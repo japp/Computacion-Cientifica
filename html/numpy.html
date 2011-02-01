@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Arrays con Numpy &mdash; Computacion Cientifica - Introduccion a Python v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Computacion Cientifica - Introduccion a Python v0.1 documentation" href="index.html" />
+    <link rel="next" title="Lectura y escritura de ficheros" href="lectura_ficheros.html" />
+    <link rel="prev" title="Control de flujo" href="control_de_flujo.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="lectura_ficheros.html" title="Lectura y escritura de ficheros"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="control_de_flujo.html" title="Control de flujo"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="arrays-con-numpy">
+<h1>Arrays con Numpy<a class="headerlink" href="#arrays-con-numpy" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Los <strong>arrays</strong> son un tipo de dato similar a las listas, pero orientadas especialmente al cálculo numérico. En cierto modo se pueden considerar como vectores o matrices y son un tipo de dato fundamental para el cálculo con tipos de datos de estructurados (conjuntos de datos).</p>
+<p>El inconveniente principal de las listas, que es el tipo básico de dato estructurado en Python es que no está pensado para el cálculo matemático; veámolo con un ejemplo:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="n">lista</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>        <span class="c"># Lista de numeros de 0 a 4</span>
+
+<span class="gp">In [2]: </span><span class="k">print</span><span class="p">(</span><span class="n">lista</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">[0, 1, 2, 3, 4, 0, 1, 2, 3, 4]</span>
+
+<span class="gp">In [3]: </span><span class="k">print</span><span class="p">(</span><span class="n">lista</span><span class="o">*</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="go">---------------------------------------------------------------------------</span>
+<span class="go">TypeError                                 Traceback (most recent call last)</span>
+
+<span class="go">/home/japp/&lt;ipython console&gt; in &lt;module&gt;()</span>
+
+<span class="go">TypeError: can&#39;t multiply sequence by non-int of type &#39;float&#39;</span>
+</pre></div>
+</div>
+<p>En el ejemplo anterior vemos cómo al multiplicar una lista por un número entero, el resultado es concatenar la lista, en lugar de multiplicar cada uno de sus elementos. Peor aún, al multiplicarlo por un número no entero da un error, al no poder crear una fracción de una lista. Esto se podría resolver iterando cada uno de los elementos de la lista con un bucle <strong>for</strong>:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [4]: </span><span class="n">lista_nueva</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mf">2.5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lista</span><span class="p">]</span>
+<span class="gp">In [5]: </span><span class="k">print</span><span class="p">(</span><span class="n">lista_nueva</span><span class="p">)</span>
+<span class="go">[0.0, 2.5, 5.0, 7.5, 10.0]</span>
+</pre></div>
+</div>
+<p>aunque esta técnica es ineficiente y lenta.</p>
+<p>Cuando realmente queremos hacer cálculos con listas de números, debemos usar los <em>arrays</em>. El módulo <strong>numpy</strong> nos da acceso a los arrays y a una enorme cantidad de métodos y funciones aplicables a los arrays. Además, numpy incluye funciones matemáticas básicas similares al módulo <strong>math</strong> además de algunas utilidades de números aleatorios, ajuste lineal de funciones, etc.</p>
+<div class="section" id="creando-arrays">
+<h2>Creando arrays<a class="headerlink" href="#creando-arrays" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Primero debemos importar el módulo <strong>numpy</strong> en sí o bien todas sus funciones:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [6]: </span><span class="kn">import</span> <span class="nn">numpy</span>              <span class="c"># Cargar el modulo numpy, o bien</span>
+<span class="gp">In [7]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>        <span class="c"># cargar el modulo numpy, llamándolo np, o bien</span>
+<span class="gp">In [8]: </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>       <span class="c"># cargar todas funciones de numpy</span>
+</pre></div>
+</div>
+<p>Si cargamos el módulo solamente, accederemos a las funciones como numpy.array() o np.array(), según cómo importemos el módulo; si en lugar de eso importamos todas las funciones, accederemos a ellas directamente (e.g. array() ). Por comodidad usaremos por ahora esta última opción, aunque muy a menudo veremos que usa la notación np.array(), etc., especialmente cuando trabajamos con varios módulos distintos.</p>
+<p>Un <em>array</em> se puede crear explícitamente o a partir de una lista.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [9]: </span><span class="n">x</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.6</span><span class="p">,</span> <span class="mf">9.3</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>         <span class="c"># Creacion de un array directamente</span>
+<span class="gp">In [10]: </span><span class="n">notas</span> <span class="o">=</span> <span class="p">[</span> <span class="mf">9.8</span><span class="p">,</span> <span class="mf">7.8</span><span class="p">,</span> <span class="mf">9.9</span><span class="p">,</span> <span class="mf">8.4</span><span class="p">,</span> <span class="mf">6.7</span><span class="p">]</span>     <span class="c"># Crear un lista</span>
+<span class="gp">In [11]: </span><span class="n">notas</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">notas</span><span class="p">)</span>                   <span class="c"># y convertir la lista a array</span>
+</pre></div>
+</div>
+<p>Existen métodos para crear arrays automáticamente:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [12]: </span><span class="n">numeros</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mf">10.</span><span class="p">)</span>                  <span class="c"># Array de numeros de 0 a 9</span>
+<span class="gp">In [13]: </span><span class="k">print</span><span class="p">(</span><span class="n">numeros</span><span class="p">)</span>
+<span class="go">[ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9.]</span>
+
+<span class="gp">In [14]: </span><span class="n">lista_ceros</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>                <span class="c"># Array de 10 ceros</span>
+<span class="gp">In [15]: </span><span class="k">print</span><span class="p">(</span><span class="n">lista_ceros</span><span class="p">)</span>
+<span class="go">[ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]</span>
+
+<span class="gp">In [16]: </span><span class="n">lista_unos</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>                  <span class="c"># Array de 10 unos</span>
+<span class="gp">In [17]: </span><span class="k">print</span><span class="p">(</span><span class="n">lista_unos</span><span class="p">)</span>
+<span class="go">[ 1.  1.  1.  1.  1.  1.  1.  1.  1.  1.]</span>
+
+<span class="go">In [18]:otra_lista = linspace(0,30,8)           # Array de 8 números, de 0 a 30</span>
+<span class="gp">In [19]: </span><span class="k">print</span><span class="p">(</span><span class="n">otra_lista</span><span class="p">)</span>
+<span class="go">[  0.           4.28571429   8.57142857  12.85714286  17.14285714</span>
+<span class="go">  21.42857143  25.71428571  30.        ]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="indexado-de-arrays">
+<h2>Indexado de arrays<a class="headerlink" href="#indexado-de-arrays" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Los <em>arrays</em> se indexan prácticamente igual que las listas y las cadenas de texto:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [18]: </span><span class="k">print</span><span class="p">(</span><span class="n">numeros</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>           <span class="c"># Elementos desde el tercero al septimo</span>
+<span class="go">[ 3.  4.  5.  6.  7.]</span>
+
+<span class="gp">In [19]: </span><span class="k">print</span><span class="p">(</span><span class="n">numeros</span><span class="p">[:</span><span class="mi">4</span><span class="p">])</span>            <span class="c"># Elementos desde el primero al cuarto</span>
+<span class="go">[ 0.  1.  2.  3.]</span>
+
+<span class="gp">In [20]: </span><span class="k">print</span><span class="p">(</span><span class="n">numeros</span><span class="p">[</span><span class="mi">5</span><span class="p">:])</span>            <span class="c"># Elementos desde el quinto al final</span>
+<span class="go">[ 5.  6.  7.  8.  9.]</span>
+
+<span class="gp">In [21]: </span><span class="k">print</span><span class="p">(</span><span class="n">numeros</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>            <span class="c"># El antepenúltimo elemento (devuelve un elemento, no un array)</span>
+<span class="go">7.</span>
+
+<span class="gp">In [24]: </span><span class="k">print</span><span class="p">(</span><span class="n">numeros</span><span class="p">[:])</span>             <span class="c"># Todo el array, equivalente a print(numeros)</span>
+<span class="go">[ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9.]</span>
+
+<span class="gp">In [25]: </span><span class="k">print</span><span class="p">(</span><span class="n">numeros</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>         <span class="c"># Elementos del segundo al septimo, pero saltando de dos en dos</span>
+<span class="go">[ 2.  4.  6.]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="algunas-propiedades-de-los-arrays">
+<h2>Algunas propiedades de los arrays<a class="headerlink" href="#algunas-propiedades-de-los-arrays" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Al igual que las listas, podemos ver el tamaño de un array unidimensional con <strong>len()</strong>, aunque la manera correcta de conocer la forma de un array es usando el método <strong>shape</strong>:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [28]: </span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">numeros</span><span class="p">))</span>
+<span class="go">10</span>
+<span class="gp">In [29]: </span><span class="k">print</span><span class="p">(</span><span class="n">numeros</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(10,)</span>
+</pre></div>
+</div>
+<p>Nótese que el resultado del método <strong>shape</strong> es una tupla, en este caso con un solo elemento ya que el array &#8220;numeros&#8221; es unidimensional.</p>
+<p>Si creamos un array con arange usando un número entero, el array que se creará será de enteros. Es posible cambiar todo el array a otro tipo de dato (como a float) usando el método <strong>astype()</strong>:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [31]: </span><span class="n">enteros</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="gp">In [32]: </span><span class="k">print</span><span class="p">(</span><span class="n">enteros</span><span class="p">)</span>
+<span class="go">[0 1 2 3 4 5]</span>
+
+<span class="gp">In [33]: </span><span class="nb">type</span><span class="p">(</span><span class="n">enteros</span><span class="p">)</span>
+<span class="gr">Out[33]: </span><span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;numpy.ndarray&#39;</span><span class="o">&gt;</span>
+
+<span class="gp">In [34]: </span><span class="nb">type</span><span class="p">(</span><span class="n">enteros</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gr">Out[34]: </span><span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;numpy.int32&#39;</span><span class="o">&gt;</span>
+
+<span class="gp">In [35]: </span><span class="n">decimales</span> <span class="o">=</span> <span class="n">enteros</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">&#39;float&#39;</span><span class="p">)</span>
+
+<span class="gp">In [36]: </span><span class="nb">type</span><span class="p">(</span><span class="n">decimales</span><span class="p">)</span>
+<span class="gr">Out[36]: </span><span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;numpy.ndarray&#39;</span><span class="o">&gt;</span>
+
+<span class="gp">In [37]: </span><span class="nb">type</span><span class="p">(</span><span class="n">decimales</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gr">Out[37]: </span><span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;numpy.float64&#39;</span><span class="o">&gt;</span>
+
+<span class="gp">In [38]: </span><span class="k">print</span><span class="p">(</span><span class="n">decimales</span><span class="p">)</span>
+<span class="go">[ 0.  1.  2.  3.  4.  5.]</span>
+
+<span class="gp">In [38]: </span><span class="k">print</span><span class="p">(</span><span class="n">decimales</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>   <span class="c"># Forma o tamaño del array</span>
+<span class="go">(6, )</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operaciones-con-arrays">
+<h2>Operaciones con arrays<a class="headerlink" href="#operaciones-con-arrays" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Los arrays permiten hacer operaciones aritméticas básicas entre ellos:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [39]: </span><span class="n">x</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">5.6</span><span class="p">,</span> <span class="mf">7.3</span><span class="p">,</span> <span class="mf">7.7</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">9.2</span><span class="p">])</span>
+
+<span class="gp">In [40]: </span><span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">decimales</span><span class="p">)</span>
+<span class="go">[  5.6   8.3   9.7   5.3   8.2  14.2]</span>
+
+<span class="gp">In [41]: </span><span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">decimales</span><span class="p">)</span>
+<span class="go">[  0.    7.3  15.4   6.9  16.8  46. ]</span>
+
+<span class="gp">In [42]: </span><span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">decimales</span><span class="p">)</span>
+<span class="go">[        Inf  7.3         3.85        0.76666667  1.05        1.84      ]</span>
+</pre></div>
+</div>
+<p>Los operaciones se hacen elemento a elemento, por lo que ambas deben tener la misma forma (<em>shape</em>). Fíjate que en la división el resultado del primer elemento es indefinido (inf) debido a la división por cero.</p>
+<p>Varios arrays se pueden unir con el método <strong>concatenate</strong>, que también se puede usar para añadir elementos nuevos:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [44]: </span><span class="n">z</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">decimales</span><span class="p">))</span>
+
+<span class="gp">In [45]: </span><span class="k">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="go">[ 5.6  7.3  7.7  2.3  4.2  9.2  0.   1.   2.   3.   4.   5. ]</span>
+
+<span class="gp">In [46]: </span><span class="n">z</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="n">x</span><span class="p">,[</span><span class="mi">7</span><span class="p">]))</span>
+
+<span class="gp">In [47]: </span><span class="k">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="go">[ 5.6  7.3  7.7  2.3  4.2  9.2  7. ]</span>
+</pre></div>
+</div>
+<p>es importante fijarse que los de <em>arrays</em> o listas a unir <strong>debe darse como una tupla</strong> y de ahí los elementos entre paréntesis como (x,[7]) o (x,[2,4,7]) o (x,array([2,4,7])).</p>
+<p>Además las operaciones aritméticas básicas, los <em>arrays</em> de <strong>numpy</strong> tienen <em>métodos</em> o funciones específicas para ellas más avanzadas. Algunas de ellas son las siguientes:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [5]: </span><span class="n">z</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>   <span class="c"># Valor máximo en el array</span>
+<span class="gr">Out[5]: </span><span class="mf">9.1999999999999993</span>
+
+<span class="gp">In [6]: </span><span class="n">z</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>   <span class="c"># Valor mínimo en el array</span>
+<span class="gr">Out[6]: </span><span class="mf">2.2999999999999998</span>
+
+<span class="gp">In [7]: </span><span class="n">z</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c"># Valor medio</span>
+<span class="gr">Out[7]: </span><span class="mf">6.1857142857142851</span>
+
+<span class="gp">In [8]: </span><span class="n">z</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>   <span class="c"># Desviación típica</span>
+<span class="gr">Out[8]: </span><span class="mf">2.1603098795103919</span>
+
+<span class="gp">In [9]: </span><span class="n">z</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>   <span class="c"># Suma de todos los elementos</span>
+<span class="gr">Out[9]: </span><span class="mf">43.299999999999997</span>
+
+<span class="gp">In [16]: </span><span class="n">median</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="c"># Mediana</span>
+<span class="gr">Out[16]: </span><span class="mf">7.0</span>
+</pre></div>
+</div>
+<p>Los <em>métodos</em>, que se operan se manera <strong>z.sum()</strong> también pueden usarse como funciones de tipo <strong>sum(z)</strong>, etc. Consulta el manual de <strong>numpy</strong> para conocer otras propiedades y métodos de los <em>arrays</em>.</p>
+<p>Una gran utilidad es la posibilidad de usar <em>arrays</em> con datos booleanos (<strong>True</strong> o <strong>False</strong>) y operar entre ellos o con arrays con números. Veamos algunos ejemplos:</p>
+<blockquote>
+<div><div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [19]: </span><span class="n">A</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
+<span class="gp">In [20]: </span><span class="n">B</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
+
+<span class="gp">In [22]: </span><span class="n">A</span><span class="o">*</span><span class="n">B</span>
+<span class="gr">Out[22]: </span><span class="n">array</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span>  <span class="bp">True</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+<span class="gp">In [29]: </span><span class="n">C</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="gp">In [30]: </span><span class="n">A</span><span class="o">*</span><span class="n">C</span>
+<span class="gr">Out[30]: </span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="gp">In [31]: </span><span class="n">B</span><span class="o">*</span><span class="n">C</span>
+<span class="gr">Out[31]: </span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>En este ejemplo vemos cómo al multiplicar dos <em>arrays</em> booleanos es resultado es otro array booleano con el resultado que corresponda, pero al multiplicar booleanos con <em>arrays</em> numéricos, el resultado es un array numérico con los mismos elementos, pero con los elementos que fueron multiplicados por <strong>False</strong> iguales a cero.</p>
+<p>Tambíén es posible usar los <em>arrays</em> como índices de otro <em>array</em> y como índices se pueden usar <em>arrays</em> numéricos o booleanos. El resultado será en este caso un <em>array</em> con los elementos que se indique en el <em>array</em> de índices numérico o los elementos correspondientes a <strong>True</strong> en caso de usar un <em>array</em> de índices booleano. Veámoslo con un ejemplo:</p>
+<blockquote>
+<div><div class="highlight-ipython"><div class="highlight"><pre><span class="c"># Array con enteros de 0 a 9</span>
+<span class="gp">In [37]: </span><span class="n">mi_array</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c"># Array de índices numericos con numeros de 0 9 de 2 en 2</span>
+<span class="gp">In [38]: </span><span class="n">indices1</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c"># Array de índices booleanos</span>
+<span class="gp">In [39]: </span><span class="n">indices2</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
+
+<span class="gp">In [40]: </span><span class="k">print</span><span class="p">(</span><span class="n">mi_array</span><span class="p">)</span>
+<span class="go">[ 0 10 20 30 40 50 60 70 80 90]</span>
+
+<span class="gp">In [43]: </span><span class="k">print</span><span class="p">(</span><span class="n">mi_array</span><span class="p">[</span><span class="n">indices1</span><span class="p">])</span>
+<span class="go">[ 0 20 40 60 80]</span>
+
+<span class="gp">In [44]: </span><span class="k">print</span><span class="p">(</span><span class="n">mi_array</span><span class="p">[</span><span class="n">indices2</span><span class="p">])</span>
+<span class="go">[10 20 50 80 90]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>También es muy sencillo crear <em>arrays</em> booleanos usando operadores lógicos y luego usalos como índices, por ejemplo:</p>
+<blockquote>
+<div><div class="highlight-ipython"><div class="highlight"><pre><span class="c"># Creo un array usando un operador booleano</span>
+<span class="gp">In [50]: </span><span class="n">mayores50</span> <span class="o">=</span> <span class="n">mi_array</span> <span class="o">&gt;</span> <span class="mi">50</span>
+
+<span class="gp">In [51]: </span><span class="k">print</span><span class="p">(</span><span class="n">mayores50</span><span class="p">)</span>
+<span class="go">[False False False False False False  True  True  True  True]</span>
+
+<span class="c"># Lo utilizo como índices para seleccionar los que cumplen esa condición</span>
+<span class="gp">In [52]: </span><span class="k">print</span><span class="p">(</span><span class="n">mi_array</span><span class="p">[</span><span class="n">mayores50</span><span class="p">])</span>
+<span class="go">[60 70 80 90]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="arrays-multidimensionales">
+<h2>Arrays multidimensionales<a class="headerlink" href="#arrays-multidimensionales" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Hasta ahora sólo hemos trabajado con <em>arrays</em> con una sola dimensión, pero <strong>numpy</strong> permite trabajar con más dimensiones. Un array de dos dimensiones podría ser por ejemplo un sistema de ecuaciones o una imagen. Para crearlos es posible hacerlo declarándolos directamente o mediante funciones como <strong>zero()</strong> o ones()** dando como parámetro <strong>una tupla</strong> con la forma del <em>array</em> o también usando <strong>arange()</strong> y crear un <em>array</em> unidimensional y luego cambiar su forma. Veamos estos ejemplos:</p>
+<blockquote>
+<div><div class="highlight-ipython"><div class="highlight"><pre><span class="c"># Array de 3 filas y tres columnas, creado implícitamente</span>
+<span class="gp">In [56]: </span><span class="n">arr0</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">],[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">999</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="gp">In [57]: </span><span class="k">print</span><span class="p">(</span><span class="n">arr0</span><span class="p">)</span>
+<span class="go">[[ 10  20  30]</span>
+<span class="go"> [  9  99 999]</span>
+<span class="go"> [  0   2   3]]</span>
+
+<span class="c"># Array de ceros con 2 filas y 3 columnas</span>
+<span class="gp">In [57]: </span><span class="n">arr1</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">In [59]: </span><span class="k">print</span><span class="p">(</span><span class="n">arr1</span><span class="p">)</span>
+<span class="go">[[ 0.  0.  0.]</span>
+<span class="go"> [ 0.  0.  0.]]</span>
+
+<span class="c"># Array de unos con 4 filas y una columna</span>
+<span class="gp">In [62]: </span><span class="n">arr2</span> <span class="o">=</span> <span class="n">ones</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">In [63]: </span><span class="k">print</span><span class="p">(</span><span class="n">arr2</span><span class="p">)</span>
+<span class="go">[[ 1.]</span>
+<span class="go"> [ 1.]</span>
+<span class="go"> [ 1.]</span>
+<span class="go"> [ 1.]]</span>
+
+<span class="c"># Array unidimensional de 9 elementos y cambio</span>
+<span class="c"># su forma a 3x3</span>
+<span class="gp">In [64]: </span><span class="n">arr3</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">In [65]: </span><span class="k">print</span><span class="p">(</span><span class="n">arr3</span><span class="p">)</span>
+<span class="go">[[0 1 2]</span>
+<span class="go"> [3 4 5]</span>
+<span class="go"> [6 7 8]]</span>
+
+<span class="gp">In [69]: </span><span class="n">arr2</span><span class="o">.</span><span class="n">shape</span>
+<span class="gr">Out[69]: </span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Como vemos en la última línea, la forma (<em>shape</em>) de los <em>arrays</em> se sigue dando como una tupla, con la dimensión de cada eje separado por comas; en ese caso la primera dimensión son las cuatro filas y la segunda dimensión o eje es una columna. Es por eso que al usar las funciones <strong>zero()</strong>, <strong>ones()</strong>, <strong>reshape()</strong>, etc. hay que asegurarse que el parámetro de entrada es una tupla con la longitud  de cada eje. Cuando usamos la función <strong>len()</strong> en un <em>array</em> bidimensional, el resultado es la longitud del primer eje o dimensión, es decir, <strong>len(arr2)</strong> es 4.</p>
+<p>El acceso a los elementos es el habitual, pero ahora hay que tener en cuenta el eje al que nos referimos, usando &#8221;:&#8221; como comodín para referirnos a todo el eje. Por ejemplo:</p>
+<blockquote>
+<div><div class="highlight-ipython"><div class="highlight"><pre><span class="c"># Primer elemento de la primera fila y primera columna (0,0)</span>
+<span class="gp">In [86]: </span><span class="n">arr0</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="gr">Out[86]: </span><span class="mi">10</span>
+<span class="c"># Primera columna</span>
+<span class="gp">In [87]: </span><span class="n">arr0</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="gr">Out[87]: </span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span>  <span class="mi">0</span><span class="p">])</span>
+<span class="c"># Primera fila</span>
+<span class="gp">In [88]: </span><span class="n">arr0</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span>
+<span class="gr">Out[88]: </span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="c"># Elementos 0 y 1 de la primera fila</span>
+<span class="gp">In [89]: </span><span class="n">arr0</span><span class="p">[</span><span class="mi">0</span><span class="p">,:</span><span class="mi">2</span><span class="p">]</span>
+<span class="gr">Out[89]: </span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Igualmente podemos manipular un <em>arrays</em> bidimensional usando sus índices:</p>
+<blockquote>
+<div><div class="highlight-ipython"><div class="highlight"><pre><span class="c"># Asigno el primer elemento a 88</span>
+<span class="gp">In [91]: </span><span class="n">arr0</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">88</span>
+<span class="c"># Asigno elementos 0 y 1 de la segunda fila</span>
+<span class="gp">In [92]: </span><span class="n">arr0</span><span class="p">[</span><span class="mi">1</span><span class="p">,:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span><span class="mi">60</span><span class="p">]</span>
+<span class="c"># Multiplico por 10 la última fila</span>
+<span class="gp">In [93]: </span><span class="n">arr0</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">arr0</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span><span class="o">*</span><span class="mi">10</span>
+
+<span class="gp">In [94]: </span><span class="k">print</span><span class="p">(</span><span class="n">arr0</span><span class="p">)</span>
+<span class="go">array([[ 88,  20,  30],</span>
+<span class="go">       [ 50,  60, 999],</span>
+<span class="go">       [  0,  20,  30]])</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="ejercicios">
+<h2>Ejercicios<a class="headerlink" href="#ejercicios" title="Enlazar permanentemente con este título">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Crear un programa que resuelva la ecuación de segundo grado <img class="math" src="_images/math/0561d206b22c2c257323a06ef53126f4e994d486.png" alt="ax^2 + bx + c = 0"/> para cualquier valor de <em>a</em>, <em>b</em> y <em>c</em> comprobando el valor del descriminante <img class="math" src="_images/math/c1833703de1db68e83c19f50c0021d34a8fd0265.png" alt="\Delta = b^2 - 4ac"/>.</p>
+</li>
+<li><p class="first">La media aritmética, pesada y geométrica de una serie de números se definen respectivamente como</p>
+<div class="math">
+<p><img src="_images/math/2e123c01b8d196590b4b09e9eed4bdbe82d10928.png" alt="\bar{x} = \frac{1}{n}\cdot \sum_{i=1}^n{x_i}, \hspace{1cm} \bar{x} = \frac{\sum_{i=1}^n{w_i \cdot x_i}}{\sum_{i=1}^n {w_i}}, \hspace{1cm} \bar{x} =  \prod_{i=1}^n{x_i}" /></p>
+</div><p>Calcular estos valores para la lista de números 34.4, 30.1, 29.8, 33.5, 30.9, 31.1 y pesos 0.9, 0.79, 0.84, 0.6, 0.88, 0.78.</p>
+</li>
+<li><p class="first">Cree un programa que calcule la desviación estándar de los números en un array, es decir, calcular:</p>
+<div class="math">
+<p><img src="_images/math/02d0a1592537e9c706c56be1dd146e6206b62e5d.png" alt="s = \sqrt{\frac{1}{N-1} \sum_{i=1}^N (x_i - \overline{x})^2}." /></p>
+</div></li>
+<li><p class="first">Usando la función randint de numpy.random, genere una lista de 30 números enteros. Calcule la media y desviación estándar entre grupos de 5 en 5 poniendo los resultados en arrays, es decir, obtener un array con las medias y otro con las desviaciones estándar, que serán de longtud 30/5. Crear un fichero con tres columnas que contenga el número de línea, la media y la desviación estándar.</p>
+</li>
+<li><p class="first">La función <strong>arctan2</strong> del módulo math o de numpy permite calcular el arcotangente de (y,x) medido en radianes, lo que permite mantener la información sobre los cuadrantes. El valor medio de <em>n</em> ángulos se puede realizar con la siguente ecuación:</p>
+<div class="math">
+<p><img src="_images/math/b76fde4ad53b89968deeb43f825cebf4ea5b41a5.png" alt="M \theta = \operatorname{arctan2}\left(\frac{1}{n}\cdot\sum_{j=1}^n \sin\theta_j, \frac{1}{n}\cdot\sum_{j=1}^n \cos\theta_j\right)" /></p>
+</div><p>Calcule el valor medio de los ángulos 12.3, 10.1, 11.9, 12.4, 10.4 y 10.9.</p>
+</li>
+<li><p class="first">Calcule en un <em>array</em> los valores que toma la función seno cociente <img class="math" src="_images/math/d9147a4b2bf86d1213516bbe7f65f53c4bae6d57.png" alt="sen(\theta)/\theta"/> para valores de <img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta"/> entre -45º y 45º a intervalos de 0.1º. Escriba el resultado en un fichero que incluya en una columna el ángulo  <img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta"/> en grados y en otra el valor de seno cociente correspondiente.</p>
+</li>
+<li><p class="first">Para el cálculo de la letra del DNI se calcula el módulo 23 del número, es decir, la división entera del número del DNI entre 23. El resultado será siempre un valor entre 0 y 22 y cada uno de ellos tiene asignado una letra según la siguiente tabla:</p>
+<p><tt class="docutils literal"><span class="pre">0</span> <span class="pre">1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">4</span> <span class="pre">5</span> <span class="pre">6</span> <span class="pre">7</span> <span class="pre">8</span> <span class="pre">9</span> <span class="pre">10</span> <span class="pre">11</span> <span class="pre">12</span> <span class="pre">13</span> <span class="pre">14</span> <span class="pre">15</span> <span class="pre">16</span> <span class="pre">17</span> <span class="pre">18</span> <span class="pre">19</span> <span class="pre">20</span> <span class="pre">21</span> <span class="pre">22</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">T</span> <span class="pre">R</span> <span class="pre">W</span> <span class="pre">A</span> <span class="pre">G</span> <span class="pre">M</span> <span class="pre">Y</span> <span class="pre">F</span> <span class="pre">P</span> <span class="pre">D</span>&nbsp; <span class="pre">X</span>&nbsp; <span class="pre">B</span>&nbsp; <span class="pre">N</span>&nbsp; <span class="pre">J</span>&nbsp; <span class="pre">Z</span>&nbsp; <span class="pre">S</span>&nbsp; <span class="pre">Q</span>&nbsp; <span class="pre">V</span>&nbsp; <span class="pre">H</span>&nbsp; <span class="pre">L</span>&nbsp; <span class="pre">C</span>&nbsp; <span class="pre">K</span>&nbsp; <span class="pre">E</span></tt></p>
+<p>Escriba un programa que calcule letra de cualquier DNI. El programa debe comprobar que la entrada tiene ocho dígitos.</p>
+</li>
+<li><p class="first">Calcule todos los números inferiores a 500 que son multiplos de 5 y 7.</p>
+</li>
+<li><p class="first">Se llama sucesión de Fibonacci a la colección de <tt class="docutils literal"><span class="pre">n</span></tt> números para la que el primer elemento es cero, el segundo 1 y el resto es la suma de los dos anteriores. Por ejemplo, la sucesión para n=5 es (0, 1, 1, 2, 3). Crear un programa que calcule la lista de números para cualquier <tt class="docutils literal"><span class="pre">n</span></tt>.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Arrays con Numpy</a><ul>
+<li><a class="reference internal" href="#creando-arrays">Creando arrays</a></li>
+<li><a class="reference internal" href="#indexado-de-arrays">Indexado de arrays</a></li>
+<li><a class="reference internal" href="#algunas-propiedades-de-los-arrays">Algunas propiedades de los arrays</a></li>
+<li><a class="reference internal" href="#operaciones-con-arrays">Operaciones con arrays</a></li>
+<li><a class="reference internal" href="#arrays-multidimensionales">Arrays multidimensionales</a></li>
+<li><a class="reference internal" href="#ejercicios">Ejercicios</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="control_de_flujo.html"
+                        title="Capítulo anterior">Control de flujo</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="lectura_ficheros.html"
+                        title="Próximo capítulo">Lectura y escritura de ficheros</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/numpy.txt"
+           rel="nofollow">Enseñar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="lectura_ficheros.html" title="Lectura y escritura de ficheros"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="control_de_flujo.html" title="Control de flujo"
+             >anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Jorge A Perez Prieto y Teodoro Roca Cortes.
+      Actualizado por última vez en 30 de January de 2011.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

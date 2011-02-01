@@ -1,0 +1,61 @@
+\BOOKMARK [0][-]{chapter.1}{Introducci\363n a Python}{}
+\BOOKMARK [1][-]{section.1.1}{Empezando con Python}{chapter.1}
+\BOOKMARK [1][-]{section.1.2}{Tipos b\341sicos de datos}{chapter.1}
+\BOOKMARK [1][-]{section.1.3}{Operadores aritm\351ticos}{chapter.1}
+\BOOKMARK [1][-]{section.1.4}{Operadores l\363gicos}{chapter.1}
+\BOOKMARK [1][-]{section.1.5}{Cadenas de texto}{chapter.1}
+\BOOKMARK [1][-]{section.1.6}{Impresi\363n de texto y de n\372meros}{chapter.1}
+\BOOKMARK [1][-]{section.1.7}{Estructuras de datos}{chapter.1}
+\BOOKMARK [1][-]{section.1.8}{Tuplas: listas inalterables}{chapter.1}
+\BOOKMARK [1][-]{section.1.9}{Diccionarios}{chapter.1}
+\BOOKMARK [1][-]{section.1.10}{M\363dulos y paquetes de Python}{chapter.1}
+\BOOKMARK [0][-]{chapter.2}{Programas ejecutables}{}
+\BOOKMARK [1][-]{section.2.1}{Reutilizando el c\363digo}{chapter.2}
+\BOOKMARK [1][-]{section.2.2}{Definiendo funciones}{chapter.2}
+\BOOKMARK [1][-]{section.2.3}{Entrada de datos}{chapter.2}
+\BOOKMARK [1][-]{section.2.4}{Ejercicios}{chapter.2}
+\BOOKMARK [0][-]{chapter.3}{Control de flujo}{}
+\BOOKMARK [1][-]{section.3.1}{El bucle for}{chapter.3}
+\BOOKMARK [1][-]{section.3.2}{Sentencias if-then-else}{chapter.3}
+\BOOKMARK [1][-]{section.3.3}{El bucle while}{chapter.3}
+\BOOKMARK [1][-]{section.3.4}{Atrapando los errores}{chapter.3}
+\BOOKMARK [1][-]{section.3.5}{Ejercicios}{chapter.3}
+\BOOKMARK [0][-]{chapter.4}{Arrays con Numpy}{}
+\BOOKMARK [1][-]{section.4.1}{Creando arrays}{chapter.4}
+\BOOKMARK [1][-]{section.4.2}{Indexado de arrays}{chapter.4}
+\BOOKMARK [1][-]{section.4.3}{Algunas propiedades de los arrays}{chapter.4}
+\BOOKMARK [1][-]{section.4.4}{Operaciones con arrays}{chapter.4}
+\BOOKMARK [1][-]{section.4.5}{Arrays multidimensionales}{chapter.4}
+\BOOKMARK [1][-]{section.4.6}{Ejercicios}{chapter.4}
+\BOOKMARK [0][-]{chapter.5}{Lectura y escritura de ficheros}{}
+\BOOKMARK [1][-]{section.5.1}{Creando un fichero sencillo}{chapter.5}
+\BOOKMARK [1][-]{section.5.2}{Lectura de ficheros}{chapter.5}
+\BOOKMARK [1][-]{section.5.3}{Lectura y escritura con Numpy}{chapter.5}
+\BOOKMARK [1][-]{section.5.4}{Ejercicios}{chapter.5}
+\BOOKMARK [0][-]{chapter.6}{Representaci\363n gr\341fica de datos}{}
+\BOOKMARK [1][-]{section.6.1}{Trabajando con texto}{chapter.6}
+\BOOKMARK [1][-]{section.6.2}{Representaci\363n gr\341fica de funciones}{chapter.6}
+\BOOKMARK [1][-]{section.6.3}{Histogramas}{chapter.6}
+\BOOKMARK [1][-]{section.6.4}{Figuras m\372ltiples}{chapter.6}
+\BOOKMARK [1][-]{section.6.5}{Varios gr\341ficos en una figura}{chapter.6}
+\BOOKMARK [1][-]{section.6.6}{Representando datos de laboratorio}{chapter.6}
+\BOOKMARK [1][-]{section.6.7}{Barras de error}{chapter.6}
+\BOOKMARK [1][-]{section.6.8}{Datos bidimensionales}{chapter.6}
+\BOOKMARK [1][-]{section.6.9}{Guardando las im\341genes}{chapter.6}
+\BOOKMARK [1][-]{section.6.10}{Ejercicios}{chapter.6}
+\BOOKMARK [0][-]{chapter.7}{Ajuste de datos experimentales: M\351todo de m\355nimos cuadrados}{}
+\BOOKMARK [1][-]{section.7.1}{Ajuste a polinomios con Python}{chapter.7}
+\BOOKMARK [0][-]{chapter.8}{C\341lculo Num\351rico}{}
+\BOOKMARK [1][-]{section.8.1}{Integraci\363n num\351rica}{chapter.8}
+\BOOKMARK [1][-]{section.8.2}{\301lgebra matricial}{chapter.8}
+\BOOKMARK [1][-]{section.8.3}{Rutinas b\341sicas con matrices}{chapter.8}
+\BOOKMARK [1][-]{section.8.4}{Resoluci\363n de sistemas de ecuaciones lineales}{chapter.8}
+\BOOKMARK [0][-]{chapter.9}{C\341lculo Simb\363lico}{}
+\BOOKMARK [1][-]{section.9.1}{Introducci\363n a Sympy}{chapter.9}
+\BOOKMARK [1][-]{section.9.2}{Operaciones algebraicas}{chapter.9}
+\BOOKMARK [1][-]{section.9.3}{C\341lculo de l\355mites}{chapter.9}
+\BOOKMARK [1][-]{section.9.4}{C\341lculo de derivadas}{chapter.9}
+\BOOKMARK [1][-]{section.9.5}{Expansi\363n de series}{chapter.9}
+\BOOKMARK [1][-]{section.9.6}{Integraci\363n}{chapter.9}
+\BOOKMARK [1][-]{section.9.7}{Ecuaciones algebraicas y \341lgebra lineal}{chapter.9}
+\BOOKMARK [1][-]{section.9.8}{Ejercicios}{chapter.9}

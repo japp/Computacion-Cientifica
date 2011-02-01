@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Programas ejecutables &mdash; Computacion Cientifica - Introduccion a Python v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Computacion Cientifica - Introduccion a Python v0.1 documentation" href="index.html" />
+    <link rel="next" title="Control de flujo" href="control_de_flujo.html" />
+    <link rel="prev" title="Introducción a Python" href="introduccion.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="control_de_flujo.html" title="Control de flujo"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="introduccion.html" title="Introducción a Python"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="programas-ejecutables">
+<h1>Programas ejecutables<a class="headerlink" href="#programas-ejecutables" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="reutilizando-el-codigo">
+<h2>Reutilizando el código<a class="headerlink" href="#reutilizando-el-codigo" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Con Python, además de usarse de manera interactiva con una consola, es posible crear programas o <em>scripts</em> (guiones) ejecutables. Un <em>script</em> es un fichero de texto con los comandos de Python escritos de manera consecutiva y que se ejecutarán al ajecutar el <em>script</em>. Basta utilizar un editor de textos cualquiera (kate, gedit, notepad, etc.) con extensión <strong>.py</strong> para que éste lo identifique como un programa de Python.</p>
+<p>El siguiente ejemplo es un pequeño programa que llamaremos <strong>cubo.py</strong> que calcula el cubo de un número cualquiera dado por el usuario:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+<span class="c">#-*- coding: utf-8 -*-</span>
+
+<span class="c"># Mensaje de bienvenida</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Programa de calculo del cubo de un numero.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+
+<span class="c"># Numero de entrada</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">23.0</span>
+
+<span class="c"># Calculo el valor del cubo de x</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span>
+
+<span class="c"># Imprimo el resultado</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;El cubo de </span><span class="si">%.2f</span><span class="s"> es </span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>El programa se puede ejecutar ahora desde una consola de Linux (o de la de Windows) escribiendo en ella</p>
+<div class="highlight-bash"><div class="highlight"><pre>python cubo.py
+</pre></div>
+</div>
+<p>En la primera línea del programa hemos puesto ademas <strong>#!/usr/bin/python</strong> para que además no haga falta llamar al intérprete y se pueda ejecutar como un programa normal, aunque para ello debe tener naturalmente permisos de ejecución. La segunda línea, <strong>#-*- coding: utf-8 -*-</strong> hemos indicado el tipo de codificación UTF-8, para poder poner caracteres especiales como tildes y eñes.</p>
+<p>Hay que fijarse que a menudo hay lineas <em>comentadas</em>, que empiezan con <strong>#</strong>. Estas líneas no son ejecutables y <strong>son ignoradas</strong> por el intérprete de Python y se usan para añadir notas o comentarios. Es muy recomendable incluir comentarios de este tipo que expliquen lo que el programa va haciendo porque nos ayudarán  más adelante a recordar qué hace o cómo funciona el código cuando volvamos a leerlo nosotros u otros usuarios del código. Se pueden incluir comentarios de varias líneas, por ejemplo al inicio del programa para explicar lo que hace, usando comillas triples; todo lo que vaya entre ellas será un comentario y por tanto ignorado por el intérprete.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Este es un comentario de una linea</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;La raíz cuadrada de 2 es &quot;</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="mf">2.</span><span class="p">))</span>
+
+<span class="sd">&quot;&quot;&quot;Este un comentario que</span>
+<span class="sd">usa varias lineas y está limitado</span>
+<span class="sd">por comillas triples. Todo lo que esté</span>
+<span class="sd">entre ellas no se intenta ejecutar</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;El cubo de 2 es &quot;</span><span class="p">,</span> <span class="mf">2.0</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="definiendo-funciones">
+<h2>Definiendo funciones<a class="headerlink" href="#definiendo-funciones" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Además de las funciones incluídas en Python, el usuario puede crear las suyas propias, que permiten reutilizar código. Veamos por ejemplo una sencilla función para calcular el cubo de un número y otra para imprimir un mensaje:</p>
+<div class="highlight-python"><pre>def cubo(x):
+   y = x**3
+   return y
+
+print( cubo(4.0) )
+
+def saludo(nombre):
+   print("Hola %s, cómo estas?" % nombre)
+
+saludo('Juan')
+Hola Juan, cómo estas?</pre>
+</div>
+<p>Nótese que el primer caso hemos usado la sentencia <strong>return</strong> para devolver un valor, sin imprimirlo necesariamente. Esto es lo más habitual cuando se crea un función, hacer todas las operaciones necestarias y luego utilizar <strong>return</strong> para devolver un valor; luego, utilizarse la función, este retultado puede entonces imprimirse, volcarse a una variable, o lo que el programador necesite. En el segundo caso de arriba siempre se imprime una línea cada vez que se llama a la función, porque se pide en la función.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Advertencia</p>
+<p class="last">En Python la identación es obligatoria, porque se emplea para separar los bloques e indican donde empiezan y terminan los bucles y condicionales. Si la identación no es correcta, se obtendrá un resultado equivocado o tendremos un error de identación.</p>
+</div>
+</div>
+<div class="section" id="entrada-de-datos">
+<h2>Entrada de datos<a class="headerlink" href="#entrada-de-datos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Generalmente el valor de una variable se asigna haciendo por ejemplo pi=3.1416, pero se puede pedir una entrada por teclado usando la función <strong>raw_input()</strong> de la forma siguiente:</p>
+<div class="highlight-python"><pre>entrada_numero = raw_input('Dame un numero: ' )
+Dame un numero: 22</pre>
+</div>
+<p>Es muy importante notar que el valor que se obtiene es siempre un <em>string</em>, aunque se introduzca un número. Por ejemplo, en el ejemplo anterior el valor de la variable &#8220;entrada_numero&#8221; es &#8220;22&#8221;, comillas, osea un <em>string</em>, como podría comprobarse haciendo <strong>type(entrada_numero)</strong>. Si queremos operar aritméticamente con el resultado debemos pasarlo a entero o a <em>float</em>, según cómo lo vayamos a usar, por ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">entrada_numero</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">entrada_numero</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Con la ayuda de sta función podemos crear programas que pidan uno o varios números (u otro tipo de dato) al usuario y hacer cálculos complejos con ellos sin tener que incluir los valores de entrada en el fichero cada vez que se utilice. Ahora podríamos modificar el pequeño programa del inicio, que calcula el cubo de un número, de manera que lo pida al usuario cuando se ejecute el programa:</p>
+<div class="highlight-python"><pre>#!/usr/bin/python
+#-*- coding: utf-8 -*-
+
+# Mensaje de bienvenida
+print("Programa de calculo del cubo de un numero.\n")
+
+# Recoje un numero dado por el usuario y pasa a float
+x = float(raw_input("Valor del numero? "))
+
+# Defino una funcion que calcula el cubo de un numero
+def cubo(x):
+    return x**3
+
+# Imprimo el resultado
+print("El cubo de %.2f es %.2f" % (x, cubo(x))</pre>
+</div>
+</div>
+<div class="section" id="ejercicios">
+<h2>Ejercicios<a class="headerlink" href="#ejercicios" title="Enlazar permanentemente con este título">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Dada la frase &#8220;Dios no solo juega a los dados, a veces los tira donde no se pueden ver&#8221;</p>
+<blockquote>
+<div><ul class="simple">
+<li>¿Cuantas letras tiene? ¿y palabras?</li>
+<li>Pasa a una variable las 15 primeras letras. Pasa a una lista las cinco primeras palabras.</li>
+<li>¿Cuántas letras tiene la última palabra?</li>
+<li>Concatena (une) el primer tercio de la fase con el último tercio.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Escribe una función que calcule la distancia cartesiana entre dos puntos cualesquiera de coordenadas <img class="math" src="_images/math/991c93bf3b5f578663c6c139c34f79cc70713969.png" alt="(x_1, y_1)"/> y  <img class="math" src="_images/math/574cd26ba0fbfb46272d82eb95420c5fdbc53546.png" alt="(x_2, y_2)"/>.</p>
+</li>
+<li><p class="first">Escriba un programa que calcule la densidad media de cualquier planeta, admitiendo como entrada la masa y el radio medio de éste.</p>
+</li>
+<li><p class="first">La variación de temperatura de un cuerpo a temperatura inicial <img class="math" src="_images/math/6801c07694edb238c4a095956d8bf46ccdb38fcc.png" alt="T_0"/> en un ambiente a <img class="math" src="_images/math/43b3aabcb88e217357a0b38741411a9357bf238f.png" alt="T_s"/> cambia de la siguiente manera:</p>
+<div class="math">
+<p><img src="_images/math/c025e0301a85c36850aab4e237f1de86acb773af.png" alt="T =  T_s + (T_0 - T_s)e^{-kt}" /></p>
+</div><p>con <img class="math" src="_images/math/e0d2bf360290fd61d1c1557e763f2622363b3d35.png" alt="t"/> en horas y siendo <em>k</em> un parámetro que depende del cuerpo. Una lata de refresco a 5ºC queda en la guantera del coche a 40ºC. ¿Qué temperatura tendrá 1, 5, 12 y 14 horas? Utiliza <em>k=0.45</em>. Encuentra las horas que tendría que estar para estar a 0.5ºC menos que la temperatura ambiente. Define funciones adecuadas para realizar ambos cálculos para cualquier tiempo y cualquier hora respectivamente.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Programas ejecutables</a><ul>
+<li><a class="reference internal" href="#reutilizando-el-codigo">Reutilizando el código</a></li>
+<li><a class="reference internal" href="#definiendo-funciones">Definiendo funciones</a></li>
+<li><a class="reference internal" href="#entrada-de-datos">Entrada de datos</a></li>
+<li><a class="reference internal" href="#ejercicios">Ejercicios</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="introduccion.html"
+                        title="Capítulo anterior">Introducción a Python</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="control_de_flujo.html"
+                        title="Próximo capítulo">Control de flujo</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/ejecutables.txt"
+           rel="nofollow">Enseñar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="control_de_flujo.html" title="Control de flujo"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="introduccion.html" title="Introducción a Python"
+             >anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Jorge A Perez Prieto y Teodoro Roca Cortes.
+      Actualizado por última vez en 30 de January de 2011.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

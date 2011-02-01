@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Cálculo Simbólico &mdash; Computacion Cientifica - Introduccion a Python v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Computacion Cientifica - Introduccion a Python v0.1 documentation" href="index.html" />
+    <link rel="prev" title="Cálculo Numérico" href="calculo_numerico.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="calculo_numerico.html" title="Cálculo Numérico"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="calculo-simbolico">
+<h1>Cálculo Simbólico<a class="headerlink" href="#calculo-simbolico" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>En el capítulo anterior vimos cómo es posible usar técnicas numéricas para resolver problemas matemáticos complejos, como integrales, sistemas de ecuaciones, etc. En Física  e ingeniería es prácticamente más habitual resolver ciertos problemas numéricamente debido a la dificultad o incluso imposibilidad de hacerlo analíticamente. Sin embargo, a menudo necesitamos resolver problemas metemáticos de manera analítica necesariamente, en ocasiones pueden ser problemas complejos. Por ejemplo, es posible que para obtener la primitiva cierta integral recorramos a técnicas de substitución, integración por partes, etc. o bien tengremos que consultar un libro de tablas de integrales.</p>
+<p>Afortunadamente, los ordenadores también nos pueden ayudar al cálculo analítico y Python
+posee para ello módulo Sympy. Sympy es una librería de <strong>cálculo simbólico</strong> que permite resolver
+analíticamente múltiples problemas matemáticos, entre ellos derivadas, integrales, series numéricas o límites. Veamos algunas posibilidades de esta librería.</p>
+<div class="section" id="introduccion-a-sympy">
+<h2>Introducción a Sympy<a class="headerlink" href="#introduccion-a-sympy" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Al igual que en Python existen varios tipos de datos numéricos como enteros (int), decimales (float) o booleanos (bool: True, False, etc.), Sympy posee tres tipos de datos propios:  <strong>Real</strong>, <strong>Rational</strong> e <strong>Integer</strong>, es decir, números reales, racionales y enteros. Esto quiere decir que Rational(1,2) representa 1/2, Rational(5,2) a 5/2, etc. y no 0.5 o 2.5.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">1/2</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">*</span><span class="mi">2</span>
+<span class="go">1</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Rational</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">50</span><span class="o">/</span><span class="n">Rational</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">**</span><span class="mi">50</span>
+<span class="go">1/88817841970012523233890533447265625</span>
+</pre></div>
+</div>
+<p>También existen algunas constantes especiales, como el número <strong>e</strong> o <img class="math" src="_images/math/f2ca003a7da0de4994b4733e203b74ff52d42553.png" alt="\pi"/>,
+si embargo éstos se tratan con símbolos y no tienen un valor númerico determinado. Eso
+quiere decir que no se puede obtener un valor numérico de una operación usando el <em>pi</em>
+de Sympy, como <em>(1+pi)</em>, como lo haríamos con el de Numpy, que es numérico:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span>
+<span class="go">pi**2</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
+<span class="go">3.14159265358979</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">pi</span><span class="o">+</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
+<span class="go">5.85987448204884</span>
+</pre></div>
+</div>
+<p>como se ve, sin embargo, se puede usar el método <strong>evalf()</strong> para evaluar una expresión para tener
+un valor en punto flotante (<em>float</em>). Es posible incluso representar matemáticamente el símbolo infinito, mediante <tt class="docutils literal"><span class="pre">oo</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">oo</span> <span class="o">&gt;</span> <span class="mi">99999</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oo</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="go">oo</span>
+</pre></div>
+</div>
+<p>Para hacer operaciones simbólicas hay que definir explícitamente los símbolos que vamos a usar, que serán en general las variables y otros elementos de nuestras ecuaciones:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Y ahora ya podemos manipularlos como queramos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">+</span><span class="n">x</span><span class="o">-</span><span class="n">y</span>
+<span class="go">2*x</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="go">(x + y)**2</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+<span class="go">2*x*y + x**2 + y**2</span>
+</pre></div>
+</div>
+<p>Es posible hacer una substitución de variables usando <tt class="docutils literal"><span class="pre">subs(viejo,</span> <span class="pre">nuevo)</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">(1 + y)**2</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">4*y**2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operaciones-algebraicas">
+<h2>Operaciones algebraicas<a class="headerlink" href="#operaciones-algebraicas" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Podemos usar <tt class="docutils literal"><span class="pre">apart(expr,</span> <span class="pre">x)</span></tt> para hacer una descomposición parcial de fracciones:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">       1</span>
+<span class="go">───────────────</span>
+<span class="go">(2 + x)*(1 + x)</span>
+
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">apart</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">  1          1</span>
+<span class="go">─────── - ────────</span>
+<span class="go">1 + x      2 + x</span>
+
+<span class="gp">&gt;&gt;&gt; </span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">-(1 + x)</span>
+<span class="go">─────────</span>
+<span class="go"> 1 - x</span>
+
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">apart</span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">      2</span>
+<span class="go">1 - ──────</span>
+<span class="go">    1 - x</span>
+</pre></div>
+</div>
+<p>Para unirlas, podemos usar <tt class="docutils literal"><span class="pre">together(expr,</span> <span class="pre">x)</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span> <span class="n">together</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">z</span><span class="p">)</span>
+<span class="go">x*y + x*z + y*z</span>
+<span class="go">───────────────</span>
+<span class="go">     x*y*z</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">together</span><span class="p">(</span><span class="n">apart</span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">-1 - x</span>
+<span class="go">───────</span>
+<span class="go"> 1 - x</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">together</span><span class="p">(</span><span class="n">apart</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">),</span> <span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">       1</span>
+<span class="go">───────────────</span>
+<span class="go">(2 + x)*(1 + x)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="calculo-de-limites">
+<h2>Cálculo de límites<a class="headerlink" href="#calculo-de-limites" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Sympy puede calcular límites usando la función <strong>limit()</strong> con la siguientesintaxis: <strong>limit(función, variable, punto)</strong>, lo que calcularía el limite de f(x) cuando variable -&gt; punto::</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s">&quot;x&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>es posible incluso usar límites infinitos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
+<span class="go">oo</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
+<span class="go">0</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="calculo-de-derivadas">
+<h2>Cálculo de derivadas<a class="headerlink" href="#calculo-de-derivadas" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La función de Sympy para calcular la derivada de cualquier función es <tt class="docutils literal"><span class="pre">diff(func,</span> <span class="pre">var)</span></tt>. Veamos algunos ejemplos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">cos(x)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">2*cos(2*x)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">tan</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">1 + tan(x)**2</span>
+</pre></div>
+</div>
+<p>Puedes comprobar que es correcto calculando el límite:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">((</span><span class="n">tan</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="n">tan</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">1 + tan(x)**2</span>
+</pre></div>
+</div>
+<p>También se pueden calcular derivadas de orden superior indicando el orden de la derivada como un tercer parámetro opcional de la función <strong>diff()</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>         <span class="c"># Derivada de orden 1</span>
+<span class="go">2*cos(2*x)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>         <span class="c"># Derivada de orden 2</span>
+<span class="go">-4*sin(2*x)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>         <span class="c"># Derivada de orden 3</span>
+<span class="go">-8*cos(2*x)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="expansion-de-series">
+<h2>Expansión de series<a class="headerlink" href="#expansion-de-series" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Para la expansión de series se aplica el método <tt class="docutils literal"><span class="pre">.series(var,</span> <span class="pre">punto,</span> <span class="pre">orden)</span></tt> a la serie que se desea expandir:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">1 - x**2/2 + x**4/24 - x**6/720 + x**8/40320 + O(x**10)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">1 + x**2/2 + 5*x**4/24 + 61*x**6/720 + 277*x**8/8064 + O(x**10)</span>
+
+
+<span class="go">e = 1/(x + y)</span>
+<span class="go">s = e.series(x, 0, 5)</span>
+
+<span class="go">pprint(s)</span>
+</pre></div>
+</div>
+<p>La función <strong>pprint</strong> de Sympy imprime el resultado de manera más legible:</p>
+<div class="highlight-python"><pre>     4    3    2
+1   x    x    x    x
+─ + ── - ── + ── - ── + O(x**5)
+y    5    4    3    2
+    y    y    y    y</pre>
+</div>
+</div>
+<div class="section" id="integracion">
+<h2>Integración<a class="headerlink" href="#integracion" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La integración definida e indefinida de funciones es una de las funcionalidades más interesantes de Sympy. Veamos algunos ejemplos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">x**6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">-cos(x)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">-x + x*log(x)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">sinh</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">cosh(x) + x**2</span>
+</pre></div>
+</div>
+<p>También con funciones especiales:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">erf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">pi**(1/2)*erf(x)**2/4</span>
+</pre></div>
+</div>
+<p>También es posible calcular integrales definidas:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>Y también integrales impropias:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">-1</span>
+</pre></div>
+</div>
+<p>Algunas integrales definidas complejas es necesario definirlas como objeto <strong>Integral()</strong> y luego evaluarlas con el método <strong>evalf()</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">integ</span> <span class="o">=</span> <span class="n">Integral</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">integ</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">1.6</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ecuaciones-algebraicas-y-algebra-lineal">
+<h2>Ecuaciones algebraicas y álgebra lineal<a class="headerlink" href="#ecuaciones-algebraicas-y-algebra-lineal" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Otra sorprendente utilidad de Sympy es su capacidad para resolver sistemas de
+ecuacuaciones fácilmente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Una ecuación, resolver x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">[I, 1, -1, -I]</span>
+
+<span class="go"># Sistema de dos ecuaciones. Resuelve x e y</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">solve</span><span class="p">([</span><span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+<span class="go">{y: 1, x: -3}</span>
+</pre></div>
+</div>
+<p>Sympy tiene su propio tipo de dato Matriz, independiente del de Numpy/Scipy.
+Con él se pueden definir matrices numéricas o simbólicas y operar con ellas:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Matriz identidad 2x2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="go">[1, 0]</span>
+<span class="go">[0, 1]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="n">y</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
+<span class="go">[1, x]</span>
+<span class="go">[y, 1]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">**</span><span class="mi">2</span>
+<span class="go">[1 + x*y,     2*x]</span>
+<span class="go">[    2*y, 1 + x*y]</span>
+</pre></div>
+</div>
+<p>Existen otros constructores similares a arrays de Numpy pero para matrices:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Matrices de unos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ones</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="go">[1, 1, 1, 1, 1]</span>
+<span class="go">[1, 1, 1, 1, 1]</span>
+<span class="go">[1, 1, 1, 1, 1]</span>
+<span class="go">[1, 1, 1, 1, 1]</span>
+<span class="go">[1, 1, 1, 1, 1]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Matriz identidad</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[1, 0, 0]</span>
+<span class="go">[0, 1, 0]</span>
+<span class="go">[0, 0, 1]</span>
+</pre></div>
+</div>
+<p>Hay que fijarse en que muchas de las funciones anteriores ya existen en
+Numpy con el mismo nombre (ones(), eye(), etc.), por lo que si queremos usar
+ambas debemos importar los paquetes con otro nombre, Por ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Funcion eye de Sympy (matriz)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[1, 0, 0]</span>
+<span class="go">[0, 1, 0]</span>
+<span class="go">[0, 0, 1]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Funcion eye de Numpy (array)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([[ 1.,  0.,  0.],</span>
+<span class="go">       [ 0.,  1.,  0.],</span>
+<span class="go">       [ 0.,  0.,  1.]])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Matriz de Numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">matrix([[ 1.,  0.,  0.],</span>
+<span class="go">        [ 0.,  1.,  0.],</span>
+<span class="go">        [ 0.,  0.,  1.]])</span>
+</pre></div>
+</div>
+<p>Es posible operar entre ellas, salvo que las matrices de Numpy no pueden operar con símbolos, algo que se puede hacer con Sympy. La selección de elementos de matrices de Sympy se hace de manera idéntica a los arrays o matrices de Numpy:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Multiplico la matriz identidad por x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span>
+<span class="go">[x, 0, 0]</span>
+<span class="go">[0, x, 0]</span>
+<span class="go">[0, 0, x]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Substituyo x por 4 en la matriz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">[4, 0, 0]</span>
+<span class="go">[0, 4, 0]</span>
+<span class="go">[0, 0, 4]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Substituyo la variable x por y en la matriz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">[y, 0, 0]</span>
+<span class="go">[0, y, 0]</span>
+<span class="go">[0, 0, y]</span>
+
+<span class="gp">&gt;&gt;&gt; </span> <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="go">....:</span>
+
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="go">[1.5,   0,   0]</span>
+<span class="go">[  0, 1.5,   0]</span>
+<span class="go">[  0,   0, 1.5]</span>
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">((</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="p">))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Determinante de la matriz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
+<span class="go">-28</span>
+<span class="go"># Matriz inversa</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">M</span><span class="o">.</span><span class="n">inv</span><span class="p">()</span>
+<span class="go">[-3/14, 1/14,  1/2]</span>
+<span class="go">[-1/28, 5/28, -1/4]</span>
+<span class="go">[  3/7, -1/7,    0]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Substituyo algunos elementos de la matriz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span>
+<span class="go">[1,        2, 3]</span>
+<span class="go">[3, x**(1/2), x]</span>
+<span class="go">[2,      2*x, 1]</span>
+</pre></div>
+</div>
+<p>Podemos resolver un sistema de ecuaciones por el método LU:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Matriz 3x3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span> <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Matriz 1x3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,[</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Resuelvo el sistema por LU</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">soln</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">LUsolve</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">soln</span>
+<span class="go">[3]</span>
+<span class="go">[7]</span>
+<span class="go">[5]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ejercicios">
+<h2>Ejercicios<a class="headerlink" href="#ejercicios" title="Enlazar permanentemente con este título">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Calcular la derivada de <img class="math" src="_images/math/5683a2b9690d89f226103f497f64c9e35294d061.png" alt="x^{3} \operatorname{arccos}\left(\frac{2}{x}\right)"/>.</p>
+</li>
+<li><p class="first">Calcular la derivada segunda de <img class="math" src="_images/math/34b188248f9f8c7d145f7acb1c0ce6442e9b171c.png" alt="e^{- x} \operatorname{log}\left(x\right)"/>.</p>
+</li>
+<li><p class="first">Calcular los diez primeros elementos de la serie:</p>
+<div class="math">
+<p><img src="_images/math/d50271968d430e77d6177d1444d75559ad47e862.png" alt="\sum_{n=0} \frac{1}{(1 + n)^{5/2}}." /></p>
+</div></li>
+<li><p class="first">Calcular la siguiente integral:</p>
+<div class="math">
+<p><img src="_images/math/540a5bbaa283c2539b56ccbdfc48435a9ec390a1.png" alt="y(x) = \int \frac{\operatorname{cos}\left(x\right)}{\operatorname{sin}\left(x\right)} dx." /></p>
+</div><p>Evaluar el resultado para x=0.5.</p>
+</li>
+<li><p class="first">Calcular la integral siguiente y evaluar su valor en x=1.5:</p>
+<div class="math">
+<p><img src="_images/math/c014740d61be046c46ca6fcd792031cb497b3bc1.png" alt="y(x) = \int \frac{1}{1 + e^{x}} dx" /></p>
+</div></li>
+<li><p class="first">Comprobar las siguientes integrales definidas:</p>
+<div class="math">
+<p><img src="_images/math/e1effb791f97c3cfd8d2e5f76cfc783a7e211015.png" alt="\int_0 ^1 \frac{1}{\sqrt{\operatorname{log}\left(\frac{1}{x}\right)}} dx  = \sqrt{\pi} \hspace{2cm}  \int_0 ^1 x\operatorname{log}\left(1 + x\right) dx  = \frac{1}{4} \hspace{2cm} \int_{0}^{\infty} e^{-x} \operatorname{sin}\left(x\right) dx = \frac{1}{2}" /></p>
+</div></li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Cálculo Simbólico</a><ul>
+<li><a class="reference internal" href="#introduccion-a-sympy">Introducción a Sympy</a></li>
+<li><a class="reference internal" href="#operaciones-algebraicas">Operaciones algebraicas</a></li>
+<li><a class="reference internal" href="#calculo-de-limites">Cálculo de límites</a></li>
+<li><a class="reference internal" href="#calculo-de-derivadas">Cálculo de derivadas</a></li>
+<li><a class="reference internal" href="#expansion-de-series">Expansión de series</a></li>
+<li><a class="reference internal" href="#integracion">Integración</a></li>
+<li><a class="reference internal" href="#ecuaciones-algebraicas-y-algebra-lineal">Ecuaciones algebraicas y álgebra lineal</a></li>
+<li><a class="reference internal" href="#ejercicios">Ejercicios</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="calculo_numerico.html"
+                        title="Capítulo anterior">Cálculo Numérico</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/calculo_simbolico.txt"
+           rel="nofollow">Enseñar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="calculo_numerico.html" title="Cálculo Numérico"
+             >anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Jorge A Perez Prieto y Teodoro Roca Cortes.
+      Actualizado por última vez en 30 de January de 2011.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Ajuste de datos experimentales: Método de mínimos cuadrados &mdash; Computacion Cientifica - Introduccion a Python v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Computacion Cientifica - Introduccion a Python v0.1 documentation" href="index.html" />
+    <link rel="next" title="Cálculo Numérico" href="calculo_numerico.html" />
+    <link rel="prev" title="Representación gráfica de datos" href="graficos.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="calculo_numerico.html" title="Cálculo Numérico"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="graficos.html" title="Representación gráfica de datos"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ajuste-de-datos-experimentales-metodo-de-minimos-cuadrados">
+<h1>Ajuste de datos experimentales: Método de mínimos cuadrados<a class="headerlink" href="#ajuste-de-datos-experimentales-metodo-de-minimos-cuadrados" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Un trabajo habitual de laboratorio es la creación de un modelo
+matemático de cierto comportamiento físico empleando datos
+experimentales. Por ejemplo, si se toman medidas de la amplitud de las oscilaciones de un
+péndulo,  es posible obtener una función oscilatoria
+analítica que describa ese movimiento con la frecuencia y amplitud
+adecuadas para cualquier instante de tiempo.</p>
+<p>Aunque existen muchas técnicas para el ajuste de funciones a datos
+experimentales, el método más común es el de <em>mínimos cuadrados</em>.
+Supongamos que tenemos una serie de medidas <img class="math" src="_images/math/e6e6b2820799645c16f4bc0279fc2e81006c9797.png" alt="(x_1, y_1), (x_2,
+y_2), (x_3, y_3), \dots , (x_n, y_n)"/>, siendo <em>x</em> la variable
+independiente e <em>y</em> la dependiente. Para un modelo <img class="math" src="_images/math/c96dd6ec1dc4ad7520fbdc78fcdbec9edd068d0c.png" alt="f(x)"/> de
+estos datos, hay un error <em>r</em> para cada medida de <img class="math" src="_images/math/eeb4f540c6abfb56a67b753cc3bd9df79a3a8ee0.png" alt="r_1
+= y_1 -f(x_1), r_2 = y_2 -f(x_2), \dots ,  r_n = y_n -f(x_n)"/>. Según
+el método de mínimos cuadrados, la mejor función de ajuste <em>f(x)</em> es
+aquella en la que</p>
+<div class="math">
+<p><img src="_images/math/93c0f4735556ec38616432b5d651c94e6ec099b1.png" alt="R = d_1^2 + d_2^2 + \dots + d_n^2 = \sum^n_{i=1} d^2_i = \sum^n_{i=1}  \lvert y_i - f(x_i)\rvert" /></p>
+</div><p>es minimo. La forma canónica de este problema es</p>
+<div class="math">
+<p><img src="_images/math/f402a2beab95a9e99f15385e30b2cd1532c77ed8.png" alt="Xa = Y" /></p>
+</div><p>en la que <em>X</em> es una matriz <em>MxN</em> para <em>M</em> medidas experimentales y
+<em>N</em> grados de libertad y el objetivo es minimizar <img class="math" src="_images/math/9ec7747a10f645e0ba888c54704af32953aa1300.png" alt="\lvert Ax - y
+\rvert"/>. En el caso del ajuste a un polinomio de grado <em>N</em>, el modelo
+sería de la forma</p>
+<div class="math">
+<p><img src="_images/math/8a478ce233f39e26b37fcb70fdb176a9273d91b3.png" alt="y(x) = a_Nx^N + \dots + a_2 x^2 + a_1x + a_0" /></p>
+</div><p>para el que habría que escojer la  combinación de parámetros
+<img class="math" src="_images/math/412787c048e28774dc63fc27db42dc52ca858de7.png" alt="a_i"/> que mejor se ajusten a los datos. Así, la matriz <em>A</em>,
+llamada <em>matriz de Vandermonde</em> tiene esta forma:</p>
+<div class="math">
+<p><img src="_images/math/21ec5f9c0375e7c6d41408257a5e1810e6d5e9df.png" alt="\left[
+\begin{array}{ c c c c c}
+x_1^N &amp; \cdots &amp; x_1^2 &amp; x_1 &amp; 1 \\
+x_2^N &amp; \cdots &amp; x_2^2 &amp; x_2 &amp; 1 \\
+\vdots \\
+x_M^N &amp; \cdots &amp; x_M^2 &amp; x_M &amp; 1 \\
+\end{array}
+\right]" /></p>
+</div><p>en ella, cada fila corresponde a una medida experimental <img class="math" src="_images/math/dc02f67679ae3866644c84ea6422d8105ed567a3.png" alt="Ax =
+y_i"/>.</p>
+<div class="section" id="ajuste-a-polinomios-con-python">
+<h2>Ajuste a polinomios con Python<a class="headerlink" href="#ajuste-a-polinomios-con-python" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La función <strong>polyfit()</strong> de <strong>Numpy</strong> permite ajuste de datos
+experimentales a polinomios de cualquier orden. La sintaxis básica es</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">parametros</span> <span class="o">=</span> <span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>en donde <em>x</em> e <em>y</em> son los datos experimentales y <em>n</em> grado del
+polinomio a ajustar. El resultado es una lista con los parámetros del
+polinomio. Si a polyfit se le incluye la opción <em>full=True</em>, además de
+los parámetros devuelve el residuo y otros datos (ver ayuda de la
+función <strong>polyfit()</strong>).</p>
+<p>Consideremos el siguiente ajuste a una recta de una serie de datos <em>x</em>
+e <em>y</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Importo todas las funciones de numpy si no lo he hecho</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c"># Datos experimentales</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">,</span>  <span class="mf">3.</span><span class="p">,</span>  <span class="mf">4.</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span> <span class="mf">10.2</span> <span class="p">,</span>  <span class="mf">12.1</span><span class="p">,</span>  <span class="mf">15.5</span> <span class="p">,</span>  <span class="mf">18.3</span><span class="p">,</span>  <span class="mf">20.6</span> <span class="p">])</span>
+
+<span class="c"># Ajuste a una recta (polinomio de grado 1)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="c"># imprime [ 2.7   9.94]</span>
+</pre></div>
+</div>
+<p>en este ejemplo <strong>polyfit()</strong> devuelve la lista de parámetros <em>p</em> de la
+recta, por lo que el modelo lineal <img class="math" src="_images/math/1a4478b7293ea717a163ead5195718a3e2bab089.png" alt="f(x) = ax +b"/> de nuestros datos será:</p>
+<div class="math">
+<p><img src="_images/math/687c8eff7a85ee9c30a68ca8abf17f17102c81a6.png" alt="y(x) = p_0 x + p_1 = 2.7x + 9.94" /></p>
+</div><p>Ahora podemos dibujar los datos experimentales y la recta ajustada:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Valores de y calculados del ajuste</span>
+<span class="n">y_ajuste</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">p_datos</span><span class="p">,</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">&#39;b.&#39;</span><span class="p">)</span>                                  <span class="c"># Dibujamos los datos experimentales</span>
+<span class="n">p_ajuste</span><span class="p">,</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_ajuste</span><span class="p">,</span> <span class="s">&#39;r-&#39;</span><span class="p">)</span>    <span class="c"># Dibujamos la recta de ajuste</span>
+
+<span class="n">title</span><span class="p">(</span><span class="s">&#39;Ajuste lineal por minimos cuadrados&#39;</span><span class="p">)</span>
+
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Eje x&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Eje y&#39;</span><span class="p">)</span>
+
+<span class="n">legend</span><span class="p">((</span><span class="s">&#39;Datos experimentales&#39;</span><span class="p">,</span> <span class="s">&#39;Ajuste lineal&#39;</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s">&quot;upper left&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/plot_ajuste_lineal.png" class="align-center" src="_images/plot_ajuste_lineal.png" style="width: 10cm;" />
+<p>Como se ve en este ejemplo, la salida por defecto de <strong>polyfit()</strong> es un array con los parámetros del ajuste. Sin embargo, si se pide una salida detalla con el parámetro <em>full=True</em> (por defecto <em>full=False</em>), el resultado es una tupla con el array de parámetros, el residuo, el rango, los valores singulares y la condición relativa. Nos interesa especialmente el residuo del ajuste, que es la suma cuadrática de todos los resíduos <img class="math" src="_images/math/9ccfb21a5d6f9b240e0beee156b0f79245a696a5.png" alt="\sum^n_{i=1}  \lvert y_i - f(x_i)\rvert**2"/>. Para el ejemplo anterior tendríamos lo siguiente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Ajuste a una recta, con salida completa</span>
+<span class="n">resultado</span> <span class="o">=</span> <span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">full</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">resultado</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot; Imprime tupla</span>
+<span class="sd">(array([ 2.7 ,  9.94]),                 # Parámetros del ajuste</span>
+<span class="sd"> array([ 0.472]),                       # Suma de residuos</span>
+<span class="sd"> 2,                                     # Rango de la matriz del sistema</span>
+<span class="sd"> array([ 2.52697826,  0.69955764]),     # Valores singulares</span>
+<span class="sd"> 1.1102230246251565e-15)                # rcond</span>
+<span class="sd"> &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Si estamos trabajando con polinomios, puede que nos interese usar las funciones <strong>polyval()</strong> o <strong>poly1d()</strong> de numpy. Se utilizan para evaluar y generar funciones polinómicas respectivamente, a partir de una lista u array de parámetros. Por ejemplo, si del ejemplo anterior tenemos un array <em>p</em> con los parámetros del ajuste lineal:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Evaluo el polinomio en x=5.4</span>
+<span class="k">print</span> <span class="n">polyval</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mf">5.4</span><span class="p">)</span>
+<span class="c"># Imprime 24.520000000000003</span>
+
+<span class="c"># Creo una funcion polinomica de parametros p</span>
+<span class="n">mi_recta</span> <span class="o">=</span> <span class="n">poly1d</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="c"># Ahora mi_recta es una funcion que puedo evaluar</span>
+
+<span class="c"># Evaluo la fucion en x=5.4</span>
+<span class="k">print</span> <span class="n">mi_recta</span><span class="p">(</span><span class="mf">5.4</span><span class="p">)</span>
+<span class="c"># imprime 24.520000000000003</span>
+</pre></div>
+</div>
+<p>Como es de esperar, <strong>polyfit()</strong> sólo puede ajustar polinomios pero a veces nos gustaría ajustar otras funciones. En muchos casos, sin embargo, es posible linealizar la función con un cambio de variable adecuado y ajustar esta última. Por ejemplo la función</p>
+<div class="math">
+<p><img src="_images/math/b26aeacb3d404d1a9704be061751062c53d7e560.png" alt="y = \frac{b}{x + a}" /></p>
+</div><p>se puede linealizar a <img class="math" src="_images/math/a819425c692cf7f3d64e25b635b56af39e072b1f.png" alt="y'(x) = a'x + b'"/> haciendo el cambio</p>
+<div class="math">
+<p><img src="_images/math/27ec22db3e3b7e344e23819c436e390bf8f13c70.png" alt="y' = \frac{1}{y} \hspace{1cm} a = \frac{a'}{b'}  \hspace{1cm} b = \frac{1}{a'}." /></p>
+</div><p>ahora basta con ajustar la recta   <img class="math" src="_images/math/a819425c692cf7f3d64e25b635b56af39e072b1f.png" alt="y'(x) = a'x + b'"/> y recuperar
+los parámetros <em>a</em> y <em>b</em> de la recta original.</p>
+<p>En otros casos en los que no es posible tal cosa, se trataría de hacer ajustes a funciones no polinómicas, aunque esto queda fuera del alcance de este curso. Si tienes interés, consulta la documentación del módulo <strong>optimize</strong> de <strong>scipy</strong>. Por ejemplo, puedes  importar la función <strong>leastsq()</strong> del módulo <strong>optimize</strong> haciendo <strong>from scipy.optimize import leastsq</strong>) para hacer ajustes por mínimos cuadrados de funciones arbitrarias, sean lineales o no. Puedes consultar el módulo <strong>scipy.optimize</strong> ver todos los métodos de optimización disponibles.</p>
+<div class="section" id="ejercicios">
+<h3>Ejercicios<a class="headerlink" href="#ejercicios" title="Enlazar permanentemente con este título">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Representar gráficamente los siguientes datos y hacer un ajuste por mínimos cuadrados a un polinomio de grado tres de los datos representando la curva resultante.</p>
+<blockquote>
+<div><p><tt class="docutils literal"><span class="pre">x</span> <span class="pre">=</span>&nbsp; <span class="pre">3.1</span>&nbsp;&nbsp; <span class="pre">6.3</span>&nbsp;&nbsp; <span class="pre">9.9</span>&nbsp; <span class="pre">12.6</span>&nbsp;&nbsp; <span class="pre">21.4</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">50.1</span> <span class="pre">190.2</span> <span class="pre">499.0</span> <span class="pre">720.8</span> <span class="pre">1130.0</span></tt></p>
+</div></blockquote>
+<p>Superponer los ajuste que resultarían de ajustes a polinomios de orden 1 y 2.</p>
+</li>
+<li><p class="first">El fichero de texto medidas_PT_H.txt (archivos Tema 7) posee medidas de presión y temperatura para 10 mol de hidrógeno, que se somete a distintas temperaturas a volumen constante. Este experimento se realiza en tres envases con volúmenes distintos. Suponiendo que el gas se comporta idealmente y por tanto que se verifica que PV=nRT, representar los datos y realizar un ajuste lineal P(T) para cada volumen. ¿Cuánto vale la constante de gases ideales según el experimento?</p>
+</li>
+<li><p class="first">El fichero de texto medidas_PV_He.txt (archivos Tema 7) posee medidas de presión y volumen para 0.1 mol de helio, que se comprime sistemáticamente a temperatura constante. Este experimento se realiza a tres temperaturas distintas. Suponiendo que el gas se comporta idealmente y por tanto que se verifica que PV=nRT, representar los datos y realizar un ajuste lineal P(V) para cada temperatura. ¿Cuánto vale la constante de gases ideales según el experimento?</p>
+</li>
+<li><p class="first">Un isótopo radioactivo sigue una ley de desintegración exponencial de la forma <img class="math" src="_images/math/01b9ca21c15420366543599c6a08d9aa306ece37.png" alt="N(t) = N_0e^{-kt}"/>, donde <img class="math" src="_images/math/0d77bbbacb691e43cd012ef9840614b838b14901.png" alt="N(t)"/> es la cantidad de material que queda en un tiempo <em>t</em>, <img class="math" src="_images/math/ef46f7519c0f176611a9e4e7fe1b05012b2d0e35.png" alt="N_0"/> la cantidad original (en <em>t=0</em>) y <em>k</em> es la tasa de decaimiento del isótopo. La semivida de un isótopo es el tiempo que tarda una muestra de ese elemento en disminuir hasta la mitad, es decir <img class="math" src="_images/math/7eadf2a297c0f3c5cb57ade3eda018a8c37badd5.png" alt="N(T)=N_0/2"/>.</p>
+<p>En un laboratorio se mide cada 12 minutos la masa en gramos de cierto elemento radioactivo. Estos datos se encuentran en el fichero medidas_sustancia_radioactiva.txt (archivos Tema 7). Representar gráficamente las medidas con punto y hacer un ajuste por mínimos cuadrados del modelo teórico de desintegración radioactiva para conocer la tasa de decaimiento del isótopo.</p>
+</li>
+<li><p class="first">Para una muestra que contiene 10g de yodo 131 (semivida de 8 días), se hacen diariamente cinco medidas independientes a lo largo de 60 días. Esas medidas están en el fichero medidas_decaimiento_yodo131b.txt (archivos Tema 7), donde cada fila corresponde a cada una de las 5 medidas realizadas diariamente en gramos de yodo que queda. Representar en un gráfico con puntos las cinco medidas con colores distinto para cada una y ajustar a cada una la curva teórica de decaimiento. Imprimir por pantalla los parámetros de cada uno de los cinco ajustes.</p>
+</li>
+<li><p class="first">Cualquier metal de longitud <img class="math" src="_images/math/459e0a2cd0a6e3df9f55e7e2cc3c0817d11d3ec2.png" alt="L_0"/> a temperatura inicial <img class="math" src="_images/math/4fc1a12673bb4b282ed4a58b1b1ca85be7562da2.png" alt="T0"/>, que es sometido posteriomente a una temperatura <em>T</em> sufre una dilatación o contración dada aproximadamente por <img class="math" src="_images/math/04e424ffbc9afcb0a2090559270eb38f395f39d9.png" alt="\delta L = \alpha \Delta T)"/> donde <img class="math" src="_images/math/9aa82340bf6dc42b34f1d3f04d1b4ce188366934.png" alt="\Delta T"/> es la diferencia de temperaturas y <img class="math" src="_images/math/10f32377ac67d94f764f12a15ea987e88c85d3e1.png" alt="\alpha"/> el coeficiente de dilatación característico del metal.</p>
+<p>En un laboratorio se mide la dilatación que experimentan cuatro varillas de metal de distinto material de longitud inicial <img class="math" src="_images/math/c6624c0c4440c1b36d13fa4c53ca6293a1ecb06f.png" alt="L_0=10cm"/> al ir aumentando progresivamente su temperatura en un grado; estos datos se encuentran en el fichero medidas_dilatacion_metales.txt. Representar gráficamente las medidas en una única figura con un color distinto para cada metal y calcular el factor de dilatación <em>a</em> para cada uno ajustando el modelo teórico a los datos.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Ajuste de datos experimentales: Método de mínimos cuadrados</a><ul>
+<li><a class="reference internal" href="#ajuste-a-polinomios-con-python">Ajuste a polinomios con Python</a><ul>
+<li><a class="reference internal" href="#ejercicios">Ejercicios</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="graficos.html"
+                        title="Capítulo anterior">Representación gráfica de datos</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="calculo_numerico.html"
+                        title="Próximo capítulo">Cálculo Numérico</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/ajustes.txt"
+           rel="nofollow">Enseñar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="calculo_numerico.html" title="Cálculo Numérico"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="graficos.html" title="Representación gráfica de datos"
+             >anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Jorge A Perez Prieto y Teodoro Roca Cortes.
+      Actualizado por última vez en 30 de January de 2011.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

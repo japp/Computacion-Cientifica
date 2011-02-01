@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Representación gráfica de datos &mdash; Computacion Cientifica - Introduccion a Python v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Computacion Cientifica - Introduccion a Python v0.1 documentation" href="index.html" />
+    <link rel="next" title="Ajuste de datos experimentales: Método de mínimos cuadrados" href="ajustes.html" />
+    <link rel="prev" title="Lectura y escritura de ficheros" href="lectura_ficheros.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="ajustes.html" title="Ajuste de datos experimentales: Método de mínimos cuadrados"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="lectura_ficheros.html" title="Lectura y escritura de ficheros"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="representacion-grafica-de-datos">
+<h1>Representación gráfica de datos<a class="headerlink" href="#representacion-grafica-de-datos" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>La representación de datos científicos mediante gráficos resulta ser fundamental para expresar una gran variedad de resultados. Cualquier informe, artículo o resultado a menudo se expresa de manera mucho más clara mediante gráficos. Python posee varios paquetes gráficos; nosotros usaremos <tt class="xref py py-mod docutils literal"><span class="pre">matplotlib</span></tt>, una potente librería gráfica de alta calidad para gráficos bidimensionales y sencilla de manejar. Matplotlib posee el módulo <tt class="xref py py-mod docutils literal"><span class="pre">pylab</span></tt>, que es la interfaz para hacer gráficos bidimensionales. Veamos un ejemplo sencillo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>      <span class="c"># importar todas las funciones de pylab</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mf">10.</span><span class="p">)</span>          <span class="c"># array de floats, de 0.0 a 9.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                  <span class="c"># generar el gráfico</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x9d0f58c</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">show</span><span class="p">()</span>                   <span class="c"># mostrar el gráfico en pantalla</span>
+</pre></div>
+</div>
+<img alt="_images/plot_x6.png" class="align-center" src="_images/plot_x6.png" style="width: 10cm;" />
+<p>Hemos creado un gráfico que representa diez puntos en un <em>array</em> y luego lo hemos mostrado con <tt class="xref py py-func docutils literal"><span class="pre">show()</span></tt>; esto es así porque normalmente hacemos varios cambios en la gráfica antes de mostrarla, sin embargo, cuando trabajamos interactivamente, por ejemplo con la consola ipython podemos activar el <strong>modo interactivo</strong> para que cada cambio que se haga en la gráfica se muestre en el momento, mediante la función <strong>ion()</strong>, de esta menera no hace falta poner <tt class="xref py py-func docutils literal"><span class="pre">show()</span></tt> para mostrar la gráfica cada vez que se haga <tt class="xref py py-func docutils literal"><span class="pre">plot()</span></tt>:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [2]: </span><span class="n">ion</span><span class="p">()</span>             <span class="c"># Activo el modo interactivo</span>
+<span class="gp">In [3]: </span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>           <span class="c"># Hago un plot que se muestra sin hacer show()</span>
+<span class="gr">Out[3]: </span><span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x9ffde8c</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Recordar que este modo interactivo sólo está disponible en la consola avanzada <tt class="docutils literal"><span class="pre">ipython</span></tt>, no en la consola estándar de Python. Otra posibilidad es iniciar ipython en modo <tt class="xref py py-mod docutils literal"><span class="pre">pylab</span></tt>, haciendo <tt class="docutils literal"><span class="pre">ipython</span> <span class="pre">-pylab</span></tt>, de esta manera se carga automáticamente pylab y se activa el modo interactivo, aparte de importar el módulo <tt class="xref py py-mod docutils literal"><span class="pre">numpy</span></tt> y todas sus funciones.</p>
+<p>Fíjate cómo el comando <tt class="xref py py-func docutils literal"><span class="pre">plot()</span></tt> devuelve una lista de instancias de cada dibujo. En este caso es una lista con un sólo elemento, una instancia <tt class="docutils literal"><span class="pre">Line2D</span></tt>. Podemos capturar esta instancia para referirnos a este dibujo más adelante haciendo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mi_dibujo</span><span class="p">,</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ahora la variable <tt class="docutils literal"><span class="pre">mi_dibujo</span></tt> es una instancia o &#8220;referencia&#8221; a la línea del dibujo, que podremos manipular posteriormente con métodos que se aplican a esa instancia. Nótese que después de <tt class="docutils literal"><span class="pre">mi_dibujo</span></tt> hay una coma; esto es para indicar que <tt class="docutils literal"><span class="pre">mi_dibujo</span></tt> debe tomar el valor del primer (y en este caso el único) elemento de la lista y no la lista en sí, que es lo que habría ocurrido de haber hecho <tt class="docutils literal"><span class="pre">mi_dibujo</span> <span class="pre">=</span> <span class="pre">plot(x)</span></tt> (erróneamente).</p>
+<p>La sintaxis básica de <tt class="xref py py-func docutils literal"><span class="pre">plot()</span></tt> es simplemente <tt class="docutils literal"><span class="pre">plot(x,y)</span></tt>, pero si no se incluye <tt class="docutils literal"><span class="pre">x</span></tt>, éste se reemplaza por el <strong>número de elemento</strong>, por lo que es equivalente a hacer <tt class="docutils literal"><span class="pre">plot(range(len(y)),y)</span></tt>. En la gráfica del ejemplo anterior no se ven diez puntos, sino una línea contínua uniendo esos puntos, que es como se dibuja por defecto. Si queremos pintar los puntos debemos hacerlo con un parámetro adicional, por ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s">&#39;o&#39;</span><span class="p">)</span>     <span class="c"># Pinta diez puntos como &quot;O&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xa57ffac</span><span class="o">&gt;</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s">&#39;o-&#39;</span><span class="p">)</span>    <span class="c"># Igual que antes, pero uniéndolos además con una línea contínua</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xa58e80c</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<img alt="_images/plot_xo6.png" class="align-center" src="_images/plot_xo6.png" style="width: 10cm;" />
+<p>En este caso el <strong>&#8216;o&#8217;</strong> se usa para dibujar puntos gruesos y si se añade <strong>-</strong> también dibuja la línea contínua. En realidad se dibujaron dos gráficos uno encima del otro; si queremos que se cree un nuevo gráfico cada vez que hacemos <tt class="xref py py-func docutils literal"><span class="pre">plot()</span></tt>, debemos añadir el parámetro <tt class="docutils literal"><span class="pre">hold=False</span></tt> a  <tt class="xref py py-func docutils literal"><span class="pre">plot()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mi_dibujo</span><span class="p">,</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="s">&#39;o&#39;</span><span class="p">,</span> <span class="n">hold</span><span class="o">=</span><span class="s">&quot;False&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>El tercer parámetro (o segundo, si no se incluye la x) , donde se indica el símbolo y el color del marcador, admite distintas letras que representan de manera única el color, el símbolo o la línea que une los puntos; por ejemplo, si hacemos  <tt class="docutils literal"><span class="pre">plot(x,'bx-')</span></tt> pintará los puntos con marcas &#8220;X&#8221;, de color azul (&#8216;b&#8217;) y los unirá además con líneas contínuas. Estas son otras opciones posibles:</p>
+<p><strong>Marcas y líneas</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Símbolo</th>
+<th class="head">Descripción</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>&#8216;-&#8216;</td>
+<td>Línea sólida</td>
+</tr>
+<tr><td>&#8216;&#8211;&#8217;</td>
+<td>Línea a trazos</td>
+</tr>
+<tr><td>&#8216;-.&#8217;</td>
+<td>Puntos y rayas</td>
+</tr>
+<tr><td>&#8216;:&#8217;</td>
+<td>Línea punteada</td>
+</tr>
+<tr><td>&#8216;.&#8217;</td>
+<td>Marcador punto</td>
+</tr>
+<tr><td>&#8216;,&#8217;</td>
+<td>Marcador pixel</td>
+</tr>
+<tr><td>&#8216;o&#8217;</td>
+<td>Marcador círculo relleno</td>
+</tr>
+<tr><td>&#8216;v&#8217;</td>
+<td>Marcador triángulo hacia abajo</td>
+</tr>
+<tr><td>&#8216;^&#8217;</td>
+<td>Marcador triángulo hacia arriba</td>
+</tr>
+<tr><td>&#8216;&lt;&#8217;</td>
+<td>Marcador triángulo hacia la izquierda</td>
+</tr>
+<tr><td>&#8216;&gt;&#8217;</td>
+<td>Marcador triángulo hacia la derecha</td>
+</tr>
+<tr><td>&#8216;s&#8217;</td>
+<td>Marcador cuadrado</td>
+</tr>
+<tr><td>&#8216;p&#8217;</td>
+<td>Marcador pentágono</td>
+</tr>
+<tr><td>&#8216;*&#8217;</td>
+<td>Marcador estrella</td>
+</tr>
+<tr><td>&#8216;+&#8217;</td>
+<td>Marcador cruz</td>
+</tr>
+<tr><td>&#8216;x&#8217;</td>
+<td>Marcador X</td>
+</tr>
+<tr><td>&#8216;D&#8217;</td>
+<td>Marcador diamante</td>
+</tr>
+<tr><td>&#8216;d&#8217;</td>
+<td>Marcador diamante delgado</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Colores</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="56%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Símbolo</th>
+<th class="head">Color</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>&#8216;b&#8217;</td>
+<td>Azul</td>
+</tr>
+<tr><td>&#8216;g&#8217;</td>
+<td>Verde</td>
+</tr>
+<tr><td>&#8216;r&#8217;</td>
+<td>Rojo</td>
+</tr>
+<tr><td>&#8216;c&#8217;</td>
+<td>Cian</td>
+</tr>
+<tr><td>&#8216;m&#8217;</td>
+<td>Magenta</td>
+</tr>
+<tr><td>&#8216;y&#8217;</td>
+<td>Amarillo</td>
+</tr>
+<tr><td>&#8216;k&#8217;</td>
+<td>Negro</td>
+</tr>
+<tr><td>&#8216;w&#8217;</td>
+<td>Blanco</td>
+</tr>
+</tbody>
+</table>
+<p>Para borrar toda la figura se puede usar la función  <tt class="xref py py-func docutils literal"><span class="pre">clf()</span></tt>, mientras que  <tt class="xref py py-func docutils literal"><span class="pre">cla()</span></tt> sólo borra lo que hay dibujado dentro de los ejes y no los ejes en si.</p>
+<p>Se pueden representar varias <strong>parejas de datos</strong> con sus respectivos símbolos en una misma figura, aunque para ello siempre es obligatorio incluir el valor del eje x:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="p">()</span>  <span class="c"># Limpio la figura</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x3</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="s">&#39;b.&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="s">&#39;rd&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="s">&#39;g^&#39;</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0xa94cf6c&gt;,</span>
+<span class="go">&lt;matplotlib.lines.Line2D object at 0xa95b72c&gt;,</span>
+<span class="go">&lt;matplotlib.lines.Line2D object at 0xa95ba4c&gt;]</span>
+</pre></div>
+</div>
+<img alt="_images/plot_x_x2_x36.png" class="align-center" src="_images/plot_x_x2_x36.png" style="width: 10cm;" />
+<p>Es posible cambiar el intervalo mostrado en los ejes con <tt class="xref py py-func docutils literal"><span class="pre">xlim()</span></tt>  e <tt class="xref py py-func docutils literal"><span class="pre">ylim()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span>   <span class="c"># nuevos límites del eje x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="mi">850</span><span class="p">)</span> <span class="c"># nuevos límites del eje y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">850</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>además del marcador y el color indicado de la manera anterior, se pueden cambiar muchas otras propiedades de la gráfica como parámetros de <tt class="xref py py-func docutils literal"><span class="pre">plot()</span></tt> independientes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parámetro</th>
+<th class="head">Valores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>alpha</td>
+<td>float (0.0=transparente a 1.0=opaco)</td>
+</tr>
+<tr><td>color o c</td>
+<td>Un color de matplotlib</td>
+</tr>
+<tr><td>label</td>
+<td>string (cadena de texto)</td>
+</tr>
+<tr><td>markeredgecolor o mec</td>
+<td>Un color de matplotlib</td>
+</tr>
+<tr><td>markeredgewidth o mew</td>
+<td>float en puntos</td>
+</tr>
+<tr><td>markerfacecolor o mfc</td>
+<td>Un color de matplotlib</td>
+</tr>
+<tr><td>markersize o ms float</td>
+<td>float en puntos</td>
+</tr>
+<tr><td>linestyle o ls</td>
+<td>&#8216;-&#8216;  &#8216;&#8211;&#8217;  &#8216;-.&#8217;  &#8216;:&#8217;  &#8216;None&#8217;</td>
+</tr>
+<tr><td>linewidth o lw</td>
+<td>float en puntos</td>
+</tr>
+<tr><td>marker</td>
+<td>&#8216;+&#8217;  &#8216;*&#8217;  &#8216;,&#8217;  &#8216;.&#8217;  &#8216;1&#8217;  &#8216;2&#8217;  &#8216;3&#8217;  &#8216;4&#8217;
+&#8216;&lt;&#8217;  &#8216;&gt;&#8217;  &#8216;D&#8217;  &#8216;H&#8217;  &#8216;^&#8217;  &#8216;_&#8217; &#8216;d&#8217; &#8216;h&#8217;  &#8216;o&#8217;
+&#8216;p&#8217;  &#8216;s&#8217;  &#8216;v&#8217;  &#8216;x&#8217;  &#8216;|&#8217; TICKUP  TICKDOWN
+TICKLEFT  TICKRIGHT</td>
+</tr>
+</tbody>
+</table>
+<p>Un ejemplo usando más opciones sería este:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="s">&#39;5&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">mfc</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/plot_x_markers6.png" class="align-center" src="_images/plot_x_markers6.png" style="width: 10cm;" />
+<p>También es posible cambiar las propiedades de la gráfica una vez creada, para ello debemos <strong>capturar las instancias</strong> de cada dibujo en una variable y cambiar sus parámetros. En este caso a menudo hay que usar <tt class="xref py py-func docutils literal"><span class="pre">show()</span></tt> para actualizar el gráfico.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="s">&#39;b.&#39;</span><span class="p">,</span>   <span class="c"># Hago tres dibujos, campturando sus</span>
+<span class="go">            x, x2, &#39;rd&#39;, x, x3, &#39;g^&#39;)   #  instacias en las variables p1, p2 y p3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">set_marker</span><span class="p">(</span><span class="s">&#39;o&#39;</span><span class="p">)</span>             <span class="c"># Cambio el símbolo de la gráfica 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p3</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">)</span>              <span class="c"># Cambio el color de la gráfica 3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">show</span><span class="p">()</span>                         <span class="c"># Muestro en dibujo por pantalla</span>
+</pre></div>
+</div>
+<div class="section" id="trabajando-con-texto">
+<h2>Trabajando con texto<a class="headerlink" href="#trabajando-con-texto" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Exiten funciones para añadir texto a los ejes y a la gráfica en sí, éstos son los más importantes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x3</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Eje X&#39;</span><span class="p">)</span>       <span class="c"># Etiqueta del eje X</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xad2d4ac</span><span class="o">&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Eje Y&#39;</span><span class="p">)</span>       <span class="c"># Etiqueta del eje Y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xad328cc</span><span class="o">&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Mi grafica&#39;</span><span class="p">)</span>   <span class="c"># Título del gráfico</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xad394ac</span><span class="o">&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="s">&#39;Nota&#39;</span><span class="p">)</span>  <span class="c"># Texto en coodenadas (7,200)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xa987e2c</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>En este ejemplo, se usó la función <tt class="xref py py-func docutils literal"><span class="pre">text()</span></tt> para añadir un texto arbitrario en la gráfica, cuya posición se debe dar en <strong>las unidades de la gráfica</strong>. Cuando se utilizan textos también es posible usar fórmulas con formato LaTeX. Veamos un ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y1</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y2</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">texto1</span> <span class="o">=</span> <span class="n">text</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="s">r&#39;$\frac{\sin(x)}{x}$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">texto2</span> <span class="o">=</span> <span class="n">text</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="s">r&#39;$\sin(x) e^{x}$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="p">()</span>       <span class="c"># Añado una malla al gráfico</span>
+</pre></div>
+</div>
+<p>Aquí hemos usado código LaTeX para escribir fórmulas matemáticas, para lo que siempre hay que escribir entre <tt class="docutils literal"><span class="pre">r'$</span> <span class="pre">formula</span> <span class="pre">$'</span></tt> y he usado un tamaño de letra mayor con el parámetro <strong>fontsize</strong>. En la última línea hemos añadido una malla con la función <tt class="xref py py-func docutils literal"><span class="pre">grid()</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">LaTeX es un sistema de escritura orientado a contenidos matemáticos muy popular en ciencia e ingeniería. Puedes ver una introdución a LaTeX en los cursos ISLA de la ULL: <a class="reference external" href="http://cisla.osl.ull.es/octubre06/htc/apuntes/latex">http://cisla.osl.ull.es/octubre06/htc/apuntes/latex</a></p>
+</div>
+</div>
+<div class="section" id="representacion-grafica-de-funciones">
+<h2>Representación gráfica de funciones<a class="headerlink" href="#representacion-grafica-de-funciones" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Visto el ejemplo anterior, vemos que es muy fácil representar gráficamente una función matemática. Para ello, debemos definir la función y luego generar un <em>array</em> con el intervalo de valores que se quieren representar. Definamos algunas funciones trigonométricas y luego representémolas gráficamente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="go">.....:     y = sin(x)</span>
+<span class="go">.....:     return y</span>
+<span class="go">.....:</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="go">.....:     y = sin(x)+sin(5.0*x)</span>
+<span class="go">.....:     return y</span>
+<span class="go">.....:</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f3</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="go">.....:     y = sin(x)*exp(-x/10.)</span>
+<span class="go">.....:     return y</span>
+<span class="go">.....:</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># array de valores que quiero representar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f1</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">f2</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">f3</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Añado una leyenda al gráfico</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">legend</span><span class="p">(</span> <span class="p">(</span><span class="s">&#39;Funcion 1&#39;</span><span class="p">,</span> <span class="s">&#39;Funcion 2&#39;</span><span class="p">,</span> <span class="s">&#39;Funcion 3&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xbb4b0ac</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<img alt="_images/plot_funciones6.png" class="align-center" src="_images/plot_funciones6.png" style="width: 10cm;" />
+<p>En la última línea hemos añadido una leyenda con la función <tt class="xref py py-func docutils literal"><span class="pre">legend()</span></tt> que admite como entrada una <strong>tupla</strong> con <em>strings</em> correspondiendo consecutivamente a cada uno de los gráficos.</p>
+</div>
+<div class="section" id="histogramas">
+<h2>Histogramas<a class="headerlink" href="#histogramas" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Los histogramas son gráficos que representan el número que veces que se repite ciertos valores dentro de un intervalo, frente a su valor. Podemos hacer histogramas muy fácilmente con la función <tt class="xref py py-func docutils literal"><span class="pre">hist()</span></tt> indicando como parámetros un <em>array</em> con los números a representar. Si no se indica nada mas, se generará un histograma con 10 divisiones (llamadas <em>bins</em>, en inglés). Veamos un ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Importo el módulo de numeros aleatorios de scipy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># utilizo la función randn() del modulo random para generar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># un array de números aleatorios con distribución normal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nums</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>  <span class="c"># array con 200 números aleatorios</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Genero el histograma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hist</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="go">(array([ 2, 10, 11, 28, 40, 49, 37, 12,  6,  5]),</span>
+<span class="go">array([-2.98768497, -2.41750815, -1.84733134, -1.27715452, -0.70697771,</span>
+<span class="go">        -0.13680089,  0.43337593,  1.00355274,  1.57372956,  2.14390637,</span>
+<span class="go">        2.71408319]),</span>
+<span class="go">&lt;a list of 10 Patch objects&gt;)</span>
+</pre></div>
+</div>
+<p>Vemos que los números del <em>array</em> se dividieron automáticamente en 10 grupos (o <em>bins</em>) y cada barra representa cada una de esas divisiones, con el número de valores que caen en cada intervalo. Si en lugar usar sólo 10 divisiones queremos usae digamos 20, debemos indicarlo como un segundo parámetro:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">hist</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>El la figura de abajo se muestra el resultado de superponer ambos histogramas. La función <tt class="xref py py-func docutils literal"><span class="pre">hist()</span></tt> devuelve una tupla con tres elementos, que son un array con el número elementos en cada división, un array con el punto en eje <em>X</em> donde empieza cada división y una lista con referencias a cada una de las barras para modificar sus propiedades (consulta el manual de <tt class="xref py py-mod docutils literal"><span class="pre">matplotlib</span></tt> para más información).</p>
+<img alt="_images/plot_histograma6.png" class="align-center" src="_images/plot_histograma6.png" style="width: 10cm;" />
+</div>
+<div class="section" id="figuras-multiples">
+<h2>Figuras múltiples<a class="headerlink" href="#figuras-multiples" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Se pueden hacer cuantas figuras independientes (en ventanas distintas) queramos con la función <tt class="docutils literal"><span class="pre">figure(n)</span></tt> donde <em>n</em> es el número de la figura. Cuando se crea una figura al hacer <tt class="xref py py-func docutils literal"><span class="pre">plot()</span></tt> se hace automáticamente <tt class="docutils literal"><span class="pre">figure(1)</span></tt>, como aparece en el título de la ventana. Podríamos crear una nueva figura independiente excribiendo <tt class="docutils literal"><span class="pre">figure(2)</span></tt>, en ese momento todos los comandos de aplican a figura activa, la figura 2. Podemos regresar a la primera excribiendo <tt class="xref py py-func docutils literal"><span class="pre">figure(1)()</span></tt> para trabajar nuevamente en ella.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>             <span class="c"># Crea una figura en una ventana (Figure 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>                <span class="c"># Crea una nueva figura (vacía) en otra ventana (Figure 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span><span class="p">,</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>             <span class="c"># Dibuja el gráfico en la figura 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Funcion coseno&#39;</span><span class="p">)</span>  <span class="c"># Añade un título a la figura 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                <span class="c"># Activo la figura 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Funcion seno&#39;</span><span class="p">)</span>    <span class="c"># Añade un título a la figura 2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="varios-graficos-en-una-figura">
+<h2>Varios gráficos en una figura<a class="headerlink" href="#varios-graficos-en-una-figura" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En ocasiones nos interesa mostrar varios gráficos en un misma figura o ventana. Para ello podemos usar la función <tt class="xref py py-func docutils literal"><span class="pre">subplot()</span></tt>, indicando entre paréntesis un número con tres dígitos cuyo primer dígito indica en número de filas en los que se dividirá la figura, el segundo el número de columnas y el tercero se refiere al gráfico con el que estamos trabajando en ese momento. Por ejemplo, si quisiéramos representar las tres funciones anteriores usando tres gráficas en la misma figura, una al lado de la otra y por lo tanto con una fila y tres columnas, haríamos lo siguiente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>      <span class="c"># Figura con una fila y tres columnas, activo primer subgráfico</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f1</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s">&#39;r-&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>      <span class="c"># Figura con una fila y tres columnas, activo segundo subgráfico</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span><span class="p">,</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f2</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s">&#39;b-&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>      <span class="c"># Figura con una fila y tres columnas, activo tercer subgráfico</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p3</span><span class="p">,</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f3</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s">&#39;g-&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/plot_subplot6.png" class="align-center" src="_images/plot_subplot6.png" />
+<p>Al igual que con varias figuras, para dibujar en un gráfico hay que activarlo, así, si acabamos de dibujar el segundo gráfico escribiendo antes <strong>subplot(132)</strong> y queremos cambiar algo del primero, debemos activarlo con <tt class="xref py py-func docutils literal"><span class="pre">subplot(131)()</span></tt> y en ese momento todas funciones de gráficas se aplicarán a él.</p>
+</div>
+<div class="section" id="representando-datos-de-laboratorio">
+<h2>Representando datos de laboratorio<a class="headerlink" href="#representando-datos-de-laboratorio" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Representar datos leídos de un fichero en lugar de generarlos directamente, es tan fácil como leer los datos y pasar los a <em>arrays</em> de numpy. Una vez hecho, se grafican como hemos visto:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Leo un fichero de dos columnas de datos, pasándolo a un array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datos</span> <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="s">&#39;datos_2col.txt&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datos</span><span class="o">.</span><span class="n">shape</span>   <span class="c"># 100 filas, 2 columnas</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">col2</span><span class="p">,</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">datos</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;b.&#39;</span><span class="p">)</span>   <span class="c"># Primera columna, con puntos azules (b)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">col1</span><span class="p">,</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">datos</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s">&#39;r.&#39;</span><span class="p">)</span>   <span class="c"># Segunda columna, con puntos rojos (r)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Trazo una línea horizontal en la coordenada y=4 de color verde (g)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">axhline</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;g&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x169c6d8c</span><span class="o">&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Trazo una línea vertical en la coordenada x=30 de color verde (g)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">axvline</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;g&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xac5986c</span><span class="o">&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Dibujo una banda horizontal de y=0 a y=2 de color azul y 30% de transparencia (alpha=0.3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">axhspan</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Polygon</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xac59c4c</span><span class="o">&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Dibujo una banda vertical de x=60 a x=80 de color verde y 30% de transparencia</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">axvspan</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;g&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Polygon</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xac59a0c</span><span class="o">&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Etiqueto los ejes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Eje X&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xad043ac</span><span class="o">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Eje Y&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xad0b52c</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>En este caso hemos usado además algunas funciones para crear líneas y bandas horizontales y verticales.</p>
+<img alt="_images/plot_labdata6.png" class="align-center" src="_images/plot_labdata6.png" style="width: 10cm;" />
+</div>
+<div class="section" id="barras-de-error">
+<h2>Barras de error<a class="headerlink" href="#barras-de-error" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Cuando se trabaja con datos de laboratorio es muy habitual dibujar barras de error en los puntos representados. Esto se puede hacer usando la función <tt class="xref py py-func docutils literal"><span class="pre">errorbar()</span></tt> en lugar de <tt class="xref py py-func docutils literal"><span class="pre">plot()</span></tt> o junto con ella. Su sintáxis es similar, pero no igual, a la que hay que incluir los errores como parámetros usando <em>floats</em> si son errores iguales para todos los puntos o bien un array representando el error de cada punto. Veamos un ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Datos de x e y</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c"># Error constante en x e y</span>
+<span class="n">err_x</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">err_y</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="n">err_x</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">err_y</span><span class="p">)</span>
+
+<span class="c"># Si los errores de x e y son distintos en cada</span>
+<span class="c"># punto, se ponen en un array</span>
+<span class="n">err_y</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">err_x</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="n">err_y</span>
+
+<span class="c"># Gráfico con la barra de error en x e y, usando</span>
+<span class="c"># línea continua y puntos (fmt=&#39;-o&#39;)</span>
+<span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="n">err_x</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">err_y</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s">&#39;-o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/plot_errorbar6.png" class="align-center" src="_images/plot_errorbar6.png" style="width: 10cm;" />
+<p>Para algunos tipos de datos, conviene representar alguno de los ejes o ambos en escala logarítmica para apreciar mejor la evolución de la gráfica. Podemos usar las funciones <tt class="xref py py-func docutils literal"><span class="pre">semilogx()</span></tt>, <tt class="xref py py-func docutils literal"><span class="pre">semilogy()</span></tt> o <tt class="xref py py-func docutils literal"><span class="pre">loglog()</span></tt> para hacer un gráfico en escala logarítmica en el eje x, y o ambos, respectivamente. Por ejemplo, para representar el gráfico anterior con el eje y en escala logarítmica, podemos hacer lo siguiente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Eje y en escala logarítmica</span>
+<span class="n">p1</span><span class="p">,</span> <span class="o">=</span> <span class="n">semilogy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="s">&#39;rs-&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/plot_semilogy6.png" class="align-center" src="_images/plot_semilogy6.png" style="width: 10cm;" />
+</div>
+<div class="section" id="datos-bidimensionales">
+<h2>Datos bidimensionales<a class="headerlink" href="#datos-bidimensionales" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Es posible representar datos bidimensionales, como podría ser una imagen, usando la función <tt class="xref py py-func docutils literal"><span class="pre">imshow()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Creo un array 2D 100x100 de valores de 0.0 a 99999.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datos2D</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mf">10000.</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datos2D</span><span class="o">.</span><span class="n">shape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Gráfico del array bidimensional</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">imshow</span><span class="p">(</span><span class="n">datos2D</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Añado una barra de color para indicar los nieveles</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">colorbar</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Cambio a la paleta de colores gray() (por defecto es jet())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gray</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/plot_datos2D6.png" class="align-center" src="_images/plot_datos2D6.png" style="width: 10cm;" />
+</div>
+<div class="section" id="guardando-las-imagenes">
+<h2>Guardando las imágenes<a class="headerlink" href="#guardando-las-imagenes" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Después de crear una imagen podemos guardarla con la función <tt class="xref py py-func docutils literal"><span class="pre">savefig()</span></tt> poniendo como parámetro el nombre del fichero con su extensión. El formato de grabado se toma automáticamente de la extensión del nombre. Los formatos disponibles son png, pdf, ps, eps y svg. Por ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">savefig</span><span class="p">(</span><span class="s">&quot;mi_primera_grafica.eps&quot;</span><span class="p">)</span>  <span class="c"># Guardo la figura en formato eps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">savefig</span><span class="p">(</span><span class="s">&quot;mi_primera_grafica.png&quot;</span><span class="p">)</span>  <span class="c"># Guardo la figura en formato png</span>
+</pre></div>
+</div>
+<p>Si el gráfico se va usar para imprimir, por ejemplo en una publicación científica o en un informe, es recomendable usar un formato vectorial como Postcript (ps) o Postcript encapsulado (eps), pero si es para mostrar por pantalla o en una web, el más adecuado es un formato de mapa de bits como png o jpg.</p>
+<p>Consulta la web de <tt class="xref py py-mod docutils literal"><span class="pre">matplotlib</span></tt> (<a class="reference external" href="http://matplotlib.sourceforge.net/">http://matplotlib.sourceforge.net/</a>) para ver muchas más propiedades y ejemplos de esta librería.</p>
+</div>
+<div class="section" id="ejercicios">
+<h2>Ejercicios<a class="headerlink" href="#ejercicios" title="Enlazar permanentemente con este título">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Representar gráficamente las siguientes funciones:</p>
+<blockquote>
+<div><div class="math">
+<p><img src="_images/math/b558c3fa72619a037fd4851d0abad590fcd8bc9a.png" alt="f(x) = a e^{- { \frac{(x-x_0)^2 }{ 2 c^2} } }  \hspace{1cm}  f(x) =  \frac{b}{(x - x_0)^2 + b^2 }" /></p>
+</div></div></blockquote>
+<p>usando los valores <em>a=2.0</em>, <img class="math" src="_images/math/7419edb1519797ed61377f27b839963e3e3ff4e9.png" alt="x_0=10.0"/>, <em>c=5,0</em> y <em>b=0.5</em> en el intervalo x=[-50,+50].</p>
+</li>
+<li><p class="first">Con la serie de Gregory-Leibniz para el cálculo <img class="math" src="_images/math/f2ca003a7da0de4994b4733e203b74ff52d42553.png" alt="\pi"/> usada anteriormente:</p>
+<blockquote>
+<div><div class="math">
+<p><img src="_images/math/8851f796eb0596515f5beebf7af85a6043fd9f9f.png" alt="4 \sum^n_{k=1} \frac{(-1)^{k+1}}{2k - 1}" /></p>
+</div></div></blockquote>
+<p>el valor obtenido de  <img class="math" src="_images/math/f2ca003a7da0de4994b4733e203b74ff52d42553.png" alt="\pi"/> se acerca lentamenta al verdadero con cada término. Calcular todos los  valores que va tomando  <img class="math" src="_images/math/f2ca003a7da0de4994b4733e203b74ff52d42553.png" alt="\pi"/> con cada término hasta llegar a un error absoluto de  <img class="math" src="_images/math/c61c5a1e7ecb8844cc11069bcbc3d592295c69f6.png" alt="10^{-6}"/> y representa en una gráfica ese valor frente número de elementos sumados, usando líneas contínuas, limitándonos a los 300 primeros elementos. El otro gráfico representar el valor de  <img class="math" src="_images/math/f2ca003a7da0de4994b4733e203b74ff52d42553.png" alt="\pi"/> en los últimos 300 elementos. En gráficas dintintas, representar esta vez el valor abosuluto de la diferencia entre el valor calculado y el real frente al número de elementos, reprentando igualmente los 300 primeros en una gráfica y los 300 últimos en otra.</p>
+</li>
+<li><p class="first">El fichero medidas_I131.txt (tema 6 en el aula virtual) contiene medidas de masa de yodo 131 radioactivo hechas diariamente para medir su coeficiente de desintegración. La primera columna es la masa residual en gramos y la segunda es el error de la medida. Representar gráficamente los datos incluyendo barras de error usando puntos sin líneas, etiquetando los ejes.</p>
+</li>
+<li><p class="first">Cuando una fuente de luz coherente atraviesa una rendija delgada, se produce difracción de la luz, cuyo patrón de intensidad en la aproximación de Fraunhofer está dado por:</p>
+<blockquote>
+<div><div class="math">
+<p><img src="_images/math/a68a698f6e26ff7e560e469adfd3cca135b993d7.png" alt="I(\theta) = I_0(\frac{sen \beta}{\beta})^2 \hspace{3cm}  \beta = \frac{\pi a sen \theta}{\lambda}" /></p>
+</div></div></blockquote>
+<p>donde <em>a</em> es el ancho de la rendija, <img class="math" src="_images/math/ce4588fd900d02afcbd260bc07f54cce49a7dc4a.png" alt="\lambda"/> la longitud de onda de la luz,  <img class="math" src="_images/math/b2bdd37049b92f334dcb46d9cb0ed6957f092272.png" alt="I_0"/> la intensidad en el eje y <img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta"/> el ángulo de la posición medida con el eje de la rendija (ver dibujo). Representar gráficamente la intensidad del patrón de difracción para  <img class="math" src="_images/math/1054b4e106522673678481f00f73d41baa9f3cc7.png" alt="\lambda=400nm"/>,  <img class="math" src="_images/math/3a71be5145d96bd36e96ea3c6c15956a1bc3c82d.png" alt="\lambda=650nm"/> y <img class="math" src="_images/math/255d963e05284639dd30fbfbf6b61d98c5b431f5.png" alt="\lambda=800nm"/> usando  <img class="math" src="_images/math/80b43bf58a7445eaf7cd94e7c323579835833854.png" alt="I_0=1"/> y <em>a=0.04mm</em> en el intervalo  <img class="math" src="_images/math/f1ab7281c848181db6ca2ae2b257df6b85b97b08.png" alt="-\pi/20 &lt; \theta &lt; +\pi/20"/>. Comprobar cual es el efecto del patrón de difracción al duplicar el ancho de la rendija.</p>
+<img alt="_images/fraungeo6.png" class="align-center" src="_images/fraungeo6.png" style="width: 7cm;" />
+</li>
+<li><p class="first">Como ya hemos visto, la variación de temperatura de un objeto a temperatura <img class="math" src="_images/math/6801c07694edb238c4a095956d8bf46ccdb38fcc.png" alt="T_0"/> en un ambiente a <img class="math" src="_images/math/43b3aabcb88e217357a0b38741411a9357bf238f.png" alt="T_s"/> cambia de la siguiente manera:</p>
+<blockquote>
+<div><div class="math">
+<p><img src="_images/math/c025e0301a85c36850aab4e237f1de86acb773af.png" alt="T =  T_s + (T_0 - T_s)e^{-kt}" /></p>
+</div></div></blockquote>
+<p>con <img class="math" src="_images/math/e0d2bf360290fd61d1c1557e763f2622363b3d35.png" alt="t"/> en horas y <em>k</em> un parámetro que depende del cuerpo. a) Representa gráficamente la variación de la temperatura con el tiempo, partiendo de una <img class="math" src="_images/math/96bd767695ca3ef930281464c0714528f50b523c.png" alt="T_0=5^\circ C"/> a lo largo de 24 horas suponiendo <em>k=0.45</em> y temperatura ambiente de 40ºC. b) Superpon sobre esta curva las curvas correspondientes a cuerpos con <em>k=0.3</em> y <em>k=0.6</em> con distinto color y trazado identificándolas con una leyenda.</p>
+</li>
+<li><p class="first">Representa nuevamente la curva del apartado a) del ejercicio anterior superponiendo además las  curvas correspondientes a temperaturas iniciales distintas, de  <img class="math" src="_images/math/6d8edbe272a8528a310504055996c4f4845dda20.png" alt="T_0=-5^\circ C"/> y <img class="math" src="_images/math/1d6669760df22a90ff51bb79dc15b4667ae61c3a.png" alt="T_0=15^\circ C"/>. Para <img class="math" src="_images/math/96bd767695ca3ef930281464c0714528f50b523c.png" alt="T_0=5^\circ C"/> representa un una gráfica aparte cómo cambian las curvas con temperaturas ambiente de 20ºC y 50ºC, además de la de 40ºC. Identifica cada curva y etiqueta correctamente los ejes en todas las gráficas.</p>
+</li>
+<li><p class="first">La curva plana llamada trocoide, una generalización de la cicloide, es la curva descrita por un punto P situado a una distancia <em>b</em> del centro de una circunferencia de radio <em>a</em>, a medida que rueda (sin deslizar) por una superficie horizontal. Tiene por coordenadas (x,y) las siguientes:</p>
+<blockquote>
+<div><div class="math">
+<p><img src="_images/math/f014e4f108afd6e1ca771d4821400b7edfe002c1.png" alt="x = a \ \phi - b \ sen \phi \ \ \ ,\ \ \ y = a - b\ cos \phi" /></p>
+</div></div></blockquote>
+<p>Escribir un programa que dibuje tres curvas (contínuas y sin símbolos), en el mismo gráfico cartesiano (OX,OY), para un intervalo <img class="math" src="_images/math/2bc1127bb307b8de2cc10f3d3a67bb1a7efb0c2b.png" alt="\phi=[0.0,18.0]"/> (en radianes) y para los valores de <em>a=5.0</em> y <em>b=2.0, 5.0 y 8.0</em> . Rotular apropiadamente los ejes e incluir una leyenda con los tres valores de  que distinguen las tres curvas.</p>
+</li>
+<li><p class="first">El movimiento de oscilador amortiguado se puede expresar la siguiente manera:</p>
+<blockquote>
+<div><div class="math">
+<p><img src="_images/math/a7c3592233af4a9df12ff82cd8c38bbcb19c76bd.png" alt="x = A_0 e^{-k\omega t} \cos{(\omega t + \delta)}" /></p>
+</div></div></blockquote>
+<p>Siendo <img class="math" src="_images/math/7cce761941ab4b57ae903d05b8fa0568ebbdd98f.png" alt="A_0"/> la amplitud inicial, <img class="math" src="_images/math/54d7d48553f4d9e7ab418118607ea324cbfddfda.png" alt="\omega"/> la fecuencia de oscilación y <em>k</em> el factor de amortiguamiento. Representar gráficamente el movimiento de un oscilador forzado de amplitud inicial de 10cm y frecuencia de 10 ciclos por segundo y <img class="math" src="_images/math/9216b3fc39de22c4aab7d641144402b12ffff45a.png" alt="\delta=\pi/8"/> con factores de amortiguamiento de 0.1, 0.4, 0.9 y 1.1.</p>
+<p>Para el gráfico correspondiente a <em>k=0.1</em> dibujar con líneas a trazos los valores máximos y mínimos del movimiento oscilatorio. Nótese corresponden a las curvas para las que <img class="math" src="_images/math/1938f90f3a4c94ed52601fbcf402c8e715b0fdc7.png" alt="x=A_0"/> y <img class="math" src="_images/math/efdb76695abb7401de728521c5f191b28276caa0.png" alt="x=-A_0"/>.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Representación gráfica de datos</a><ul>
+<li><a class="reference internal" href="#trabajando-con-texto">Trabajando con texto</a></li>
+<li><a class="reference internal" href="#representacion-grafica-de-funciones">Representación gráfica de funciones</a></li>
+<li><a class="reference internal" href="#histogramas">Histogramas</a></li>
+<li><a class="reference internal" href="#figuras-multiples">Figuras múltiples</a></li>
+<li><a class="reference internal" href="#varios-graficos-en-una-figura">Varios gráficos en una figura</a></li>
+<li><a class="reference internal" href="#representando-datos-de-laboratorio">Representando datos de laboratorio</a></li>
+<li><a class="reference internal" href="#barras-de-error">Barras de error</a></li>
+<li><a class="reference internal" href="#datos-bidimensionales">Datos bidimensionales</a></li>
+<li><a class="reference internal" href="#guardando-las-imagenes">Guardando las imágenes</a></li>
+<li><a class="reference internal" href="#ejercicios">Ejercicios</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="lectura_ficheros.html"
+                        title="Capítulo anterior">Lectura y escritura de ficheros</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="ajustes.html"
+                        title="Próximo capítulo">Ajuste de datos experimentales: Método de mínimos cuadrados</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/graficos.txt"
+           rel="nofollow">Enseñar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="ajustes.html" title="Ajuste de datos experimentales: Método de mínimos cuadrados"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="lectura_ficheros.html" title="Lectura y escritura de ficheros"
+             >anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Jorge A Perez Prieto y Teodoro Roca Cortes.
+      Actualizado por última vez en 30 de January de 2011.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

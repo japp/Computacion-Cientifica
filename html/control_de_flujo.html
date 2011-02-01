@@ -1,0 +1,515 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Control de flujo &mdash; Computacion Cientifica - Introduccion a Python v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Computacion Cientifica - Introduccion a Python v0.1 documentation" href="index.html" />
+    <link rel="next" title="Arrays con Numpy" href="numpy.html" />
+    <link rel="prev" title="Programas ejecutables" href="ejecutables.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="numpy.html" title="Arrays con Numpy"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="ejecutables.html" title="Programas ejecutables"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="control-de-flujo">
+<h1>Control de flujo<a class="headerlink" href="#control-de-flujo" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Un programa consiste en una serie de sentencias que se ejecutan una detrás de otra siguiendo así el flujo natural. No obstante, puede convenirnos cambiar esta secuencia de ejecución y para ello se entroducen algunas <strong>sentencias de control de flujo</strong>. Estas nos permiten interactuar con el programa, tomar decisiones y ejecutar sentencias en un orden diferente al natural. Veamos las más importantes.</p>
+<div class="section" id="el-bucle-for">
+<h2>El bucle <strong>for</strong><a class="headerlink" href="#el-bucle-for" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Realiza una misma acción o serie de acciones o sentencias repetidas veces. Una manera habitual de usar <strong>for</strong> es para recorrer con una variable <strong>cada uno de los elementos</strong> de una lista:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [3]: </span><span class="k">for</span> <span class="n">isla</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;La Gomera&#39;</span><span class="p">,</span> <span class="s">&#39;Maui&#39;</span><span class="p">,</span> <span class="s">&#39;Cuba&#39;</span><span class="p">,</span> <span class="s">&#39;Sri Lanka&#39;</span><span class="p">]:</span>
+<span class="go">    print(&quot;La isla de %s&quot; % isla)</span>
+<span class="gp">   ...:</span>
+<span class="gp">   ...:</span>
+<span class="go">La isla de La Gomera</span>
+<span class="go">La isla de Maui</span>
+<span class="go">La isla de Cuba</span>
+<span class="go">La isla de Sri Lanka</span>
+</pre></div>
+</div>
+<p>En este caso <strong>isla</strong> es una <strong>variable muda</strong> (no declarada previamente) que va tomando el valor de cada uno de los elementos de la lista; el bucle finaliza cuando la lista se termina. También es posible hacerlo con una variable lista:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">islas</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;La Gomera&#39;</span><span class="p">,</span> <span class="s">&#39;Maui&#39;</span><span class="p">,</span> <span class="s">&#39;Cuba&#39;</span><span class="p">,</span> <span class="s">&#39;Sri Lanka&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">isla</span> <span class="ow">in</span> <span class="n">islas</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">&quot;La isla de </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">isla</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot; Imprime:</span>
+<span class="sd">La isla de La Gomera</span>
+<span class="sd">La isla de Maui</span>
+<span class="sd">La isla de Cuba</span>
+<span class="sd">La isla de Sri Lanka</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Una función muy útil es la función <strong>range()</strong> que como ya vimos, crea automáticamente una lista de números enteros; con ella, podemos usar un bucle <strong>for</strong> para hacer cálculos con los elementos de una lista:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [11]: </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span>
+<span class="gp">   ....:</span>     <span class="k">print</span><span class="p">(</span><span class="s">&quot;El cubo de </span><span class="si">%d</span><span class="s"> es </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span> <span class="p">)</span>
+<span class="gp">   ....:</span>
+<span class="gp">   ....:</span>
+<span class="go">El cubo de 2 es 8</span>
+<span class="go">El cubo de 4 es 64</span>
+<span class="go">El cubo de 6 es 216</span>
+<span class="go">El cubo de 8 es 512</span>
+<span class="go">El cubo de 10 es 1000</span>
+</pre></div>
+</div>
+<p>El resultado de antes se puede obtener también iterando los índices de la lista en lugar de lo elementos, creando una lista de los índices usando <strong>range()</strong>:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="go">for i in range(len(islas)):</span>
+<span class="go">    print(&quot;%d- La isla de %s&quot; % (i, islas[i]))</span>
+
+<span class="go">&quot;&quot;&quot; Imprime:</span>
+<span class="go">0- La isla de La Gomera</span>
+<span class="go">1- La isla de Maui</span>
+<span class="go">2- La isla de Cuba</span>
+<span class="go">3- La isla de Sri Lanka</span>
+<span class="go">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Aquí, con la función <strong>range()</strong> hemos creado una lista de tantos números como elementos tiene la lista &#8220;islas&#8221;, desde 0 hasta <strong>len(islas)</strong> (la longitud de la lista) e iterar los índices.</p>
+<p>Los bucles <strong>for</strong> nos permiten crear nuevas listas fácilmente:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [23]: </span><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.3</span><span class="p">,</span> <span class="mf">4.6</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">10.</span><span class="p">]</span>
+
+<span class="gp">In [24]: </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log10</span>        <span class="c"># Importo la función ``log10`` del módulo ``math``</span>
+
+<span class="gp">In [25]: </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">b</span><span class="p">]</span>
+
+<span class="gp">In [26]: </span><span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="go">[0.36172783601759284, 0.66275783168157409, 0.87506126339170009, 1.0]</span>
+</pre></div>
+</div>
+<p>al hacer esto hemos creado una nueva lista que contiene el logaritmo de base 10 de cada uno de números en la lista <em>b</em>. Con respecto a la función logaritmo, generalmente se denota el de base 10 como acabamos de ver, mientras que la función <strong>log()</strong> calcula el <strong>logaritmo natural</strong> o de base <em>e</em>. Con la función <strong>log()</strong> también se puede calcular el logaritmo de cualquier base, indicándola como un segundo parámetro; por ejemplo, para calcular el logaritmo de <strong>base 3</strong> de 5 haríamos <strong>log(5,3)</strong>.</p>
+<p>Una aplicación muy interesante es suma de series de números. Supongamos que queremos calcular el sumatorio <img class="math" src="_images/math/0da4b66485bf84b385901d83c5164c79ada0e1c4.png" alt="\sum_{n=1}^{10} \frac{1}{n^2}"/>. Debemos definir una variable muda en la que vamos sumando o acumulando los términos del sumatorio:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="mf">0.0</span>   <span class="c"># Variable muda, para ir acumulando los términos de la suma</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">):</span>
+    <span class="n">term</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="o">**</span><span class="mf">2.0</span>     <span class="c"># Término del sumatorio</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">term</span> <span class="o">+</span> <span class="n">a</span>        <span class="c"># Acumulamos el término</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%3d</span><span class="s"> </span><span class="si">%10.6f</span><span class="s"> </span><span class="si">%10.6f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
+
+<span class="sd">&quot;&quot;&quot;RESULTADO</span>
+<span class="sd">  n   termino_n  valor sumatorio</span>
+<span class="sd">  ------------------------------</span>
+<span class="sd">  1   1.000000   1.000000</span>
+<span class="sd">  2   0.250000   1.250000</span>
+<span class="sd">  3   0.111111   1.361111</span>
+<span class="sd">  4   0.062500   1.423611</span>
+<span class="sd">  5   0.040000   1.463611</span>
+<span class="sd">  6   0.027778   1.491389</span>
+<span class="sd">  7   0.020408   1.511797</span>
+<span class="sd">  8   0.015625   1.527422</span>
+<span class="sd">  9   0.012346   1.539768</span>
+<span class="sd"> 10   0.010000   1.549768</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>En este ejemplo definimos una variable <em>a</em> con valor inicial cero para ir acumulando en ella cada uno de los términos de la suma, que metemos en la variable <tt class="docutils literal"><span class="pre">term</span></tt> y sumándola en cada ciclo del bucle hasta que termina. El valor final de la suma será el que tenga la variable <em>a</em> al terminar el bucle.</p>
+</div>
+<div class="section" id="sentencias-if-then-else">
+<h2>Sentencias <strong>if-then-else</strong><a class="headerlink" href="#sentencias-if-then-else" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Realizan una o varias operaciones si una determinada condición es cierta. De no cumplirse, se pueden realizar otras operaciones.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">c</span> <span class="o">=</span> <span class="mi">12</span>
+
+<span class="k">if</span> <span class="n">c</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>                                 <span class="c"># comprueba si es positivo</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">&quot;La variable c es positiva&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">c</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>                               <span class="c"># si no lo es, comprueba si es negativo</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">&quot;La variable c es negativa&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>                                   <span class="c"># Si nada de lo anterior se cumple, haz lo siguiente</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">&quot;La variable c vale 0&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>En el ejemplo anterior, primero se define una variable <tt class="docutils literal"><span class="pre">c</span></tt> con valor entero 12 y luego se emplea la sentencia <strong>if</strong> para comprobar si es positivo, luego se usa <strong>elif</strong> para que en caso de no ser cumplirse el <strong>if</strong> anterior, compruebe si es negativa. Si no se cumple ninguna condición anterior y sólo en ese caso, se ejecutan las sentencias que vienen después de <strong>else</strong>. Hay que notar que en caso de cumplirse la primera condición <strong>if</strong>, el bucle se interrumpe y el intérprete ya no continúa comprobando las posibles condiciones <strong>elif</strong> (pueden haber varias) o <strong>else</strong> final.</p>
+<p>Es muy importante notar nuevamente los <strong>bloques de identación</strong> o espacios que separan los condicionales <strong>if-then-else</strong> en el ejemplo anterior. Al ejecutarse el código y en contrarse el primer <strong>if</strong>, el intérprete de Python sabe que todo lo que viene después de los &#8220;<strong>:</strong>&#8221; e identado con espacios es lo que debe ejecutarse en caso de cumplirse la condición y esto termina cuando se encuentra con un bloque de identación inferior, que en este caso es la sentencia <strong>elif</strong>. Veamos lo anterior con un ejemplo usando solo la sentencia <strong>if</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">9.3</span><span class="p">,</span> <span class="mf">12.0</span>
+
+<span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+   <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+   <span class="k">print</span> <span class="p">(</span><span class="s">&quot;La variable a es mayor que b&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&quot;El valor de c es </span><span class="si">%f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>En este ejemplo se comprueba si <tt class="docutils literal"><span class="pre">a</span></tt> es mayor que <tt class="docutils literal"><span class="pre">b</span></tt> y en ese caso se calcula su diferencia e imprime un mensaje. Luego se imprime el valor de <tt class="docutils literal"><span class="pre">c</span></tt> en otra sentencia, pero como esa línea está ya fuera del bloque de identación del <strong>if</strong>, el condicional termina justo ante y esa sentencia se intentará imprimir aunque la condición del <strong>if</strong> no se cumpla, ya que no está contenido en ella. El código correcto sería simplemente</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">9.3</span><span class="p">,</span> <span class="mf">12.0</span>
+
+<span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+   <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+   <span class="k">print</span> <span class="p">(</span><span class="s">&quot;La variable a es mayor que b&quot;</span><span class="p">)</span>
+   <span class="k">print</span> <span class="p">(</span><span class="s">&quot;El valor de c es </span><span class="si">%f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Así, el valor de <tt class="docutils literal"><span class="pre">c</span></tt> sólo imprime si el condicional se cumple.</p>
+<p>Sin embargo, cuando después de un condicional hay <strong>una única sentencia</strong>, ésta se puede escribir en la misma línea:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span> <span class="k">print</span> <span class="p">(</span><span class="s">&quot;La variable a es mayor que b&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span> <span class="k">print</span> <span class="p">(</span><span class="s">&quot;La variable a es menor o igual que b&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="el-bucle-while">
+<h2>El bucle <strong>while</strong><a class="headerlink" href="#el-bucle-while" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Se ejecutan una o varias operaciones mientras cierta condición que definimos sea cierta. Por ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cuentas</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="n">cuentas</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">cuentas</span><span class="p">)</span>
+   <span class="n">cuentas</span> <span class="o">=</span> <span class="n">cuentas</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">5</span>
+<span class="mi">6</span>
+<span class="mi">7</span>
+<span class="mi">8</span>
+<span class="mi">9</span>
+</pre></div>
+</div>
+<p>En este ejemplo se define inicialmente un valor <tt class="docutils literal"><span class="pre">0</span></tt> para la variable <tt class="docutils literal"><span class="pre">cuentas</span></tt> y su valor se va redefiniendo, aunmentado su valor en <tt class="docutils literal"><span class="pre">1</span></tt> e imprimiéndolo. Mientras sea menor que 10 las sentencias dentro del bucle <strong>while</strong> seguirán ejecutándose y se detendrá cuando valga 10, algo que podemos comprobar después del bucle:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">cuentas</span><span class="p">)</span>
+<span class="c"># Imprime 10</span>
+</pre></div>
+</div>
+<p>Veamos otro ejemplo. Supongamos que tenemos unos ahorros en el banco y queremos saber el tiempo que nos llevará tener cierta cantidad gracias a los intereses. Lo que hacemos es crear un bucle <strong>while</strong> en el que añadiremos anualmente los intereses, contando los años. Cuando lleguemos a la cantidad deseada el bucle se detendrá y tendremos los años que nos llevaría:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mis_ahorros</span> <span class="o">=</span> <span class="mi">100</span>     <span class="c"># Partimos de 100 euros</span>
+<span class="n">interes</span> <span class="o">=</span> <span class="mf">1.05</span>        <span class="c"># Interés del 5% anual</span>
+<span class="n">anhos</span> <span class="o">=</span> <span class="mi">0</span>             <span class="c"># Tiempo de inicio, cuando tenemos 100 euros</span>
+
+<span class="k">while</span> <span class="n">mis_ahorros</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="p">:</span>                  <span class="c"># Queremos llegar a tener 500 euros</span>
+   <span class="n">mis_ahorros</span> <span class="o">=</span> <span class="n">mis_ahorros</span> <span class="o">*</span> <span class="n">interes</span>    <span class="c"># Añado los intereses anuales a los ahorros</span>
+   <span class="n">anhos</span> <span class="o">=</span> <span class="n">anhos</span> <span class="o">+</span> <span class="mi">1</span>                      <span class="c"># Añado un año a la cuenta de años ya que</span>
+                                          <span class="c"># cada ciclo while equivale a un año.</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Me llevará </span><span class="si">%d</span><span class="s"> anhos ahorrar </span><span class="si">%d</span><span class="s"> euros.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">anhos</span><span class="p">,</span> <span class="n">mis_ahorros</span><span class="p">))</span>
+
+<span class="c"># Resultado</span>
+<span class="c"># Me llevará 33 anhos ahorrar 500 euros.</span>
+</pre></div>
+</div>
+<p>Podemos utilizar <strong>while</strong> con la condicion de que <strong>no se cumpla</strong> usando <strong>while not</strong>:</p>
+<div class="highlight-python"><pre>x = 0
+while not x == 10:
+  x = x + 1
+  print("x = %d" % x)
+
+ # Resultado
+ x = 1
+ x = 2
+ x = 3
+ x = 4
+ x = 5
+ x = 6
+ x = 7
+ x = 8
+ x = 9
+ x = 10</pre>
+</div>
+<p>Sin embargo, hay que tener cuidado cuando se comparan <em>floats</em> entre sí, ya que debido a precisión finita de los ordenadores, es posible que una determinada igualdad nunca se cumpla exactamente. Veamos este ejemplo:</p>
+<div class="highlight-python"><pre>x = 0.0
+# Mientras x no sea exactamente 1.0, suma 0.1 a la variable *x*
+while not x == 1.0:
+    x = x + 0.1
+    print("x = %19.17f" % x)
+
+# Resultado
+x = 0.10000000000000001
+x = 0.20000000000000001
+x = 0.30000000000000004
+x = 0.40000000000000002
+x = 0.50000000000000000
+x = 0.59999999999999998
+x = 0.69999999999999996
+x = 0.79999999999999993
+x = 0.89999999999999991
+x = 0.99999999999999989     &lt;-- El bucle while debió detenerse aquí, pero no lo hizo
+x = 1.09999999999999987
+x = 1.19999999999999996
+x = 1.30000000000000004
+  .
+  .
+  .</pre>
+</div>
+<p>y así sucesivamente, no se pararía nunca. El código anterior <strong>produce un bucle infinito</strong> porque la condición <strong>x == 1.0</strong> nunca se da exactamente debido a la precisión limitada de los ordenadores, el valor más cercano es  0.9999999999 pero no 1.0. La conclusión es que es preferible <strong>no comprar nunca *floats* exactamente</strong>. Una opción es usar intervalos de precisión, por ejemplo:</p>
+<div class="highlight-python"><pre>x = 0.0
+while abs(x - 1.0) &gt; 1e-8:
+x = x + 0.1
+    print("x = %19.17f" % x)
+
+# Resultado
+x = 0.10000000000000001
+x = 0.20000000000000001
+x = 0.30000000000000004
+x = 0.40000000000000002
+x = 0.50000000000000000
+x = 0.59999999999999998
+x = 0.69999999999999996
+x = 0.79999999999999993
+x = 0.89999999999999991
+x = 0.99999999999999989</pre>
+</div>
+</div>
+<div class="section" id="atrapando-los-errores">
+<h2>Atrapando los errores<a class="headerlink" href="#atrapando-los-errores" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Hemos visto que cuando existe algún error en el código, Python detiene la ejecución y nos devuelve una <strong>excepción o mensaje de error</strong> indicándonos que fué lo que ocurrió. Por ejemplo, supongamos que por algún motivo hacemos una división por cero:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [4]: </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">0</span>
+
+<span class="gp">In [5]: </span><span class="n">a</span><span class="o">/</span><span class="n">b</span>
+<span class="go">---------------------------------------------------------------------------</span>
+<span class="go">ZeroDivisionError                         Traceback (most recent call last)</span>
+
+<span class="go">/home/japp/&lt;ipython console&gt; in &lt;module&gt;()</span>
+<span class="go">ZeroDivisionError: integer division or modulo by zero</span>
+</pre></div>
+</div>
+<p>al hacer esto, nos avisa del error indicando el tipo en la última línea, <strong>ZeroDivisionError</strong>, terminando la ejecución. Que Python nos dé tanta información al ocurrir una excepción es muy útil pero muy a menudo sabemos que estos errores pueden ocurrir y lo ideal es estar preparado capturando la excepción y actuar en consecuencia en lugar de interrumpir el programa. Para hacer esto podemos usar la sentencia <strong>Try-except</strong>, que no permiter &#8220;probar&#8221; (Try) una sentencia y capturar un error y hacer algo al respecto (except) en caso de haberlo en lugar de detener el programa. Para el caso anterior podemos hacer lo siguiente:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [7]: </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">0</span>
+<span class="gp">In [8]: </span><span class="k">try</span><span class="p">:</span> <span class="n">a</span><span class="o">/</span><span class="n">b</span>
+<span class="gp">   ...:</span> <span class="k">except</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">&quot;Hay un error en los valores de entrada&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ahora el código intenta ejecutar <tt class="docutils literal"><span class="pre">a/b</span></tt> y de haber algún tipo de error imprime el mensaje indicado y sigue adelante en lugar abortar el programa. Al hacer esto hemos &#8220;capturado&#8221; la excepción o error evitando que el programa se detenga, suponiendo que éste puede continuar a pesar del error. Nótese que de esta manera no sabemos qué tipo de error ha ocurrido, que antes se indicaba con la clave  <strong>ZeroDivisionError</strong>, que es uno de los muchos tipos de errores que Python reconoce.  Si quisiésemos saber exactamente qué tipo de error ocurrió, debemos especificarlo en <strong>except</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;A&quot;</span>
+
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">a</span><span class="o">/</span><span class="n">b</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">&quot;Error, division por cero&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">&quot;Error en el tipo de dato&quot;</span><span class="p">)</span>
+
+<span class="c"># Resultado:</span>
+<span class="c"># Error, division por cero</span>
+
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">a</span><span class="o">/</span><span class="n">c</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">&quot;Error, division por cero&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">&quot;Error en el tipo de dato&quot;</span><span class="p">)</span>
+
+<span class="c"># Resultado:</span>
+<span class="c"># Error en el tipo de dato</span>
+</pre></div>
+</div>
+<p>De esta manera, sabemos exactamente qué tipo de error se cometió en cada caso, una división por cero o un error en el tipo de dato (que es lo que indica <strong>TypeError</strong>). Naturalmente, si no ocurriese ninguno de estos errores específicamente, Python daría un error y terminaría el programa de manera habitual. Consulta la documentación oficial de Python para más información sobre la captura de excepciones y los tipos de errores reconocidos.</p>
+</div>
+<div class="section" id="ejercicios">
+<h2>Ejercicios<a class="headerlink" href="#ejercicios" title="Enlazar permanentemente con este título">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Escribe un progama que calcule el factorial de un número <em>n</em> cualquiera. Es decir, calcula:</p>
+<div class="math">
+<p><img src="_images/math/aaa3951ea3c16e74d83a01e13e68785aebf0797c.png" alt="n!=\prod_{k=1}^n k\qquad\mbox{para }n\ge0" /></p>
+</div></li>
+<li><p class="first">Crea una lista con lista con 10 números con valores distintos y arbitrarios, con valores de 0 a 100. Crea una función que encuentre el mayor y que dé su posición en la lista.</p>
+</li>
+<li><p class="first">Con la lista anterior, crear una lista nueva que incluya los números que son primos y otra que incluya sus índices en la lista original.</p>
+</li>
+<li><p class="first">Crea un programa que calcule el valor medio y la desviación estándar de una lista cualquiera de números.</p>
+</li>
+<li><p class="first">Genera una lista con lista con 100 números enteros aleatorios de -100 a 100 con la función <strong>randint</strong> (haz <tt class="docutils literal"><span class="pre">from</span> <span class="pre">numpy.random</span> <span class="pre">import</span> <span class="pre">randint</span></tt> y luego <tt class="docutils literal"><span class="pre">nums</span> <span class="pre">=</span> <span class="pre">randint(-100,</span> <span class="pre">100,</span> <span class="pre">100)</span></tt>. Separa en tres listas distintas los números negativos, los positivos y los mayores de +50, de manera que la suma de los números de cada lista no sea mayor que 200, es decir, completar las listas mientras que no se llegue a ese número.</p>
+</li>
+<li><p class="first">Calcular el valor de <img class="math" src="_images/math/f2ca003a7da0de4994b4733e203b74ff52d42553.png" alt="\pi"/> empleando la siguiente expresión:</p>
+<div class="math">
+<p><img src="_images/math/8851f796eb0596515f5beebf7af85a6043fd9f9f.png" alt="4 \sum^n_{k=1} \frac{(-1)^{k+1}}{2k - 1}" /></p>
+</div></li>
+<li><p class="first">Modifica el programa anterior para obtener el valor de <img class="math" src="_images/math/f2ca003a7da0de4994b4733e203b74ff52d42553.png" alt="\pi"/> con una precisión determinada (por ejemplo <img class="math" src="_images/math/ba4c550ee9912a2a4ac806ce96ae8de9f6f7bf6d.png" alt="10^{-5}"/>) comparado con el valor real tomado del módulo math.</p>
+</li>
+<li><p class="first">Haz un programa que calcule volumen de una esfera, cilindro o un cono. El programa debe preguntar primero qué es lo que se desea calcular y luego pedir los datos necesarios según lo que se elija.</p>
+</li>
+<li><p class="first">Dada la lista de notas de los alumnos de una clase, decir quien ha sacado aprobado (más de 5), notable (más de 7), sobresaliente (más de 9) o ha suspendido.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="68%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">Alumno</p>
+</th>
+<th class="head"><p class="first last">Nota</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">Miguel</p>
+</td>
+<td><p class="first last">6.7</p>
+</td>
+</tr>
+<tr><td><p class="first last">Maria</p>
+</td>
+<td><p class="first last">4.9</p>
+</td>
+</tr>
+<tr><td><p class="first last">Iballa</p>
+</td>
+<td><p class="first last">9.8</p>
+</td>
+</tr>
+<tr><td><p class="first last">Fran</p>
+</td>
+<td><p class="first last">5.0</p>
+</td>
+</tr>
+<tr><td><p class="first last">Luisa</p>
+</td>
+<td><p class="first last">6.7</p>
+</td>
+</tr>
+<tr><td><p class="first last">Ruyman</p>
+</td>
+<td><p class="first last">8.0</p>
+</td>
+</tr>
+<tr><td><p class="first last">Ana</p>
+</td>
+<td><p class="first last">6.2</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Suponiendo que todos los nombres de chica terminan con &#8220;a&#8221; (lo que casualmente en este ejemplo es cierto), decir si cada uno es chico o chica.</p>
+</li>
+<li><p class="first">Escribir un programa que calcule la suma de los elementos necesarios de la serie:</p>
+<div class="math">
+<p><img src="_images/math/237b127ca5fe3fc8f3af95a78f18fc5dcd68d9c5.png" alt="\sum_{i=0}^{n, 2} \frac{1}{(i+1)(i+3)}," /></p>
+</div><p>para obtenerla con 5 cifras significativas. La suma hasta <img class="math" src="_images/math/752f217ec65ba59d25cb9cf71b4c9e9340eda0d4.png" alt="n=\infty"/> es 0.5. Como resultado dar el valor de la suma y el número <em>n</em> de sumandos sumados.</p>
+</li>
+<li><p class="first">La nota final de la asignatura de Computación Científica (<em>p</em>) se calcula añadiendo a la nota del  examen final (<em>z</em>) una ponderación de la evaluación contínua (<em>c</em>) a lo largo del curso de la forma:</p>
+<div class="math">
+<p><img src="_images/math/5fc9af5a455e74ac512f842e1331785a12d286e7.png" alt="p = 0.6c + z \frac{(10 - 0.6c)}{10}" /></p>
+</div><p>El alumno estará aprobado cuando la nota final <em>p</em> sea mayor o igual a cinco, siempre que <em>z</em> supere un tercio de la nota máxima (<em>z&gt;10/3</em>); en caso contrario, se queda con <em>p=z</em>. Un grupo de alumnos ha obtenido las siguientes calificaciones en la evaluación contínua y en el examen final:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><p class="first last"><em>c</em></p>
+</td>
+<td><p class="first last">8.2  0.0   9.0   5.0   8.4  7.2  5.0  9.2  4.9  7.9</p>
+</td>
+</tr>
+<tr><td><p class="first last"><em>z</em></p>
+</td>
+<td><p class="first last">7.1  5.1   8.8   3.1   4.6  2.0  4.1  7.4  4.4  8.8</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Hacer un programa que calcule sus notas finales indicando además quién ha aprobado y suspendido. Calcular también la nota media de la evaluación contínua, del examen final y de la nota final. En todos los resultados debe mostrarse una única cifra decimal.</p>
+</li>
+<li><p class="first">Dada la serie geométrica cuya suma exacta es:</p>
+<div class="math">
+<p><img src="_images/math/33a6096bec20f5d87e74cc1bc849ad7c2391603f.png" alt="\sum_{n=0}^{\infty} ax^n =  \frac{a}{1 - x}" /></p>
+</div><p>válida siempre que <em>0 &lt; x &lt; 1</em> y siendo <em>a</em> un número real cualquiera, escribir un programa que calcule esta suma con diez cifras significativas solamente para cualquier valor de <em>x</em> y <em>a</em>, comprobando que se cumple la condición necesaria para <em>x</em>. Dar como resultado el valor de la suma y el número de sumandos sumados para obtenerla.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Control de flujo</a><ul>
+<li><a class="reference internal" href="#el-bucle-for">El bucle <strong>for</strong></a></li>
+<li><a class="reference internal" href="#sentencias-if-then-else">Sentencias <strong>if-then-else</strong></a></li>
+<li><a class="reference internal" href="#el-bucle-while">El bucle <strong>while</strong></a></li>
+<li><a class="reference internal" href="#atrapando-los-errores">Atrapando los errores</a></li>
+<li><a class="reference internal" href="#ejercicios">Ejercicios</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="ejecutables.html"
+                        title="Capítulo anterior">Programas ejecutables</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="numpy.html"
+                        title="Próximo capítulo">Arrays con Numpy</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/control_de_flujo.txt"
+           rel="nofollow">Enseñar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="numpy.html" title="Arrays con Numpy"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="ejecutables.html" title="Programas ejecutables"
+             >anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Jorge A Perez Prieto y Teodoro Roca Cortes.
+      Actualizado por última vez en 30 de January de 2011.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

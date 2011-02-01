@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lectura y escritura de ficheros &mdash; Computacion Cientifica - Introduccion a Python v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Computacion Cientifica - Introduccion a Python v0.1 documentation" href="index.html" />
+    <link rel="next" title="Representación gráfica de datos" href="graficos.html" />
+    <link rel="prev" title="Arrays con Numpy" href="numpy.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="graficos.html" title="Representación gráfica de datos"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="numpy.html" title="Arrays con Numpy"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="lectura-y-escritura-de-ficheros">
+<h1>Lectura y escritura de ficheros<a class="headerlink" href="#lectura-y-escritura-de-ficheros" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Muy a menudo tenemos datos de un cálculo o medidas de un experimento en un fichero de texto. Para poder manipular estos datos debemos aprender a leerlos como números o arrays para poder analizarlos. Igualmente, el resultado de un cálculo o un análisis es necesario volcarlo a un fichero de texto en lugar de mostrarlo por pantalla para conservar el resultado. Esto es especialmente necesario cuando los resultados son <em>arrays</em> largos o cuando tenemos que procesar gran cantidad de números de ficheros generados automáticament. Vamos a ver cómo leer y escribir ficheros de texto con Python.</p>
+<div class="section" id="creando-un-fichero-sencillo">
+<h2>Creando un fichero sencillo<a class="headerlink" href="#creando-un-fichero-sencillo" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>El primer paso para manipular un fichero, ya sea para crearlo, leerlo o escribir en él es crear una <strong>instancia</strong> a ese fichero; una instancia es una llamada o referencia, en este caso a un fichero, a la que se le asigna un nombre. Esto consiste simplemente en &#8220;abrir&#8221; el fichero en modo de lectura, escritura, para añadir o una combinación de estos, según lo que necesitemos:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [48]: </span><span class="n">fichero_leer</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;mi_fichero.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">In [48]: </span><span class="n">fichero_escribir</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;mi_fichero.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="gp">In [48]: </span><span class="n">fichero_escribir</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;mi_fichero.txt&#39;</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">)</span>
+<span class="gp">In [48]: </span><span class="n">fichero_leer</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;mi_fichero.txt&#39;</span><span class="p">,</span> <span class="s">&#39;rw&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>En los ejemplos anteriores se ha abierto un fichero de varias maneras posibles, donde hemos indicado en el primer parámetro el nombre del fichero y el segundo el <strong>modo de apertura</strong>:</p>
+<div class="highlight-text"><div class="highlight"><pre>&#39;r&#39;  -&gt; Abre el fichero mi_fichero.txt para leer (debe existir)
+&#39;w&#39;  -&gt; Abre el fichero mi_fichero.txt para escribir. Si no
+         existe lo crea y si existe sobrescribe el contenido.
+&#39;a&#39;  -&gt; Abre el fichero mi_fichero.txt para añadir. Si no
+         existe lo crea y si existe continua escribiendo en al final del fichero.
+&#39;rw&#39; -&gt; Abre el fichero mi_fichero.txt para leer y escribir
+</pre></div>
+</div>
+<p>Vamos a crear un fichero y escribir algo en él. Lo primero es abrir el fichero en modo escritura:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [49]: </span><span class="n">fs</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;prueba.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="gp">In [50]: </span><span class="nb">type</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+<span class="gr">Out[50]: </span><span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;file&#39;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>aquí la variable <strong>fs</strong> es una instancia o llamada al fichero. A partir de ahora cualquier operación que se haga al fichero se hace a esta instancia <strong>fs</strong> y no el nombre del fichero en sí. Escribamos ahora algo de contenido, para esto se emplea el método <strong>write()</strong> a la instancia del fichero:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [51]: </span><span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;Hola, estoy escribiendo un texto a un fichero&#39;</span><span class="p">)</span>
+<span class="gp">In [52]: </span><span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;Y esta es otra linea&#39;</span><span class="p">)</span>
+<span class="gp">In [53]: </span><span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="nb">str</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="p">)</span>
+<span class="gp">In [54]: </span><span class="n">fs</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>                <span class="c"># Cerramos el fichero</span>
+</pre></div>
+</div>
+<p>Al teminar de trabajar con el fichero debemos cerrarlo con el método <strong>close()</strong>, es aquí cuando realmente se escribe el fichero y no hay que olvidar cerrarlo siempre al terminar de trabajar con él. Una vez cerrado se abrir con un editor de textos como Kate o gEdit. Veremos que cada orden de escritura se ha hecho consecutivamente y no línea a línea. Si queremos añadir líneas nuevas debemos ponerlas explícitamente con <tt class="docutils literal"><span class="pre">\\n</span></tt> que el código ASCII para una nueva línea:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [55]: </span><span class="n">fs</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;prueba.txt&#39;</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">)</span>
+<span class="gp">In [56]: </span><span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">)</span>                      <span class="c"># Dejo dos lineas en blanco</span>
+<span class="gp">In [57]: </span><span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Esta es una linea nueva</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="gp">In [58]: </span><span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Y esta es otra linea</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="gp">In [59]: </span><span class="n">fs</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>De igual manera podemos usar un bucle <strong>for</strong> para escribir una lista de datos:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [61]: </span><span class="n">fsalida</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;datos.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="gp">In [62]: </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arange</span><span class="p">(</span><span class="mf">100.</span><span class="p">):</span>
+<span class="gp">   ....:</span>     <span class="n">fsalida</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%d</span><span class="s">  </span><span class="si">%10.4f</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">exp</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>     <span class="c"># Escribe usando 10 caracteres en total,</span>
+<span class="gp">In [63]: </span><span class="n">fsalida</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>                                     <span class="c"># con 4 decimales</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lectura-de-ficheros">
+<h2>Lectura de ficheros<a class="headerlink" href="#lectura-de-ficheros" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Ahora podemos leer este fichero de datos u otro similar que ya exista. Una vez abierto el fichero para lectura, podemos crear una lista vacía para cada columna de datos y luego con un bucle leerlo línea por línea separando cada una en columnas con el método <strong>split()</strong>. Veámoslo con un ejemplo; queremos leer el fichero &#8220;datos.txt&#8221; acabamos de crear antes. Contiene 100 filas con dos columnas, la primera un número y la segunda su exponencial. Lo podríamos hacer de esta forma:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [69]: </span><span class="n">fdatos</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;datos.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>   <span class="c">#  Abrimos el fichero &quot;datos.txt&quot; para lectura</span>
+<span class="gp">In [70]: </span><span class="n">x_datos</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">In [71]: </span><span class="n">y_datos</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">In [73]: </span><span class="k">for</span> <span class="n">linea</span> <span class="ow">in</span> <span class="n">fdatos</span><span class="p">:</span>
+<span class="gp">   ....:</span>     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">linea</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>           <span class="c"># Se separa cada línea en columnas</span>
+<span class="gp">   ....:</span>     <span class="n">x_datos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>       <span class="c"># Añado el elemento x a la lista x_datos</span>
+<span class="gp">   ....:</span>     <span class="n">y_datos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>       <span class="c"># Añado el elemento y a la lista y_datos</span>
+<span class="gp">   ....:</span>
+<span class="gp">   ....:</span>
+
+<span class="gp">In [75]: </span><span class="n">fdatos</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="gp">In [77]: </span><span class="nb">type</span><span class="p">(</span><span class="n">x_datos</span><span class="p">)</span>
+<span class="gr">Out[77]: </span><span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;list&#39;</span><span class="o">&gt;</span>
+
+<span class="gp">In [78]: </span><span class="nb">len</span><span class="p">(</span><span class="n">x_datos</span><span class="p">)</span>
+<span class="gr">Out[78]: </span><span class="mi">100</span>
+
+<span class="gp">In [79]: </span><span class="n">x_datos</span><span class="p">,</span> <span class="n">y_datos</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">x_datos</span><span class="p">),</span> <span class="n">array</span><span class="p">(</span><span class="n">y_datos</span><span class="p">)</span>
+
+<span class="gp">In [80]: </span><span class="nb">type</span><span class="p">(</span><span class="n">x_datos</span><span class="p">)</span>
+<span class="gr">Out[80]: </span><span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;numpy.ndarray&#39;</span><span class="o">&gt;</span>
+
+<span class="gp">In [81]: </span><span class="n">x_datos</span><span class="o">.</span><span class="n">shape</span>
+<span class="gr">Out[81]: </span><span class="p">(</span><span class="mi">100</span><span class="p">,)</span>
+</pre></div>
+</div>
+<p>Ahora que tenemos todos los datos en arrays los podemos manipular como tales. Recuerda que <strong>split()</strong> separa por defecto por espacios, si queremos separar por comas u otro caracter debemos incluirlo como parámetro: <strong>split(&#8216;,&#8217;)</strong>.</p>
+</div>
+<div class="section" id="lectura-y-escritura-con-numpy">
+<h2>Lectura y escritura con Numpy<a class="headerlink" href="#lectura-y-escritura-con-numpy" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Una manera alternativa de guardar y leer arrays es usando los métodos <strong>savetxt()</strong> y <strong>loadtxt()</strong> de <strong>numpy</strong>, que guardan y leen ficheros de texto con <strong>una línea por columna</strong>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="go">savetxt(&quot;datos2.txt&quot;, (x_datos, y_datos))</span>
+
+<span class="go">x, y = loadtxt(&quot;datos2.txt&quot;)</span>
+</pre></div>
+</div>
+<p>Consulta la ayuda de la función leadtxt() de <strong>numpy</strong> para conocer otras opciones de lectura como seleccionar columnas determinadas, usar distintos delimitadores de columnas, etc.</p>
+</div>
+<div class="section" id="ejercicios">
+<h2>Ejercicios<a class="headerlink" href="#ejercicios" title="Enlazar permanentemente con este título">¶</a></h2>
+<ol class="arabic simple">
+<li>En el fichero <em>datos_2col.txt</em> hay dos columnas de datos. Calcular la raíz cuadrada de los valores de la primera columna y el cubo de la segunda y escribirlos a un nuevo fichero de dos columnas, pero solo para las entradas cuyos valores de la segunda columna de datos original sean mayor o igual a 0.5.</li>
+<li>El fichero <em>datos_4col.txt</em> contiene cuatro columnas de datos. Escribir un fichero de datos con cuatro columnas que incluya el número de entrada (empezando por 1), el promedio entre las dos primeras columnas, el promedio entre las dos últimas y la diferencia entre ambas medias.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Lectura y escritura de ficheros</a><ul>
+<li><a class="reference internal" href="#creando-un-fichero-sencillo">Creando un fichero sencillo</a></li>
+<li><a class="reference internal" href="#lectura-de-ficheros">Lectura de ficheros</a></li>
+<li><a class="reference internal" href="#lectura-y-escritura-con-numpy">Lectura y escritura con Numpy</a></li>
+<li><a class="reference internal" href="#ejercicios">Ejercicios</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="numpy.html"
+                        title="Capítulo anterior">Arrays con Numpy</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="graficos.html"
+                        title="Próximo capítulo">Representación gráfica de datos</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/lectura_ficheros.txt"
+           rel="nofollow">Enseñar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="graficos.html" title="Representación gráfica de datos"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="numpy.html" title="Arrays con Numpy"
+             >anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Jorge A Perez Prieto y Teodoro Roca Cortes.
+      Actualizado por última vez en 30 de January de 2011.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Cálculo Numérico &mdash; Computacion Cientifica - Introduccion a Python v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Computacion Cientifica - Introduccion a Python v0.1 documentation" href="index.html" />
+    <link rel="next" title="Cálculo Simbólico" href="calculo_simbolico.html" />
+    <link rel="prev" title="Ajuste de datos experimentales: Método de mínimos cuadrados" href="ajustes.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="calculo_simbolico.html" title="Cálculo Simbólico"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="ajustes.html" title="Ajuste de datos experimentales: Método de mínimos cuadrados"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="calculo-numerico">
+<h1>Cálculo Numérico<a class="headerlink" href="#calculo-numerico" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Aunque el paquete <tt class="xref py py-mod docutils literal"><span class="pre">Numpy</span></tt> ofrece ciertas funcionalidades matemáticas además de la manipulación básica de arrays, como el paquete <tt class="xref py py-mod docutils literal"><span class="pre">linalg</span></tt> para álgebra lineal y <tt class="xref py py-mod docutils literal"><span class="pre">random</span></tt> para números aleatorios, en <tt class="xref py py-mod docutils literal"><span class="pre">Scipy</span></tt> encontraremos todas las herramientas matemáticas que podamos necesitar. <tt class="xref py py-mod docutils literal"><span class="pre">Scipy</span></tt> es una colección de paquetes de algoritmos y herramientas matemáticas para distintas tareas, que también utiliza <tt class="xref py py-mod docutils literal"><span class="pre">Numpy</span></tt>. <tt class="xref py py-mod docutils literal"><span class="pre">Scipy</span></tt> posee varios subpaquetes que deben importarse independientemente cuando se vayan a utilizar; éstos son algunos de ellos:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Subpaquete</th>
+<th class="head">Descripción</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>odr</td>
+<td>Regresión de distancias ortogonales (ODR)</td>
+</tr>
+<tr><td>misc</td>
+<td>Funciones varias (lectura de imagenes, factorial, etc.)</td>
+</tr>
+<tr><td>fftpack</td>
+<td>Algoritmos para transformada de Fourier discreta</td>
+</tr>
+<tr><td>io</td>
+<td>Entrada y salida de datos</td>
+</tr>
+<tr><td>stats</td>
+<td>Funciones estadisticas</td>
+</tr>
+<tr><td>lib</td>
+<td>Envoltorios (<em>wrappers</em>) de Python a librerías externas</td>
+</tr>
+<tr><td>integrate</td>
+<td>Integración numérica</td>
+</tr>
+<tr><td>ndimage</td>
+<td>Imagenes n-dimensionales</td>
+</tr>
+<tr><td>linalg</td>
+<td>Álgebra lineal</td>
+</tr>
+<tr><td>interpolate</td>
+<td>Herramientas de interpolación</td>
+</tr>
+<tr><td>optimize</td>
+<td>Herramientas de optimización</td>
+</tr>
+<tr><td>signal</td>
+<td>Tratamiento de señales</td>
+</tr>
+</tbody>
+</table>
+<p>Para ver la lista completa de subpaquetes consultar la ayuda de scipy como <tt class="xref py py-func docutils literal"><span class="pre">help(scipy)()</span></tt> (haciendo antes <tt class="docutils literal"><span class="pre">import</span> <span class="pre">scipy</span></tt> para tener todos los nombres asociados a <tt class="xref py py-mod docutils literal"><span class="pre">scipy</span></tt>) y consultar su página web para ver la documentación completa (<cite>Link www.scipy.org</cite>). Una manera práctica de trabajar es importar el espacio de nombres de <tt class="xref py py-mod docutils literal"><span class="pre">scipy</span></tt>, es decir el nombre de sus paquetes y funciones principales y luego importar el o los paquetes que vaya a usar, como en este ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="o">*</span>         <span class="c"># importa el nombre de los subpaquetes únicamente</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">optimize</span><span class="o">,</span> <span class="nn">stats</span>      <span class="c"># importa los paquete optimize y stats</span>
+</pre></div>
+</div>
+<div class="section" id="integracion-numerica">
+<h2>Integración numérica<a class="headerlink" href="#integracion-numerica" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>El subpaquete <tt class="xref py py-mod docutils literal"><span class="pre">integrate</span></tt> ofrece varias herramientas de integración numérica con distintos métodos. Podemos ver todos los disponibles consultando su ayuda:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">integrate</span><span class="p">)</span>
+
+<span class="go">Integration routines</span>
+<span class="go">====================</span>
+
+<span class="go">Methods for Integrating Functions given function object.</span>
+
+<span class="go">quad          -- General purpose integration.</span>
+<span class="go">dblquad       -- General purpose double integration.</span>
+<span class="go">tplquad       -- General purpose triple integration.</span>
+<span class="go">fixed_quad    -- Integrate func(x) using Gaussian quadrature of order n.</span>
+<span class="go">quadrature    -- Integrate with given tolerance using Gaussian quadrature.</span>
+<span class="go">romberg       -- Integrate func using Romberg integration.</span>
+
+<span class="go">Methods for Integrating Functions given fixed samples.</span>
+
+<span class="go">trapz         -- Use trapezoidal rule to compute integral from samples.</span>
+<span class="go">cumtrapz      -- Use trapezoidal rule to cumulatively compute integral.</span>
+<span class="go">simps         -- Use Simpson&#39;s rule to compute integral from samples.</span>
+<span class="go">romb          -- Use Romberg Integration to compute integral from</span>
+<span class="go">                (2**k + 1) evenly-spaced samples.</span>
+
+<span class="go">See the special module&#39;s orthogonal polynomials (special) for Gaussian</span>
+<span class="go">    quadrature roots and weights for other weighting factors and regions.</span>
+
+<span class="go">Interface to numerical integrators of ODE systems.</span>
+
+<span class="go">odeint        -- General integration of ordinary differential equations.</span>
+<span class="go">ode           -- Integrate ODE using VODE and ZVODE routines.</span>
+</pre></div>
+</div>
+<p>Existen por ejemplo implementaciones del método del trapecio o el método de Simpsom, ambos métodos simples basados en muestras fijas. Las funciones <tt class="xref py py-func docutils literal"><span class="pre">trapz()</span></tt> y <tt class="xref py py-func docutils literal"><span class="pre">simps()</span></tt>, que emplean dichos métodos para al cálculo numérico de integrales, adminten como entrada un array <tt class="docutils literal"><span class="pre">y</span></tt> de valores a integrar y otro array con la variable independiente <tt class="docutils literal"><span class="pre">x</span></tt>; si no se incluye un segundo parámetro, el espaciado entre los elementos de <tt class="docutils literal"><span class="pre">y</span></tt> de 1 por defecto, aunque este valor se puede asignar con el parámetro opcional <tt class="docutils literal"><span class="pre">dx=1</span></tt>.</p>
+<p>Supongamos que queremos integrar numéricamente la función <img class="math" src="_images/math/081bf0417da2140657aad909a14ca6c3ff8b77d5.png" alt="\sin(x)"/> de 0 a <img class="math" src="_images/math/0bb2bb96d081e9446fee8ff264871c74f51b23c6.png" alt="pi"/>, cuyo valor exacto es 2. Veamos cómo se puede calcular numéricamente con distinto número de muestras:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#  Generamos 5 muestras de la función seno, de 0 a pi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Integramos el array por el método del trapecio</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">1.8961188979370398</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Si aunmentamos el número de muestras,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># la intragración se acerca más al valor analítico</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#  Generamos 20 muestras de la función seno, de 0 a pi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Integramos el array por el método del trapecio</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">1.9954413183201947</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Integramos por el método de Simpson</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="o">.</span><span class="n">simps</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">1.999977188106568</span>
+</pre></div>
+</div>
+<img alt="_images/plot_trapecio.png" class="align-center" src="_images/plot_trapecio.png" style="width: 14cm;" />
+<p>Como se ve, el método de Simpson da un valor más cercano al verdadero, que del trapecio, ya que el primero emplea polinomios de grado 2 para la integración.</p>
+<p>En la prática, la función de uso general más eficiente es <tt class="xref py py-func docutils literal"><span class="pre">quad(func,</span> <span class="pre">a,</span> <span class="pre">b)()</span></tt>, que integra por cuadratura de Clenshaw-Curtis <a class="footnote-reference" href="#id2" id="id1">[1]</a> una función de Python <tt class="xref py py-func docutils literal"><span class="pre">func()</span></tt> entre <tt class="docutils literal"><span class="pre">a</span></tt> y <tt class="docutils literal"><span class="pre">b</span></tt>. Consideremos como ejemplo el cálculo del área una semicircunferencia de radio unidad calculando la integral bajo la curva. Para ello definimos una función de circunferencia e integramos entre -1 y 1:</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Para detalles, ver por ejemplo <a class="reference external" href="http://en.wikipedia.org/wiki/Clenshaw-Curtis_quadrature">http://en.wikipedia.org/wiki/Clenshaw-Curtis_quadrature</a></td></tr>
+</tbody>
+</table>
+<p>La función <tt class="xref py py-func docutils literal"><span class="pre">quad()</span></tt> devuelve por defecto el valor de la integral, que en este caso vale <img class="math" src="_images/math/8efc60a1547dcb02df3995b9b35771fdee9f9c21.png" alt="\frac{1}{2}\pi"/> y una estimación del error en el proceso de integración numérica. Los límites de integración pueden ser <img class="math" src="_images/math/313ed63d54d69ada93bebbb744fb32ef6d85aec5.png" alt="+\infty"/> o <img class="math" src="_images/math/afac538740054d4786c170ef0123850adea5cdf9.png" alt="-\infty"/> usando los símbolos <tt class="docutils literal"><span class="pre">+Inf</span></tt> o <tt class="docutils literal"><span class="pre">-Inf</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">func1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mf">5.</span><span class="p">)</span>
+
+<span class="n">int1</span><span class="p">,</span> <span class="n">err1</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">func1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">+</span><span class="mi">2</span><span class="p">)</span>           <span class="c"># integración entre -2 y +2</span>
+<span class="n">int2</span><span class="p">,</span> <span class="n">err2</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">func1</span><span class="p">,</span> <span class="o">-</span><span class="n">Inf</span><span class="p">,</span> <span class="o">+</span><span class="n">Inf</span><span class="p">)</span>       <span class="c"># integración entre -infinito y +infinito</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">int1</span><span class="p">,</span> <span class="n">int2</span><span class="p">)</span>
+<span class="p">(</span><span class="mf">6.294530963693763</span><span class="p">,</span> <span class="mf">7.9266545952120211</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/integrate_gauss.png" class="align-center" src="_images/integrate_gauss.png" style="width: 10cm;" />
+<p>Es posible incluir varios parámetros a la función empleando el parámetro opcional <tt class="docutils literal"><span class="pre">args</span></tt> como una tupla de parámetros (ver la ayuda de <tt class="xref py py-func docutils literal"><span class="pre">quad()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Definimos la función a integrar, incluyendo parámetros</span>
+<span class="k">def</span> <span class="nf">f2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+     <span class="k">return</span> <span class="n">a</span><span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c"># Definimos unos parámetros de entrada</span>
+     <span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="c"># Integramos numéricamente, incluyendo parámetros</span>
+<span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">))</span>
+<span class="p">(</span><span class="mf">2.6283185307179586</span><span class="p">,</span> <span class="mf">2.9180197488520396e-14</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Se pueden calcular integrales dobles empleando de manera similar <tt class="xref py py-func docutils literal"><span class="pre">dblquad()</span></tt>, aunque los límites de la segunda integral se deben poner como funciones de Python.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Función a integrar</span>
+<span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
+
+<span class="c"># Límites de la primera integral</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span>
+
+<span class="c"># Definición de limites de segunda integral</span>
+<span class="k">def</span> <span class="nf">gfun</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+   <span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">hfun</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+   <span class="k">return</span> <span class="mi">10</span>
+
+<span class="n">integrate</span><span class="o">.</span><span class="n">dblquad</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">gfun</span><span class="p">,</span> <span class="n">hfun</span><span class="p">)</span>
+<span class="c"># Resultado: (120.00000000000001, 1.3322676295501881e-12)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="algebra-matricial">
+<h2>Álgebra matricial<a class="headerlink" href="#algebra-matricial" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Una maneras de ver <em>arrays</em> bidimensionales de <tt class="xref py py-mod docutils literal"><span class="pre">Numpy</span></tt> es como matrices, aunque en realidad los <em>arrays</em>, cuando se opera algebraicamente con ellos, no se manipulan como matrices. Por ejemplo el producto de dos arrays bidimensionales <strong>NxM</strong> se raliza elemento a elemento y no como un producto algebraico de matrices. Veamos unos ejemplos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Dos matrices nxn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="go">[[ 3  6  7]</span>
+<span class="go"> [ 2  6  2]</span>
+<span class="go"> [10  9  1]]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+<span class="go">[[ 4  5  5]</span>
+<span class="go"> [ 8  3  4]</span>
+<span class="go"> [ 3 11  2]]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Producto elemento a elemento entre matrices</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">B</span><span class="p">)</span>
+<span class="go">[[12 30 35]</span>
+<span class="go"> [16 18  8]</span>
+<span class="go"> [30 99  2]]</span>
+</pre></div>
+</div>
+<p>Sin embargo <tt class="xref py py-mod docutils literal"><span class="pre">Numpy</span></tt> permite hacer el producto punto entre matrices con la función func:<cite>dot()</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Producto punto entre matrices</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">))</span>
+<span class="go">[[ 81 110  53]</span>
+<span class="go"> [ 62  50  38]</span>
+<span class="go"> [115  88  88]]</span>
+</pre></div>
+</div>
+<p>Si se va a operar a menudo con matrices es conveniente usar el comando <tt class="xref py py-func docutils literal"><span class="pre">mat()</span></tt> de <tt class="xref py py-func docutils literal"><span class="pre">numpy()</span></tt>, es una abreviatura de <tt class="docutils literal"><span class="pre">matrix</span></tt>. Un elemento <tt class="docutils literal"><span class="pre">matrix</span></tt> es idéntico a un array y se crea de igual manera o a partir de <em>arrays</em>, pero se comporta como una matriz:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; # Creación elemento matriz (igual que un array)
+&gt;&gt;&gt; C = mat([[4, 5, 5], [8, 3, 4], [3, 11, 2]])
+&gt;&gt;&gt; type(C)
+&gt;&gt;&gt; &lt;class 'numpy.core.defmatrix.matrix'&gt;
+&gt;&gt;&gt; # Conversión de array a matriz
+&gt;&gt;&gt; A = mat(A)
+&gt;&gt;&gt; type(A)
+&gt;&gt;&gt; &lt;class 'numpy.core.defmatrix.matrix'&gt;
+&gt;&gt;&gt; # Producto matricial
+&gt;&gt;&gt; print(A*C)
+[[ 81 110  53]
+ [ 62  50  38]
+ [115  88  88]]</pre>
+</div>
+</div>
+<div class="section" id="rutinas-basicas-con-matrices">
+<h2>Rutinas básicas con matrices<a class="headerlink" href="#rutinas-basicas-con-matrices" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La inversa de una matriz <img class="math" src="_images/math/f3e830722dede854af533bfa96d549c68ed5997f.png" alt="\mathbf{A}"/> es una matrix  <img class="math" src="_images/math/684089822af19d4ccbfae10139f057dbdad68d9f.png" alt="\mathbf{B}"/> tal que <img class="math" src="_images/math/860664eaa82a7b28e432c34f4162804b0a6769f8.png" alt="\mathbf{AB}=\mathbf{I}"/> donde  <img class="math" src="_images/math/be6e42f1c628767a374da81818b6cda46a8c678d.png" alt="\mathbf{I}"/> es la llamada <strong>matriz identidad</strong> que consiste en una matriz en la que los elementos en la diagonal son unos y son ceros en el resto. Normalmente  <img class="math" src="_images/math/684089822af19d4ccbfae10139f057dbdad68d9f.png" alt="\mathbf{B}"/> se denota como <img class="math" src="_images/math/18b3c4a8a35d5ce7b0b35828dabdfb522c1ac7f2.png" alt="\mathbf{B}=\mathbf{A}^{-1}"/> . En Scipy, la inversa de una matriz de un array Numpy se puede calcular haciendo <tt class="docutils literal"><span class="pre">linalg.inv(A)</span></tt>, o usando <tt class="docutils literal"><span class="pre">A.I</span></tt> si A es una matriz. Por ejemplo, consideremos</p>
+<div class="math">
+<p><img src="_images/math/ef7340860081ac769d781876f7f7ee541fbd46a6.png" alt="\mathbf{A=}
+\left[
+        \begin{array}{ccc}
+                1 &amp; 3 &amp; 5\\
+                2 &amp; 5 &amp; 1\\
+                2 &amp; 3 &amp; 8
+        \end{array}
+\right]" /></p>
+</div><p>entonces:</p>
+<div class="math">
+<p><img src="_images/math/dbee11637d3b08ab2203004e9bdfb8c75423b4a1.png" alt="\mathbf{A^{-1}=\frac{1}{25}\left[\begin{array}{ccc} -37 &amp; 9 &amp; 22\\ 14 &amp; 2 &amp; -9\\ 4 &amp; -3 &amp; 1\end{array}\right]=\left[\begin{array}{ccc} -1.48 &amp; 0.36 &amp; 0.88\\ 0.56 &amp; 0.08 &amp; -0.36\\ 0.16 &amp; -0.12 &amp; 0.04\end{array}\right].}" /></p>
+</div><p>este cálculo lo haríamos con <tt class="xref py py-mod docutils literal"><span class="pre">Scipy</span></tt> de la siguiente manera:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">mat</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
+<span class="go">matrix([[1, 3, 5],</span>
+<span class="go">                  [2, 5, 1],</span>
+<span class="go">                  [2, 3, 8]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">I</span>
+<span class="go">matrix([[-1.48,  0.36,  0.88],</span>
+<span class="go">                  [ 0.56,  0.08, -0.36],</span>
+<span class="go">                  [ 0.16, -0.12,  0.04]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="go">array([[-1.48,  0.36,  0.88],</span>
+<span class="go">                 [ 0.56,  0.08, -0.36],</span>
+<span class="go">                 [ 0.16, -0.12,  0.04]])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="resolucion-de-sistemas-de-ecuaciones-lineales">
+<h2>Resolución de sistemas de ecuaciones lineales<a class="headerlink" href="#resolucion-de-sistemas-de-ecuaciones-lineales" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Con Scipy es muy fácil resolver un sistema de ecuaciones empleando el comando <tt class="docutils literal"><span class="pre">linalg.solve</span></tt>. Este comando tiene como parámetros de entrada la matriz y el vector de términos independientes. Si la matriz es simétrica el proceso de cálculo se puede acelerar si se indica como parámetro. Supongamos que queremos resolver el siguiente sistema de ecuaciones:</p>
+<div class="math">
+<p><img src="_images/math/0f29ae050af457555d07c98be153606d0e5eff17.png" alt="\begin{array}{c c c}
+x+3y+5z &amp; = &amp; 10\\
+2x+5y+z &amp; = &amp; 8\\
+2x+3y+8z &amp; = &amp; 3
+\end{array}" /></p>
+</div><p>Podemos encontrar la solución usando la matriz inversa:</p>
+<div class="math">
+<p><img src="_images/math/c9d14591cc5e8676183363c9448b174f51517d2e.png" alt="\left[\begin{array}{c} x\\ y\\ z\end{array}\right]=\left[\begin{array}{ccc} 1 &amp; 3 &amp; 5\\ 2 &amp; 5 &amp; 1\\ 2 &amp; 3 &amp; 8\end{array}\right]^{-1}\left[\begin{array}{c} 10\\ 8\\ 3\end{array}\right]=\frac{1}{25}\left[\begin{array}{c} -232\\ 129\\ 19\end{array}\right]=\left[\begin{array}{c} -9.28\\ 5.16\\ 0.76\end{array}\right]." /></p>
+</div><p>Sin embargo, es mejor usar el comando <tt class="docutils literal"><span class="pre">linalg.solve</span></tt> ya que es más rápido y numéricamente más estable, aunque en este caso el resultado es el mismo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="s">&#39;[1 3 5; 2 5 1; 2 3 8]&#39;</span><span class="p">)</span>   <span class="c"># Las filas se separan con &quot;;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="s">&#39;[10;8;3]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">I</span><span class="o">*</span><span class="n">b</span>                              <span class="c"># Usando la matriz inversa</span>
+<span class="go">matrix([[-9.28],</span>
+<span class="go">                  [ 5.16],</span>
+<span class="go">                  [ 0.76]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>                   <span class="c"># Usando la funcion ``linalg.solve(A,b)``</span>
+<span class="go">array([[-9.28],</span>
+<span class="go">                 [ 5.16],</span>
+<span class="go">                 [ 0.76]])</span>
+</pre></div>
+</div>
+<div class="section" id="calculo-del-determinante">
+<h3>Cálculo del determinante<a class="headerlink" href="#calculo-del-determinante" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Supongamos que  <img class="math" src="_images/math/d6b159fdba4b71ff0eb9caee9a10fb34ebfcaad8.png" alt="a_{ij}"/> son los elementos de la matriz  <img class="math" src="_images/math/f3e830722dede854af533bfa96d549c68ed5997f.png" alt="\mathbf{A}"/> y  <img class="math" src="_images/math/a7ed40a037402c5e69f9a60729def57b8c12e34b.png" alt="M_{ij}=\left|\mathbf{A}_{ij}\right|"/> será el determinante de la matriz que se obtiene elimiando la <em>i</em>-esima fila y la <em>j</em>-esima columna de   <img class="math" src="_images/math/f3e830722dede854af533bfa96d549c68ed5997f.png" alt="\mathbf{A}"/>. Entonces para cualquier fila <em>i</em>:</p>
+<div class="math">
+<p><img src="_images/math/c855459d3e18576589a7fcc80d2126fe8ed7e491.png" alt="\left|\mathbf{A}\right|=\sum_{j}\left(-1\right)^{i+j}a_{ij}M_{ij}." /></p>
+</div><p>Con Scipy el determinante se puede calcular con <strong>linalg.det</strong>. Por ejemplo, el determinante de la matriz <strong>A</strong></p>
+<div class="math">
+<p><img src="_images/math/0f022955189e65c1bda6e32c7d8eec71bd9ea77f.png" alt="\mathbf{A=}\left[\begin{array}{ccc} 1 &amp; 3 &amp; 5\\ 2 &amp; 5 &amp; 1\\ 2 &amp; 3 &amp; 8\end{array}\right]" /></p>
+</div><p>es</p>
+<div class="math">
+<p><img src="_images/math/69e1e2368c68a585b2e404477d2ac2b78ed15838.png" alt="\begin{array}{ccc} \left|\mathbf{A}\right| &amp; = &amp; 1\left|\begin{array}{cc} 5 &amp; 1\\ 3 &amp; 8\end{array}\right|-3\left|\begin{array}{cc} 2 &amp; 1\\ 2 &amp; 8\end{array}\right|+5\left|\begin{array}{cc} 2 &amp; 5\\ 2 &amp; 3\end{array}\right|\\ &amp; = &amp; 1\left(5\cdot8-3\cdot1\right)-3\left(2\cdot8-2\cdot1\right)+5\left(2\cdot3-2\cdot5\right)=-25.\end{array}" /></p>
+</div><p>Con Scipy se calcula tan fácilmente como:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">mat</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="go">-25.000000000000004</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ejercicios">
+<h3>Ejercicios<a class="headerlink" href="#ejercicios" title="Enlazar permanentemente con este título">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Calcular numéricamente las siguientes integrales</p>
+<blockquote>
+<div><div class="math">
+<p><img src="_images/math/28dd283e4bd89567add19224e80e71db3a36fdee.png" alt="2\pi \int_0^1 x^3 \sqrt{1 + 9x^4}~dx   ~~~~~~~~~~~~   \int_0^{2\pi}e^{-x} \sin{(10x)}~dx" /></p>
+</div></div></blockquote>
+</li>
+<li><p class="first">Calcular numéricamente el área más pequeña comprendida entre un círculo <img class="math" src="_images/math/c1d72848c7869b54f9d0f1e26cf1a8aea5e24d43.png" alt="x^2 + y^2 = 25"/> y la recta <em>x=3</em>.</p>
+</li>
+<li><p class="first">Escribir un programa en el que dibujen la función <img class="math" src="_images/math/e02ba37a569cabcee9f03c6fcae8e7d8a6c611fc.png" alt="\frac {ln x}{1-x}"/> en el intervalo [0,5]. Calcular el área bajo de la figura formada por los ejes OX, OY y esta curva en el intervalo [0,1]. Su resultado exacto es <img class="math" src="_images/math/7d2c764361c75487bc79a5b6df39b767a9d3d13b.png" alt="-\pi^2/6"/>. Calcular los errores absoluto y relativo con el que se ha obtenido el resultado, dando sólo las cifras significativas.</p>
+</li>
+<li><p class="first">Crear una función que calcule numéricamente la siguiente integral admitiendo parámetros de entrada <em>m</em> y <em>n</em>:</p>
+<blockquote>
+<div><div class="math">
+<p><img src="_images/math/3006b902f82ff221c8782d40af7c53364adc1d1a.png" alt="\pi \int_0^1 \frac{x^m - x^n}{\ln{x}} dx  = \ln{\frac{m+1}{n+1}}" /></p>
+</div></div></blockquote>
+</li>
+<li><p class="first">Resolver el sistema <strong>AX=B</strong> donde:</p>
+<blockquote>
+<div><div class="math">
+<p><img src="_images/math/8c59975fe098c1d3f4e1deb9a821ffdf66670e21.png" alt="\begin{array}{ccc}
+\mathbf{A=}
+\left[
+\begin{array}{cccc}
+1 &amp; 3 &amp; 5 &amp; 7\\
+2 &amp; -1 &amp; 3 &amp; 5\\
+0 &amp; 0 &amp; 2 &amp; 5\\
+-2 &amp; -6 &amp; -6 &amp; 1
+\end{array}
+\right] &amp; y &amp;
+\begin{array}{ccc}
+\mathbf{B=}
+\left[
+\begin{array}{c}
+1\\
+2 \\
+3\\
+4
+\end{array}
+\right]
+\end{array}
+\end{array}" /></p>
+</div></div></blockquote>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Cálculo Numérico</a><ul>
+<li><a class="reference internal" href="#integracion-numerica">Integración numérica</a></li>
+<li><a class="reference internal" href="#algebra-matricial">Álgebra matricial</a></li>
+<li><a class="reference internal" href="#rutinas-basicas-con-matrices">Rutinas básicas con matrices</a></li>
+<li><a class="reference internal" href="#resolucion-de-sistemas-de-ecuaciones-lineales">Resolución de sistemas de ecuaciones lineales</a><ul>
+<li><a class="reference internal" href="#calculo-del-determinante">Cálculo del determinante</a></li>
+<li><a class="reference internal" href="#ejercicios">Ejercicios</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="ajustes.html"
+                        title="Capítulo anterior">Ajuste de datos experimentales: Método de mínimos cuadrados</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="calculo_simbolico.html"
+                        title="Próximo capítulo">Cálculo Simbólico</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/calculo_numerico.txt"
+           rel="nofollow">Enseñar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="calculo_simbolico.html" title="Cálculo Simbólico"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="ajustes.html" title="Ajuste de datos experimentales: Método de mínimos cuadrados"
+             >anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Jorge A Perez Prieto y Teodoro Roca Cortes.
+      Actualizado por última vez en 30 de January de 2011.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introducción a Python &mdash; Computacion Cientifica - Introduccion a Python v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Computacion Cientifica - Introduccion a Python v0.1 documentation" href="index.html" />
+    <link rel="next" title="Programas ejecutables" href="ejecutables.html" />
+    <link rel="prev" title="Curso de introducción a Python" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="ejecutables.html" title="Programas ejecutables"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Curso de introducción a Python"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduccion-a-python">
+<h1>Introducción a Python<a class="headerlink" href="#introduccion-a-python" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Python puede utilizarse como un programa ejecutable desde una terminal de comandos o de manera interactiva mediante una consola de Python. Python incorpora una consola por defecto, pero existen otras con características útiles para el análisis científico de datos. <strong>ipython</strong> es una consola de Python mejorada, incluyendo completado de funciones y variables, funcionalidad de los comandos básicos de la consola del sistema (<cite>cd</cite>, <cite>ls</cite>, <cite>pwd</cite>, etc.), comandos adicionales (llamados <em>comandos mágicos</em>) y un largo etc.; es la consola de Python que usaremos para este curso.</p>
+<div class="section" id="empezando-con-python">
+<h2>Empezando con Python<a class="headerlink" href="#empezando-con-python" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Para inicial la consola IPython sólo hay que escribir <tt class="docutils literal"><span class="pre">ipython</span></tt> (o <tt class="docutils literal"><span class="pre">python</span></tt> para la consola estándar),en la terminal de comandos de Linux y Mac o ejecutar el programa desde el menú de Windows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;Hola, esto es Python&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Hola</span><span class="p">,</span> <span class="n">esto</span> <span class="n">es</span> <span class="n">Python</span>
+</pre></div>
+</div>
+<p>Para obtener ayuda sobre un comando basta escribir el comando seguido de &#8221;?&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="k">print</span><span class="p">)</span>
+<span class="go">Type:</span>
+<span class="go">builtin_function_or_method</span>
+<span class="go">Base Class:</span>
+<span class="go">&lt;type ’builtin_function_or_method’&gt;</span>
+<span class="go">String Form:</span>
+<span class="go">&lt;built-in function print&gt;</span>
+<span class="go">Namespace:</span>
+<span class="go">Python builtin</span>
+<span class="go">Docstring:</span>
+<span class="go">print(value, ..., sep=’ ’, end=’\n’, file=sys.stdout)</span>
+<span class="go">Prints the values to a stream, or to sys.stdout by default.</span>
+<span class="go">Optional keyword arguments:</span>
+<span class="go">file: a file-like object (stream); defaults to the current sys.stdout.</span>
+<span class="go">sep: string inserted between values, default a space.</span>
+<span class="go">end: string appended after the last value, default a newline.</span>
+</pre></div>
+</div>
+<p>Si trabajamos con la consola avanzada <tt class="docutils literal"><span class="pre">ipython</span></tt>, podemos hacer lo mismo escribiendo el comando con un símbolo de interrogación al final, por ejemplo: <tt class="docutils literal"><span class="pre">print?</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p>Cuando trabajamos con la terminal, puede ser muy útil guardar todo lo que vamos haciendo para usarlo porteriormente o continuar donde estábamos. Al iniciar ipython, se puede empezar grabar la sesión con el comando <strong>%logstart</strong>, por ejemplo:</p>
+<div class="highlight-python"><pre>%logstart -o registro_3_octubre_2009.txt</pre>
+</div>
+<p>donde el parámetro opcional <tt class="docutils literal"><span class="pre">-o</span></tt> guarda también la salida a modo de comentario en el fichero registro_3_octubre_2010.txt. Al iniciar <tt class="docutils literal"><span class="pre">ipython</span></tt> en otro ocasión, podemos hacer que antes lea ese fichero de sesión escribiendo:</p>
+<div class="highlight-python"><pre>ipython -lp registro_3_octubre_2010.txt</pre>
+</div>
+<p class="last">para recuperar todo casi como lo teníamos, en medida de lo posible.</p>
+</div>
+</div>
+<div class="section" id="tipos-basicos-de-datos">
+<h2>Tipos  básicos de datos<a class="headerlink" href="#tipos-basicos-de-datos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En cualquier lenguaje de programación existen distintos tipos de datos, que podemos almacenar y operar de forma diferente y que poseen distintas propiedades. Los más comunes son las <strong>cadenas de texto</strong> o <strong>string</strong>, indicadas siempre entre comillas y los <strong>números</strong>.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;Esta es una linea de texto&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Esta</span> <span class="n">es</span> <span class="n">una</span> <span class="n">linea</span> <span class="n">de</span> <span class="n">texto</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="mi">28</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">28</span>
+</pre></div>
+</div>
+<p>La <strong>variables</strong> son un componente fundamental de un lenguaje de programación y no son más que un nombre que se refiere a un registro que contiene uno o varios datos, que puede ser de distinto tipo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">frase</span> <span class="o">=</span> <span class="s">&quot;Esta es una linea de texto&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">num</span> <span class="o">=</span> <span class="mi">22</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">num</span><span class="o">*</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">44</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frase</span><span class="o">*</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;Esta es una linea de textoEsta es una linea de texto&#39;</span>
+</pre></div>
+</div>
+<p>Nótese que la cadena de texto &#8220;frase&#8221; fué duplicada al multiplicarla por dos. Con el comando <tt class="xref py py-func docutils literal"><span class="pre">type()</span></tt> de Python podemos saber el tipo de dato que es una variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">frase</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;str&#39;</span><span class="o">&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;int&#39;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Las variables pueden ser cualquier combinación de letras y números (siempre que no empiece por número) y pero no están permitidos caracteres especiales como  tildes, puntos, espacios en blanco, etc. Algunas palabras están además reservadas ya por el propio Python, como <tt class="docutils literal"><span class="pre">def</span></tt>, <tt class="docutils literal"><span class="pre">class</span></tt>, <tt class="docutils literal"><span class="pre">return</span></tt>, etc. por lo que tampoco se pueden usar como variables.</p>
+<p>Nótese que <tt class="docutils literal"><span class="pre">num</span></tt> es un entero <tt class="docutils literal"><span class="pre">int</span></tt> estricto y el cálculo entre números enteros <strong>siempre da como resultado otro número entero</strong>, redondeándose al más cercano en caso de no ser entero exacto:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">113</span><span class="o">/</span><span class="mi">27</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">4</span>        <span class="c"># en lugar de 4.18</span>
+</pre></div>
+</div>
+<p>Si queremos usar números de coma flotante, debe emplearse directamente un valor decimal (<em>float</em>) en estos casos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mf">113.0</span><span class="o">/</span><span class="mf">27.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">4.1851851851851851</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="mf">113.0</span><span class="o">/</span><span class="mf">27.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;float&#39;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Python emplea número de 64 bits por defecto en los <em>float</em>. En cualquier operación es muy importante usar los enteros y <em>float</em> correctamente y tener cuidado al mezclarlos, de otro modo se obtendrá un resultado no deseado o equivocado.</p>
+<p>Los tipos de datos pueden ser convertidos de unos otros mientras sea posible, empleando <tt class="xref py py-func docutils literal"><span class="pre">str()</span></tt> para convertir a texto, <tt class="xref py py-func docutils literal"><span class="pre">int()</span></tt> a entero y <tt class="xref py py-func docutils literal"><span class="pre">float()</span></tt> a float:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">3.0</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.1416</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">3</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="mi">34</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;34&#39;</span>
+</pre></div>
+</div>
+<p>Para el caso de los <em>float</em>, se pueden redondear con <tt class="xref py py-func docutils literal"><span class="pre">round()</span></tt>, que redondea al entero más próximo. La funciones <tt class="xref py py-func docutils literal"><span class="pre">ceil()</span></tt> y <cite>floor()</cite> del paquete <tt class="xref py py-mod docutils literal"><span class="pre">math</span></tt> redondean hacia arriba y hacia abajo respectivamente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mf">4.4</span><span class="p">))</span> <span class="p">,</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mf">4.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">4.0</span> <span class="mf">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Importo todas las funciones matemáticas del módulo math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="mf">4.4</span><span class="p">))</span> <span class="p">,</span> <span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="mf">4.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">5.0</span> <span class="mf">5.0</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="mf">4.4</span><span class="p">))</span> <span class="p">,</span> <span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="mf">4.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">4.0</span> <span class="mf">4.0</span>
+</pre></div>
+</div>
+<p>Más adelante veremos qué son los módulos, que ofrecen nuevas funciones y cómo usarlos.</p>
+</div>
+<div class="section" id="operadores-aritmeticos">
+<h2>Operadores aritméticos<a class="headerlink" href="#operadores-aritmeticos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Con Python se pueden hacer las operaciones aritméticas habituales usando los símbolos correspondientes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="48%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Operación</th>
+<th class="head">Símbolo</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Suma</td>
+<td><img class="math" src="_images/math/77cf26be132ef93923e082ee4153b2cb0ef44a50.png" alt="+"/></td>
+</tr>
+<tr><td>Resta</td>
+<td><img class="math" src="_images/math/add22d9bda21e86390bc74fa4dde17730a442da7.png" alt="-"/></td>
+</tr>
+<tr><td>Multiplicación</td>
+<td><img class="math" src="_images/math/278afa87a7dfa8e2b3f40e608884a690fb1325f6.png" alt="\ast"/></td>
+</tr>
+<tr><td>División</td>
+<td><img class="math" src="_images/math/6644aa245ba053c67d99ea9d05743f365428c1a0.png" alt="/"/></td>
+</tr>
+<tr><td>Exponenciación</td>
+<td><img class="math" src="_images/math/8917df1f4fb4de7ddaac30b30c5c25ef10b437ce.png" alt="\ast\ast"/></td>
+</tr>
+<tr><td>Residuo o resto</td>
+<td><img class="math" src="_images/math/c4393de50075e05c3363369d39412b341e39cc7d.png" alt="\%"/></td>
+</tr>
+</tbody>
+</table>
+<p>La prioridad en la ejecución (de mayor a menor, separados por ;) es la siguiente: <img class="math" src="_images/math/1b2e839a90102296aa4fcfd23bc0028918dd8ed6.png" alt="**"/>; <img class="math" src="_images/math/1e4bb5c0261c8d726157108cdd95cf6eb7bb6d46.png" alt="*"/>, /, %; +, - .</p>
+</div>
+<div class="section" id="operadores-logicos">
+<h2>Operadores lógicos<a class="headerlink" href="#operadores-logicos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Estos operadores permiten comparar valores entre sí:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="68%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Operacion</th>
+<th class="head">Simbolo</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Igualdad (comparación)</td>
+<td>==</td>
+</tr>
+<tr><td>Mayor/Menor</td>
+<td>&gt;, &lt;</td>
+</tr>
+<tr><td>Mayor o igual/Menor o igual</td>
+<td>&gt;=, =&lt;</td>
+</tr>
+<tr><td>and or</td>
+<td>y, o</td>
+</tr>
+<tr><td>true false</td>
+<td>cierto, falso</td>
+</tr>
+</tbody>
+</table>
+<p>Veamos algunos  ejemplos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">8</span> <span class="o">&gt;</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">4</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">3</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">True</span> <span class="ow">and</span> <span class="bp">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">False</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">4</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">3</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cadenas-de-texto">
+<h2>Cadenas de texto<a class="headerlink" href="#cadenas-de-texto" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Las cadenas de texto (llamdas <em>string</em>) no son mas que texto formado por letras y números de cualquier longitud y son fácilmente manipulables. Cada caracter de una cadena de texto tiene asociado un índice que indica su posición en la cadena, siendo 0 el de la izquierda de todo, 1 el siguiente, etc. hasta el último:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">frase</span> <span class="o">=</span> <span class="s">&quot;Burocracia, su lechuguita&quot;</span>    <span class="c"># Variable &quot;frase&quot; que contiene una cadena de texto</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">frase</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>         <span class="c"># Primera letra de la cadena</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">frase</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>         <span class="c"># Quinta letra, con índice 4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">frase</span><span class="p">)</span>              <span class="c"># Longitud de la cadena de texto, incluyendo espacios en blanco</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">25</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">frase</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>      <span class="c"># Imprime de cuarto caracter (índice 3) al decimo (indice 9)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ocracia</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">frase</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>        <span class="c"># Imprime desde el cuarto caracter hasta el final</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ocracia</span><span class="p">,</span> <span class="n">su</span> <span class="n">lechuguita</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">frase</span><span class="p">[:</span><span class="mi">6</span><span class="p">])</span>        <span class="c"># Imprime del inicio a sexto caracter (índice 5)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Burocr</span>
+</pre></div>
+</div>
+<p>También se pueden referir con índices contando desde la derecha, usando índices negativos, siendo -1 el primero por la derecha:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">frase</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>                           <span class="c"># El último caracter, contando desde la derecha</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">frase</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">frase</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>                 <span class="c"># El último caracter, contando desde la izquierda</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">frase</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">frase</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">frase</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>  <span class="c"># Compruebo si son iguales</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">True</span>
+</pre></div>
+</div>
+<p>Recuerda que los índices y en general cualquier lista de números se <strong>empieza siempre con 0</strong>, por lo que el primer elemento de una lista es <tt class="docutils literal"><span class="pre">frase[0]</span></tt> y no <tt class="docutils literal"><span class="pre">frase[1]</span></tt>. Al escribir <tt class="docutils literal"><span class="pre">frase[10]</span></tt> estamos tomando el elemento 11 no el 10.</p>
+<p>Existen varios métodos o funciones específicas para tratar y manipular candenas de texto. Veamos algunos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">frase</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>                                 <span class="c"># Separa la cadena por espacios a una lista</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="s">&#39;Burocracia,&#39;</span><span class="p">,</span> <span class="s">&#39;su&#39;</span><span class="p">,</span> <span class="s">&#39;lechuguita&#39;</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frase_mayusculas</span> <span class="o">=</span> <span class="n">frase</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>              <span class="c"># Cambia a mayusculas y lo guardo en la variable frase_mayusculas</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">frase_mayusculas</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BUROCRACIA</span><span class="p">,</span> <span class="n">SU</span> <span class="n">LECHUGUITA</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frase_minusculas</span> <span class="o">=</span> <span class="n">frase</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>              <span class="c"># Cambia a minúculas y lo guardo en la variable frase_minusculas</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">frase_mayusculas</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">burocracia</span><span class="p">,</span> <span class="n">su</span> <span class="n">lechuguita</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frase</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;lechuguita&#39;</span><span class="p">,</span> <span class="s">&#39;bocata&#39;</span><span class="p">)</span>         <span class="c"># Reemplaza una cadena de texto por otra</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;Burocracia, su bocata&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="impresion-de-texto-y-de-numeros">
+<h2>Impresión de texto y de números<a class="headerlink" href="#impresion-de-texto-y-de-numeros" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La cadenas de texto se pueden concatenar o unir con +:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="s">&quot;Esta es un frase&quot;</span> <span class="o">+</span> <span class="s">&quot; y esta es otra&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;Esta es un frase y esta es otra&#39;</span>
+</pre></div>
+</div>
+<p>Sin embargo, la concatenación sólo es posible para texto (<em>string</em>), por lo que no se pueden concatenar letras y números. Una posibilidad es convertir los números a <em>string</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">2</span>   <span class="c"># Defino dos numeros, a=10 y b=10**2</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; elevado al cuadrado es &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">10</span> <span class="n">elevado</span> <span class="n">al</span> <span class="n">cuadrado</span> <span class="n">es</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>Una manera más práctica y correcta de hacer esto es usando el formateo de números:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Imprimo el resultado con 50 decimales</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.50f</span><span class="s">&quot;</span><span class="p">)</span> <span class="o">%</span> <span class="n">log10</span><span class="p">(</span><span class="mf">2.</span><span class="o">**</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">30.10299956639811824743446777574717998504638671875000</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;El </span><span class="si">%s</span><span class="s"> de </span><span class="si">%d</span><span class="s"> es </span><span class="si">%f</span><span class="s">.&quot;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="s">&#39;cubo&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">10.</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">El</span> <span class="n">cubo</span> <span class="n">de</span> <span class="mi">10</span> <span class="n">es</span> <span class="mf">1000.000000</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Aqui se reemplaza cada símbolo <tt class="docutils literal"><span class="pre">%s</span></tt> (para cadenas de texto), <tt class="docutils literal"><span class="pre">%d</span></tt> (para enteros) o <tt class="docutils literal"><span class="pre">%f</span></tt> (para floats) sucesivamente con los valores después de % que están entre paréntesis. En caso de los floats se puede utilizar el formato %10.5f, que significa imprimir 10 caracteres en total, incluído el punto, usando 5 decimales. Se puede escribir también <em>floats</em> en formato científico utilizando <tt class="docutils literal"><span class="pre">%e</span></tt>, por ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.5e</span><span class="s">&quot;</span> <span class="o">%</span> <span class="mf">0.0003567</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">3.56700e-04</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="estructuras-de-datos">
+<h2>Estructuras de datos<a class="headerlink" href="#estructuras-de-datos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Los datos se pueden almacenar en variables univaluadas como hemos visto. También pueden almacenarse en variables estructuradas que contienen uno o más datos. Los tipos de datos estructurados que ofrece Python son las <strong>listas</strong>, <strong>tuplas</strong> y <strong>diccionarios</strong> y se definen de la siguiente forma:</p>
+<div class="section" id="listas">
+<h3>Listas<a class="headerlink" href="#listas" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Se trata de un conjunto de números, cadenas de texto u otras listas, ordenadas de alguna manera:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">alumnos</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Miguel&#39;</span><span class="p">,</span> <span class="s">&#39;Maria&#39;</span><span class="p">,</span> <span class="s">&#39;Luisma&#39;</span><span class="p">,</span> <span class="s">&#39;Fran&#39;</span><span class="p">,</span> <span class="s">&#39;Luisa&#39;</span><span class="p">,</span> <span class="s">&#39;Ruyman&#39;</span><span class="p">]</span>  <span class="c"># Lista de datos *string*</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edades</span> <span class="o">=</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">42</span><span class="p">]</span>                               <span class="c"># Lista de enteros</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datos</span> <span class="o">=</span>  <span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="s">&quot;Juan Carlos&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">6.7</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">,</span> <span class="mf">5.9</span><span class="p">]]</span>                       <span class="c"># lista de datos mixto</span>
+</pre></div>
+</div>
+<p>Nótese en el último ejemplo que es posible mezclar varios tipos tipos de datos, como enteros, <em>strings</em> y hasta otras lista. Se puede utilizar la función <tt class="xref py py-func docutils literal"><span class="pre">len()</span></tt> para ver el número de elementos de una lista:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">alumnos</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">6</span>
+</pre></div>
+</div>
+<p>Existen varias formas de añadir nuevos elementos a una lista existente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">alumnos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;Iballa&#39;</span><span class="p">)</span>                  <span class="c"># Añade &quot;Iballa&quot; al final de la lista</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alumnos</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">&#39;Jairo&#39;</span><span class="p">)</span>                <span class="c"># Añade &quot;Jairo&quot; en la posición 3</span>
+</pre></div>
+</div>
+<p>Es posible ordenar  lista con el método <tt class="xref py py-func docutils literal"><span class="pre">sort()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">alumnos</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Para extraer un elemento de la lista podemos usar los métodos <tt class="xref py py-func docutils literal"><span class="pre">pop()</span></tt> y <tt class="xref py py-func docutils literal"><span class="pre">remove()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">alumnos</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>                       <span class="c"># Elimino el elemento número 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;Jairo&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alumnos</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&#39;Maria&#39;</span><span class="p">)</span>              <span class="c"># Elimino el elemento &quot;Maria&quot; (primera ocurrencia)</span>
+</pre></div>
+</div>
+<p>La listas se manipulan de manera similar a las cadenas de texto, utilizando índices que indican la posición de cada elemento siendo <strong>0</strong> el primer elemento de la lista y <strong>-1</strong> el último:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">alumnos</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="s">&#39;Luisma&#39;</span><span class="p">,</span> <span class="s">&#39;Fran&#39;</span><span class="p">,</span> <span class="s">&#39;Luisa&#39;</span><span class="p">,</span> <span class="s">&#39;Ruyman&#39;</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">alumnos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alumnos</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="s">&#39;Miguel&#39;</span><span class="p">,</span> <span class="s">&#39;Ruyman&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Una función muy útil es la función <tt class="xref py py-func docutils literal"><span class="pre">range()</span></tt>, que permite crear una lista de números enteros. Por ejemplo, para crear un lista de 10 elementos, de 0 a 9 podemos hacer esto:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Se puede indicar crear una serie de números indicando el inicio, final y el intervalo entre dos consecutivos. Por ejemplo, para crear una lista con números de 100 a 200 a intervalos de 20 haríamos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">180</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Nótese que el último número, 200, no se incluye la lista. La función <tt class="xref py py-func docutils literal"><span class="pre">range()</span></tt> se emplea para generar listas de números enteros solamente. Más adelante veremos cómo crear listas similares de <em>floats</em>.</p>
+</div>
+</div>
+<div class="section" id="tuplas-listas-inalterables">
+<h2>Tuplas: listas inalterables<a class="headerlink" href="#tuplas-listas-inalterables" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Las tuplas son listas que no se pueden modificar o alterar y se definen enumerando sus elementos entre paréntesis en lugar de corchetes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Un tupla de (lista no cambiable) de alumnos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lista_alumnos</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Miguel&#39;</span><span class="p">,</span> <span class="s">&#39;Maria&#39;</span><span class="p">,</span> <span class="s">&#39;Luisma&#39;</span><span class="p">,</span> <span class="s">&#39;Fran&#39;</span><span class="p">,</span> <span class="s">&#39;Luisa&#39;</span><span class="p">,</span> <span class="s">&#39;Ruyman&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Si definimos una variable con varios valores separados por comas, Python interpreta esto como una tupla aunque no esté entre paréntesis:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Defino dos variables distintas a y b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Defino una variable con dos valores separados por comas, que se interpreta como una tupla</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>En el ejemplo anterior definimos al principio dos variables, <tt class="docutils literal"><span class="pre">a</span></tt> y <tt class="docutils literal"><span class="pre">b</span></tt>, pero al hacer luego <tt class="docutils literal"><span class="pre">c</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">3</span></tt> lo que estamos haciendo es crear una tupla con esos dos elementos. Podemos comprobarlo  viendo el tipo de dato del que se trata:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;tuple&#39;</span><span class="o">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>      <span class="c"># imprimo el primer elemento de la tupla</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>      <span class="c"># imprimo el segundo elemento de la tupla</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="diccionarios">
+<h2>Diccionarios<a class="headerlink" href="#diccionarios" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Los diccionarios son listas en las que cada elemento se identifica con un nombre, por lo que siempre se usan en parejas clave-valor separado por &#8221;:&#8221;. La clave va primero y <strong>siempre entre comillas</strong> y luego su valor, que puede ser en principio cualquier tipo de dato de Python; cada pareja clave-valor se separa por comas y todo se encierra entre llaves. Por ejemplo, podemos crear un diccionario con los datos básicos de una persona:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">datos</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;Nombre&#39;</span><span class="p">:</span> <span class="s">&#39;Juan&#39;</span><span class="p">,</span> <span class="s">&#39;Apellido&#39;</span><span class="p">:</span> <span class="s">&#39;Martinez&#39;</span><span class="p">,</span> <span class="s">&#39;Edad&#39;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span> <span class="s">&#39;Altura&#39;</span><span class="p">:</span> <span class="mf">1.67</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;dict&#39;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>En este caso hemos creado una clave &#8220;Nombre&#8221; con valor &#8220;Juan&#8221;, otra clave &#8220;Apellido&#8221; con valor &#8220;Martínez&#8221;, etc. Al crear los datos con esta estructura, podemos acceder a los valores de las claves fácilmente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">datos</span><span class="p">[</span><span class="s">&#39;Nombre&#39;</span><span class="p">]</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Juan</span>
+</pre></div>
+</div>
+<p>También podemos conocer todas las claves y los valores de un diccionario usando los métodos <tt class="xref py py-func docutils literal"><span class="pre">keys()</span></tt> y <tt class="xref py py-func docutils literal"><span class="pre">values()</span></tt> respectivamente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">datos</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="s">&#39;Apellidos&#39;</span><span class="p">,</span> <span class="s">&#39;Nombre&#39;</span><span class="p">,</span> <span class="s">&#39;Altura&#39;</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datos</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="s">&#39;Martinez&#39;</span><span class="p">,</span> <span class="s">&#39;Juan&#39;</span><span class="p">,</span> <span class="mf">1.6699999999999999</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modulos-y-paquetes-de-python">
+<h2>Módulos y paquetes de Python<a class="headerlink" href="#modulos-y-paquetes-de-python" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Python viene con muchos módulos que ofrecen funcionalidades adicionales muy interesantes. Uno de ellos es el paquete de funciones matemáticas básicas <tt class="xref py py-mod docutils literal"><span class="pre">math</span></tt>. Se puede importar un paquete haciéndolo implícitamente, osea importando el paquete en sí o bien una, varias o todas sus funciones:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">math</span>                         <span class="c"># importa el paquete math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">math</span> <span class="kn">as</span> <span class="nn">M</span>                    <span class="c"># importa el paquete math llamándolo M</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">pi</span>       <span class="c"># importa las funciones sin, cos y  pi de math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>                  <span class="c"># importa todas las funciones de math</span>
+</pre></div>
+</div>
+<p>Podemos ver un listado de las funciones que ofrece un módulo usando la función <tt class="xref py py-func docutils literal"><span class="pre">dir()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">math</span><span class="p">)</span>    <span class="c"># Lista todas las funciones y subpaquete del modulo math</span>
+<span class="go">[&#39;__doc__&#39;, &#39;__name__&#39;, &#39;__package__&#39;, &#39;acos&#39;, &#39;acosh&#39;, &#39;asin&#39;, &#39;asinh&#39;, &#39;atan&#39;, &#39;atan2&#39;, &#39;atanh&#39;, &#39;ceil&#39;, &#39;copysign&#39;, &#39;cos&#39;, &#39;cosh&#39;, &#39;degrees&#39;, &#39;e&#39;, &#39;exp&#39;, &#39;fabs&#39;, &#39;factorial&#39;, &#39;floor&#39;, &#39;fmod&#39;, &#39;frexp&#39;, &#39;fsum&#39;, &#39;hypot&#39;, &#39;isinf&#39;, &#39;isnan&#39;, &#39;ldexp&#39;, &#39;log&#39;, &#39;log10&#39;, &#39;log1p&#39;, &#39;modf&#39;, &#39;pi&#39;, &#39;pow&#39;, &#39;radians&#39;, &#39;sin&#39;, &#39;sinh&#39;, &#39;sqrt&#39;, &#39;tan&#39;, &#39;tanh&#39;, &#39;trunc&#39;]</span>
+</pre></div>
+</div>
+<p>Para conocer otros paquetes de la librería estándar consulta el tutorial oficial de Python o guía oficial de la Librería de Python. Más adelante veremos otro paquete numérico de Python más avanzado que nos aporta éstas y muchas otras funciones matemáticas útiles.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introducción a Python</a><ul>
+<li><a class="reference internal" href="#empezando-con-python">Empezando con Python</a></li>
+<li><a class="reference internal" href="#tipos-basicos-de-datos">Tipos  básicos de datos</a></li>
+<li><a class="reference internal" href="#operadores-aritmeticos">Operadores aritméticos</a></li>
+<li><a class="reference internal" href="#operadores-logicos">Operadores lógicos</a></li>
+<li><a class="reference internal" href="#cadenas-de-texto">Cadenas de texto</a></li>
+<li><a class="reference internal" href="#impresion-de-texto-y-de-numeros">Impresión de texto y de números</a></li>
+<li><a class="reference internal" href="#estructuras-de-datos">Estructuras de datos</a><ul>
+<li><a class="reference internal" href="#listas">Listas</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tuplas-listas-inalterables">Tuplas: listas inalterables</a></li>
+<li><a class="reference internal" href="#diccionarios">Diccionarios</a></li>
+<li><a class="reference internal" href="#modulos-y-paquetes-de-python">Módulos y paquetes de Python</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="index.html"
+                        title="Capítulo anterior">Curso de introducción a Python</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="ejecutables.html"
+                        title="Próximo capítulo">Programas ejecutables</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/introduccion.txt"
+           rel="nofollow">Enseñar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="ejecutables.html" title="Programas ejecutables"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Curso de introducción a Python"
+             >anterior</a> |</li>
+        <li><a href="index.html">Computacion Cientifica - Introduccion a Python v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Jorge A Perez Prieto y Teodoro Roca Cortes.
+      Actualizado por última vez en 30 de January de 2011.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
