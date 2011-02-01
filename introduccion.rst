@@ -1,11 +1,10 @@
-=====================
 Introducción a Python
-=====================
+*********************
 
 Python puede utilizarse como un programa ejecutable desde una terminal de comandos o de manera interactiva mediante una consola de Python. Python incorpora una consola por defecto, pero existen otras con características útiles para el análisis científico de datos. **ipython** es una consola de Python mejorada, incluyendo completado de funciones y variables, funcionalidad de los comandos básicos de la consola del sistema (`cd`, `ls`, `pwd`, etc.), comandos adicionales (llamados *comandos mágicos*) y un largo etc.; es la consola de Python que usaremos para este curso. 
 
 Empezando con Python
-====================
+--------------------
 
 Para inicial la consola IPython sólo hay que escribir ``ipython`` (o ``python`` para la consola estándar),en la terminal de comandos de Linux y Mac o ejecutar el programa desde el menú de Windows::
 
@@ -373,7 +372,7 @@ Python viene con muchos módulos que ofrecen funcionalidades adicionales muy int
     >>> from math import sin, cos, pi       # importa las funciones sin, cos y  pi de math
     >>> from math import *                  # importa todas las funciones de math
 
-Podemos ver un listado de las funciones que ofrece un módulo usando la función :func:`dir()'::
+Podemos ver un listado de las funciones que ofrece un módulo usando la función :func:`dir()`::
     
     >>> import math
     >>> dir(math)    # Lista todas las funciones y subpaquete del modulo math

@@ -5,16 +5,17 @@
 Curso de introducción a Python
 ==============================
 
-Contenido
-*********
+Contenido:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 2  
 
    introduccion
-   tema1a
-
-
-
-
-
+   ejecutables
+   control_de_flujo
+   numpy
+   lectura_ficheros
+   graficos 
+   ajustes
+   calculo_numerico
+   calculo_simbolico

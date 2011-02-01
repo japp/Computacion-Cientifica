@@ -2,5 +2,55 @@ Curso de Computacion Científica con Python
 
 1er año del Grado de Fisica - Universidad de La Laguna, Tenerife.
 
- 
 
+Guia de estilo
+--------------
+
+Guia de Texto estructurado (reST): http://sphinx.pocoo.org/rest.html
+
+
+Funciones: :func:`arange()`
+Modulos y paquetes: :mod:`arange()`
+Variables, etc.: ``my_var``
+
+Codigo Python o texto plano
+---------------------------
+
+Se identa el texto y el parrafo anterior se debe terminar con "::", asi se sobrentiende que es Python. Ejemplo:
+    
+    Fíjate cómo el comando **plot()** devuelve una lista de instancias de cada dibujo. En este caso es una lista con un sólo elemento, una instancia *Line2D*. Podemos capturar esta instancia para referirnos a este dibujo más adelante haciendo::
+
+    >>> x = arange(10)
+    >>> mi_dibujo, = plot(x)
+
+Si solo si identa, sin poner "::" antes, se considera texto plano sin formato.
+
+Las ecuaciones  en LaTex en linea se ponen así: :math:`\beta` . Ejemplo:
+    
+    Representa nuevamente la curva del apartado a) del ejercicio anterior superponiendo además las  curvas correspondientes a temperaturas iniciales distintas, de  :math:`T_0=-5^\circ C` y :math:`T_0=15^\circ C`. P
+
+Las ecuaciones en LaTex en entorno de ecuacion se ponen en un bloque identado identificado con .. math: . Ejemplo:
+    
+    #. El movimiento de oscilador amortiguado se puede expresar la siguiente manera:
+
+    .. math::
+	    
+	    x = A_0 e^{-k\omega t} \cos{(\omega t + \delta)}
+
+Para compilar el documento con Sphinx
+-------------------------------------
+
+Cada fichero *.rst debe estar en el index.rst si se quiere incluir
+La configuracion de documento está en conf.py
+
+# Convierte a HTML
+
+shell$ cd Computacion_Cientifica/
+shell$ sphinx-build . html/      # dir origen (.) -> dir destino (html/) 
+shell$
+
+# Convierte a LaTeX
+
+shell$ sphinx-build -b latex . latex/      # dir origen (.) -> dir destino (latex/) 
+
+el "-b" significa builder, que por defecto es HTML. Luego se debe compilar el LaTeX que esta en latex/.
